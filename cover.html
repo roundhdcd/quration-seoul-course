@@ -6,38 +6,35 @@
 <title>Quration Cover</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,"PingFang SC","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
-  .cover{width:100vw;height:100vh;max-width:480px;margin:0 auto;
-    background:linear-gradient(160deg,#ffd9e2 0%,#fff0ec 45%,#fde9df 100%);
-    position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:13vh 24px 0}
-  .deco{position:absolute;font-size:26px;opacity:.55}
-  .d1{top:7%;left:10%}.d2{top:11%;right:12%;font-size:22px}.d3{top:30%;right:8%}
-  .d4{bottom:26%;left:7%;font-size:22px}.d5{bottom:14%;right:14%}
-  .logo{width:78px;height:78px;border-radius:50%;object-fit:cover;box-shadow:0 6px 18px rgba(227,75,70,.28);margin-bottom:14px}
-  .brand{font-size:27px;font-weight:800;color:#26222b;letter-spacing:.5px}
-  .brand span{color:#e34b46}
+  html,body{height:100%}
+  body{font-family:-apple-system,"PingFang SC","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:linear-gradient(160deg,#ffd9e2 0%,#fff0ec 45%,#fde9df 100%)}
+  .cover{width:100vw;min-height:100vh;max-width:480px;margin:0 auto;position:relative;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 26px;text-align:center}
+  .deco{position:absolute;font-size:26px;opacity:.5}
+  .d1{top:14%;left:9%}.d2{top:18%;right:11%;font-size:22px}.d3{top:46%;right:6%}
+  .d4{bottom:20%;left:7%;font-size:22px}.d5{bottom:15%;right:13%}
+  /* 핵심 콘텐츠 — 화면 정중앙 밴드에 모음 (어디서 잘려도 보이게) */
   .badge{display:inline-block;background:#fff;color:#e23a5e;font-size:13px;font-weight:800;
-    padding:6px 16px;border-radius:30px;margin:10px 0 18px;box-shadow:0 3px 10px rgba(255,90,122,.18)}
-  .main{font-size:40px;font-weight:900;color:#26222b;line-height:1.28;text-align:center;letter-spacing:.5px}
-  .main .hl{color:#fff;background:#e34b46;padding:2px 12px;border-radius:12px;box-shadow:0 4px 14px rgba(227,75,70,.35);display:inline-block;margin-top:6px}
-  .sub{font-size:15.5px;color:#7a5a52;margin-top:18px;text-align:center;line-height:1.55;font-weight:600}
-  .tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px}
-  .tags span{background:rgba(255,255,255,.8);border:1px solid #ffd2dc;color:#9a5566;font-size:13px;font-weight:700;padding:6px 13px;border-radius:30px}
-  .handle{position:absolute;bottom:7%;font-size:14px;color:#9a5566;font-weight:800;letter-spacing:.5px}
-  .note{position:fixed;top:6px;left:0;right:0;text-align:center;font-size:11px;color:#c98;opacity:.0}
+    padding:6px 16px;border-radius:30px;margin-bottom:16px;box-shadow:0 3px 10px rgba(255,90,122,.18)}
+  .main{font-size:42px;font-weight:900;color:#26222b;line-height:1.26;letter-spacing:.5px}
+  .main .hl{color:#fff;background:#e34b46;padding:3px 14px;border-radius:13px;
+    box-shadow:0 5px 16px rgba(227,75,70,.35);display:inline-block;margin-top:8px}
+  .sub{font-size:16px;color:#7a5a52;margin-top:18px;line-height:1.55;font-weight:700}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+  .tags span{background:rgba(255,255,255,.85);border:1px solid #ffd2dc;color:#9a5566;font-size:13.5px;font-weight:700;padding:6px 14px;border-radius:30px}
+  .handle{font-size:15px;color:#b5546a;font-weight:800;letter-spacing:.5px;margin-top:22px}
 </style>
 </head>
 <body>
   <div class="cover">
     <span class="deco d1">🌸</span><span class="deco d2">✨</span><span class="deco d3">🧴</span>
     <span class="deco d4">☕</span><span class="deco d5">🗼</span>
-    <img class="logo" src="logo.png" alt="QK">
-    <div class="brand">Quration <span>Korea</span></div>
     <div class="badge">⏱ 3分钟出行程 · 不踩雷</div>
     <div class="main">韩国太多选择？<br><span class="hl">我帮你做决定 🫶</span></div>
     <div class="sub">在韩国 · 验证过的选择<br>你的韩国旅行决策助手</div>
     <div class="tags"><span>🍜 美食</span><span>☕ 咖啡</span><span>🏯 韩屋</span><span>🌃 夜景</span><span>💄 美妆</span></div>
-    <div class="handle">📕💬 Quration_Korea</div>
+    <div class="handle">Quration Korea</div>
   </div>
 </body>
 </html>
