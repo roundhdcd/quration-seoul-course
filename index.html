@@ -356,9 +356,28 @@ function genShare(){
 }
 
 // ====== DB 수집 (relay 준비됨) ======
+function leadMsg(l){
+  var t = l.type==='inquiry' ? '💬 새 문의' : '🎫 새 가입';
+  return '🔔 **Quration '+t+'**\n'
+    +'微信/위챗: `'+(l.wx||'-')+'`\n'
+    +(l.q?'질문: '+l.q+'\n':'')
+    +(l.name?'닉네임: '+l.name+'\n':'')
+    +'관심사: '+((l.interests||[]).join(', ')||'-')+'\n'
+    +(l.saved&&l.saved.length?'찜: '+l.saved.join(' / ')+'\n':'')
+    +'도시: '+(l.city||'-')+(l.days?' · '+l.days+'일':'')+(l.budget?' · '+l.budget:'');
+}
 function saveLead(lead){
   const db=JSON.parse(localStorage.getItem('quration_leads')||'[]'); db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
-  if(RELAY_URL){ try{ fetch(RELAY_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(lead)}); }catch(e){} }
+  if(RELAY_URL){
+    try{
+      if(RELAY_URL.indexOf('discord.com/api/webhooks')>=0){
+        var fd=new FormData(); fd.append('payload_json', JSON.stringify({content: leadMsg(lead)}));
+        fetch(RELAY_URL,{method:'POST',mode:'no-cors',body:fd});
+      } else {
+        fetch(RELAY_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(lead)});
+      }
+    }catch(e){}
+  }
   return db.length;
 }
 function reqCity(name){ openInquiry('城市申请 도시신청: '+name); }
