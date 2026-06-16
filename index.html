@@ -368,8 +368,19 @@ function genShare(){
   let txt=`首尔${state.days}天${state.days-1}夜 | ${t}🇰🇷✨\n\n谁懂啊…第一次来首尔真的会无从下手😭 选择太多，帮你直接决定好了👇\n\n`;
   days.forEach((sp,i)=>{ txt+=`📍Day${i+1} ${[...new Set(sp.map(s=>s.areaZh))].join('·')}\n`; sp.forEach(s=>{txt+=`· ${s.zh}（${s.ko}）${s.rev?'— '+s.rev:''}\n`;}); txt+=`\n`; });
   txt+=`💡 支付/退税/换钱贴士都帮你整理好啦\n完整行程+避雷攻略，评论区扣「1」我发你～\n\n#首尔旅游 #首尔攻略 #韩国自由行 #首尔美食 #${areas.replace(/·/g,' #')} #出片圣地 #首尔citywalk #不踩雷`;
-  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>showToast("✅ 已复制！去小红书粘贴 · 복사완료")).catch(()=>fb(txt));}else fb(txt);
-  function fb(x){const ta=document.createElement('textarea');ta.value=x;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast("✅ 已复制 · 복사완료");}catch(e){showToast("长按复制 · 길게눌러 복사");}document.body.removeChild(ta);}
+  window._shareTxt=txt;
+  document.getElementById('sheet').innerHTML=`
+    <button class="close" onclick="closeSheet()">×</button>
+    <h3>📤 分享这个行程</h3>
+    <div class="d">아래 글을 복사해서 <b>샤오홍슈·朋友圈</b>에 붙여넣으면 게시 끝!<br>复制下面文案，粘贴到小红书/朋友圈即可发布～</div>
+    <textarea id="shareTxt" style="min-height:230px" readonly>${txt}</textarea>
+    <button class="submit" onclick="copyShare()" style="margin-top:10px">📋 复制文案 · 복사하기</button>`;
+  document.getElementById('ov').classList.add('show');
+}
+function copyShare(){
+  var t=window._shareTxt||'', ta=document.getElementById('shareTxt');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){showToast("✅ 已复制，去粘贴吧 · 복사완료");}).catch(go);}else go();
+  function go(){ta.focus();ta.select();try{document.execCommand('copy');showToast("✅ 已复制 · 복사완료");}catch(e){showToast("长按全选复制 · 길게눌러 복사");}}
 }
 
 // ====== DB 수집 (relay 준비됨) ======
