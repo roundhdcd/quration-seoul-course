@@ -326,7 +326,7 @@ function render(days){
         <div class="ft">⏱ 推荐停留 <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
         <div class="links">
           <a href="https://map.naver.com/p/search/${encodeURIComponent(s.ko)}" target="_blank" rel="noopener">📍 地图·지도</a>
-          <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}" target="_blank" rel="noopener">📕 看小红书</a>
+          <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}" target="_blank" rel="noopener">📕 真实评价 ${Math.round(s.rec*0.4)}篇</a>
         </div>
       </div>`;
       window['_spot_'+id]=s;
@@ -347,7 +347,7 @@ function render(days){
    </div>
    <div class="savebar">
      <button class="share" onclick="genShare()">📤 分享这个行程 · 이 코스 공유하기</button>
-     <button class="join" onclick="openSave()">🎫 加入会员·保存行程 · 멤버십 가입하고 받기</button>
+     <button class="join" onclick="openSave()">📋 保存·领取行程报告 · 행정 리포트 받기</button>
      <button class="restart" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题问一问</button>
      <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
    </div>
@@ -419,8 +419,8 @@ function openSave(){
   const savedHtml=favs.length?`<div class="saved-list">${favs.map(s=>`<div>♥ ${s.zh} <span style="color:#9aa">/ ${s.ko}</span></div>`).join('')}</div>`:`<div class="d">💡 ♥ 마음에 드는 곳 먼저 누르면 더 정확해요 · 先收藏喜欢的地点</div>`;
   document.getElementById('sheet').innerHTML=`
     <button class="close" onclick="closeSheet()">×</button>
-    <h3>🎫 加入 Quration 会员</h3>
-    <div class="d">한국생활 멤버십 · 무료 가입하고 전체 코스 받기<br>免费加入，领取完整行程 + 持续的韩国情报</div>
+    <h3>📋 领取你的专属行程报告</h3>
+    <div class="d">保存就把这份「专属行程报告」+ 每周韩国情报发给你<br>저장하면 맞춤 행정 리포트 + 주간 정보를 위챗으로 받아요 (무료)</div>
     <div class="benefits"><div class="bt">会员福利 · 멤버 혜택</div>
       <div class="bi">🗓 每周首尔新热点 · 매주 서울 핫플</div>
       <div class="bi">💄 Olive Young 新品·折扣 · 올리브영 신상·할인</div>
@@ -429,7 +429,7 @@ function openSave(){
     ${savedHtml}
     <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
     <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
-    <button class="submit" onclick="submitLead()">免费加入 + 领取行程 · 무료 가입하고 받기</button>`;
+    <button class="submit" onclick="submitLead()">📩 领取行程报告 · 리포트 받기</button>`;
   document.getElementById('ov').classList.add('show');
 }
 function submitLead(){
