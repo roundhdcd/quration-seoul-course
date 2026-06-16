@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Quration · 首尔行程生成器</title>
+<style>
+  :root{
+    --ink:#1a1d24; --sub:#6b7280; --line:#ececf0; --bg:#f6f5f2;
+    --card:#ffffff; --red:#d4332f; --blue:#1c3f8f; --accent:#d4332f;
+    --soft:#faf9f7; --tag:#f1f0ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,"PingFang SC","Apple SD Gothic Neo","Malgun Gothic",Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}
+  /* header */
+  header{padding:22px 20px 16px;text-align:center;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .logo{display:inline-flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.5px}
+  .qk{width:30px;height:30px;border-radius:50%;background:
+     conic-gradient(from 135deg, var(--red) 0 50%, var(--blue) 50% 100%);
+     display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;
+     box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .brand{font-size:19px}
+  .tag-slogan{font-size:11.5px;color:var(--sub);margin-top:5px;letter-spacing:.3px}
+  /* form */
+  .panel{padding:20px}
+  .blk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 16px;margin-bottom:14px}
+  .label{font-size:13px;font-weight:700;margin-bottom:11px;display:flex;align-items:center;gap:6px}
+  .label small{font-weight:500;color:var(--sub);font-size:11px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .opt{flex:1;min-width:60px;text-align:center;padding:11px 6px;border:1.5px solid var(--line);border-radius:11px;
+    font-size:13px;cursor:pointer;background:#fff;transition:.15s;font-weight:600;color:var(--sub)}
+  .opt small{display:block;font-size:10px;font-weight:500;margin-top:2px;opacity:.8}
+  .opt.on{border-color:var(--accent);background:#fff5f4;color:var(--accent)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{padding:9px 14px;border:1.5px solid var(--line);border-radius:30px;font-size:13px;cursor:pointer;
+    background:#fff;transition:.15s;font-weight:600;color:var(--sub);display:flex;flex-direction:column;align-items:center;line-height:1.25}
+  .chip small{font-size:9.5px;font-weight:500;opacity:.75}
+  .chip.on{border-color:var(--accent);background:#fff5f4;color:var(--accent)}
+  .gen{width:100%;padding:16px;border:none;border-radius:14px;background:var(--ink);color:#fff;font-size:15.5px;
+    font-weight:700;cursor:pointer;margin-top:4px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(26,29,36,.25)}
+  .gen:active{transform:scale(.99)}
+  /* result */
+  #result{padding:0 16px 40px;display:none}
+  .summary{background:linear-gradient(135deg,#1c3f8f,#2a4fa0);color:#fff;border-radius:16px;padding:18px;margin:6px 0 18px}
+  .summary h2{font-size:17px;margin-bottom:6px}
+  .summary p{font-size:12.5px;opacity:.9}
+  .summary .meta{margin-top:11px;display:flex;gap:7px;flex-wrap:wrap}
+  .summary .meta span{background:rgba(255,255,255,.16);padding:5px 10px;border-radius:20px;font-size:11px}
+  .day{margin-bottom:22px}
+  .day-h{display:flex;align-items:center;gap:9px;margin-bottom:12px;padding-left:2px}
+  .day-n{background:var(--accent);color:#fff;width:30px;height:30px;border-radius:9px;display:flex;
+    align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .day-h b{font-size:15px}
+  .day-h small{color:var(--sub);font-size:11.5px;margin-left:auto}
+  .spot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;position:relative}
+  .spot .cat{font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.5px;margin-bottom:5px}
+  .spot .zh{font-size:16.5px;font-weight:800;margin-bottom:3px}
+  .ko-box{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px dashed #e0ddd6;border-radius:9px;
+    padding:7px 10px;margin:7px 0}
+  .ko-box .sign{font-size:9px;color:#b08a3a;font-weight:800;background:#fdf6e6;padding:2px 6px;border-radius:5px;white-space:nowrap}
+  .ko-box .ko{font-size:15px;font-weight:800;color:#2a2d34}
+  .ko-box .pron{font-size:11px;color:var(--sub);margin-left:auto}
+  .spot .why{font-size:12.5px;color:#4b5563;margin-top:4px}
+  .spot .ft{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:11px;color:var(--sub)}
+  .spot .ft b{color:var(--ink);font-weight:700}
+  .fav{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
+    background:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#cfcfcf}
+  .fav.on{color:var(--accent);border-color:#f6cdcb;background:#fff5f4}
+  .est{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center;margin-top:6px}
+  .est .t{font-size:12px;color:var(--sub)}
+  .est .v{font-size:22px;font-weight:800;margin-top:3px}
+  .est .v small{font-size:12px;color:var(--sub);font-weight:600}
+  .savebar{position:sticky;bottom:0;background:linear-gradient(transparent,#f6f5f2 28%);padding:16px 0 14px;margin-top:8px}
+  .savebar button{width:100%;padding:15px;border:none;border-radius:13px;background:var(--accent);color:#fff;
+    font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(212,51,47,.32)}
+  .restart{display:block;width:100%;text-align:center;background:none;border:none;color:var(--sub);
+    font-size:12.5px;margin-top:10px;cursor:pointer;text-decoration:underline}
+  /* modal */
+  .ov{position:fixed;inset:0;background:rgba(20,22,28,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+  .ov.show{display:flex}
+  .sheet{background:#fff;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom));
+    animation:up .25s ease}
+  @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  .sheet h3{font-size:18px;margin-bottom:5px}
+  .sheet .d{font-size:12.5px;color:var(--sub);margin-bottom:16px}
+  .sheet .saved-list{background:var(--soft);border-radius:11px;padding:11px 13px;margin-bottom:15px;font-size:12.5px;max-height:120px;overflow:auto}
+  .sheet .saved-list div{padding:3px 0;color:#374151}
+  .field{margin-bottom:13px}
+  .field label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
+  .field input{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px}
+  .field input:focus{outline:none;border-color:var(--accent)}
+  .submit{width:100%;padding:15px;border:none;border-radius:12px;background:var(--ink);color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px}
+  .close{position:absolute;top:14px;right:18px;font-size:24px;color:#bbb;cursor:pointer;background:none;border:none}
+  .ok{text-align:center;padding:14px 0}
+  .ok .big{font-size:40px}
+  .ok h3{margin:8px 0 4px}
+  .ok p{font-size:13px;color:var(--sub)}
+  .foot{text-align:center;font-size:10.5px;color:#b9bbc0;padding:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><span class="qk">QK</span><span class="brand">Quration</span></div>
+    <div class="tag-slogan">在韩国，省时间又省钱 · 한국에서 똑똑한 선택</div>
+  </header>
+
+  <!-- FORM -->
+  <div class="panel" id="form">
+    <div class="blk">
+      <div class="label">📍 城市 <small>城市 / 도시</small></div>
+      <div class="row">
+        <div class="opt on" data-city="seoul">首尔<small>서울 Seoul</small></div>
+        <div class="opt" style="opacity:.45;pointer-events:none">釜山<small>곧 출시</small></div>
+        <div class="opt" style="opacity:.45;pointer-events:none">济州<small>곧 출시</small></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="label">🗓 行程天数 <small>일정 / days</small></div>
+      <div class="row" id="days">
+        <div class="opt" data-d="2">2天1夜<small>1박2일</small></div>
+        <div class="opt on" data-d="3">3天2夜<small>2박3일</small></div>
+        <div class="opt" data-d="4">4天3夜<small>3박4일</small></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="label">💰 预算 <small>1인 예산(숙박 제외)</small></div>
+      <div class="row" id="budget">
+        <div class="opt" data-b="low">经济<small>~30만원</small></div>
+        <div class="opt on" data-b="mid">舒适<small>30~70만</small></div>
+        <div class="opt" data-b="high">高端<small>70만+</small></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="label">❤️ 兴趣 <small>관심사 (복수선택)</small></div>
+      <div class="chips" id="interests">
+        <div class="chip on" data-i="food">美食<small>맛집</small></div>
+        <div class="chip on" data-i="cafe">咖啡<small>카페</small></div>
+        <div class="chip" data-i="shop">购物<small>쇼핑</small></div>
+        <div class="chip" data-i="beauty">美妆<small>뷰티</small></div>
+        <div class="chip" data-i="skin">皮肤科<small>피부과</small></div>
+        <div class="chip" data-i="check">体检<small>건강검진</small></div>
+        <div class="chip" data-i="photo">拍照<small>인생네컷</small></div>
+        <div class="chip" data-i="kids">亲子<small>아이동반</small></div>
+      </div>
+    </div>
+
+    <button class="gen" onclick="generate()">⚡ 生成专属行程 · 코스 생성</button>
+    <div class="foot">Quration Korea · 검증된 선택 Curate · Verify · Select</div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result"></div>
+</div>
+
+<!-- SAVE MODAL -->
+<div class="ov" id="ov">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+// ---------- 데이터 (서울 샘플 스팟) ----------
+// cat: food/cafe/shop/beauty/skin/check/photo/kids
+// b: 예산 가중 (low/mid/high 어디서나 등장 정도). area로 동선 묶음.
+const SPOTS = [
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu-dong",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",why_ko:"요즘 제일 핫한 카페 성지"},
+ {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim Changgo",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",why_ko:"창고 개조 대형 카페, 사진 맛집"},
+ {zh:"圣水联合制鞋所",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",why_ko:"수제화 골목"},
+ {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",why_ko:"도심 속 공원, 산책·사진"},
+
+ {zh:"汉南洞 Comfort 咖啡",ko:"한남동 콤포트",pron:"Hannam",cat:"cafe",area:"한남",areaZh:"汉南洞",cost:"₩9,000~17,000",time:"1-2h",why_zh:"名流区精品咖啡，氛围高级",why_ko:"고급스러운 한남동 감성 카페"},
+ {zh:"梨泰院世界美食街",ko:"이태원 세계음식거리",pron:"Itaewon",cat:"food",area:"한남",areaZh:"汉南洞",cost:"₩15,000~30,000",time:"2h",why_zh:"各国料理聚集，夜晚热闹",why_ko:"세계음식·펍 거리"},
+ {zh:"Leeum三星美术馆",ko:"리움미술관",pron:"Leeum",cat:"photo",area:"한남",areaZh:"汉南洞",cost:"₩10,000",time:"2h",why_zh:"顶级私人美术馆，建筑本身就值得看",why_ko:"삼성 리움 미술관"},
+
+ {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",why_ko:"관광 1번지, 쇼핑·길거리음식"},
+ {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，免税+折扣",why_ko:"K뷰티 성지, 외국인 할인"},
+ {zh:"明洞炸鸡/刀削面",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",why_ko:"미쉐린 칼국수 노포"},
+ {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",why_ko:"서울 야경 랜드마크"},
+
+ {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",why_ko:"가로수길 편집숍·카페"},
+ {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",why_ko:"피부과 밀집, 상담 후 결정",med:true},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield Library",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",why_ko:"코엑스 별마당, 무료 포토존"},
+ {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",why_ko:"반나절 프리미엄 검진, 통역 지원",med:true},
+
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",why_ko:"홍대 거리공연·쇼핑"},
+ {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",why_ko:"인생네컷, 필수 인증"},
+ {zh:"弘大烤肉/布帐马车",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",why_ko:"밤 포차 감성"},
+
+ {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",why_ko:"한옥마을, 한복 포토"},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",area:"북촌",areaZh:"北村",cost:"₩3,000 (韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",why_ko:"경복궁, 한복시 무료입장"},
+ {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong-dong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",why_ko:"삼청동 전통찻집·카페"},
+
+ {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang Market",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",why_ko:"빈대떡·육회 노포 시장",kids:true},
+ {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",why_ko:"실내외 테마파크, 아이동반 굿",kids:true},
+ {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River Park",cat:"kids",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",why_ko:"한강 치맥·자전거",kids:true}
+];
+
+const CAT_LABEL={food:"美食 맛집",cafe:"咖啡 카페",shop:"购物 쇼핑",beauty:"美妆 뷰티",skin:"皮肤科 피부과",check:"体检 검진",photo:"拍照 포토",kids:"亲子 아이동반"};
+const BUDGET_KRW={low:250000,mid:500000,high:900000};
+
+let state={city:"seoul",days:3,budget:"mid",interests:["food","cafe"]};
+let favorites={};
+
+// ---------- 폼 인터랙션 ----------
+document.querySelectorAll('#days .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#days .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.days=+o.dataset.d});
+document.querySelectorAll('#budget .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#budget .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.budget=o.dataset.b});
+document.querySelectorAll('#interests .chip').forEach(c=>c.onclick=()=>{
+  c.classList.toggle('on');
+  state.interests=[...document.querySelectorAll('#interests .chip.on')].map(x=>x.dataset.i);
+});
+
+// ---------- 코스 생성 로직 ----------
+function generate(){
+  if(state.interests.length===0){alert("请至少选择一个兴趣 · 관심사 1개 이상 선택");return;}
+  // 1) 관심사에 맞는 스팟 필터
+  let pool=SPOTS.filter(s=>state.interests.includes(s.cat)||(state.interests.includes("kids")&&s.kids));
+  // 의료(skin/check)는 선택 안하면 제외
+  if(!state.interests.includes("skin")) pool=pool.filter(s=>s.cat!=="skin");
+  if(!state.interests.includes("check")) pool=pool.filter(s=>s.cat!=="check");
+  // 2) 동선(area)별 그룹
+  const byArea={};
+  pool.forEach(s=>{(byArea[s.area]=byArea[s.area]||[]).push(s)});
+  let areas=Object.keys(byArea).sort((a,b)=>byArea[b].length-byArea[a].length);
+  // 3) Day별로 area 배분 (하루 1~2 area, 3~4 스팟)
+  const days=[];
+  let ai=0;
+  for(let d=0;d<state.days;d++){
+    let dayspots=[];
+    let want=4;
+    while(dayspots.length<want && ai<areas.length){
+      const a=areas[ai];
+      dayspots=dayspots.concat(byArea[a].slice(0,3));
+      ai++;
+      if(dayspots.length>=3) break;
+    }
+    if(dayspots.length===0){ // 풀 소진되면 재활용
+      const all=pool.slice(); dayspots=all.slice((d*3)%all.length,(d*3)%all.length+3);
+    }
+    days.push(dayspots.slice(0,4));
+  }
+  render(days);
+}
+
+function render(days){
+  favorites={};
+  const areaNames=[...new Set(days.flat().map(s=>s.areaZh))];
+  let totalMin=days.flat().reduce((sum,s)=>{const m=(s.cost.match(/[\d,]+/g)||["0"]);return sum+parseInt(m[0].replace(/,/g,''))||sum;},0);
+  let html=`
+   <div class="summary">
+     <h2>🇰🇷 首尔 ${state.days}天 专属行程</h2>
+     <p>根据你的兴趣，已避开踩雷、优化路线 · 동선 최적화 완료</p>
+     <div class="meta">
+       <span>📍 ${state.days}天 ${state.days-1}夜</span>
+       <span>💰 ${({low:"经济",mid:"舒适",high:"高端"})[state.budget]}</span>
+       ${state.interests.map(i=>`<span>${CAT_LABEL[i].split(' ')[0]}</span>`).join('')}
+     </div>
+   </div>`;
+
+  days.forEach((spots,i)=>{
+    const dayAreas=[...new Set(spots.map(s=>s.areaZh))].join(' · ');
+    html+=`<div class="day"><div class="day-h"><div class="day-n">D${i+1}</div><b>${dayAreas}</b><small>${spots.length} 个地点</small></div>`;
+    spots.forEach((s,j)=>{
+      const id=`${i}-${j}`;
+      const medWarn=s.med?`<div class="why" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
+      html+=`
+       <div class="spot">
+         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
+         <div class="cat">${CAT_LABEL[s.cat]||''}</div>
+         <div class="zh">${s.zh}</div>
+         <div class="ko-box">
+           <span class="sign">看招牌 간판</span>
+           <span class="ko">${s.ko}</span>
+           <span class="pron">${s.pron}</span>
+         </div>
+         <div class="why">${s.why_zh}</div>
+         ${medWarn}
+         <div class="ft">⏱ <b>${s.time}</b> · 💵 <b>${s.cost}</b></div>
+       </div>`;
+      window['_spot_'+id]=s;
+    });
+    html+=`</div>`;
+  });
+
+  html+=`
+   <div class="est">
+     <div class="t">预计花费(不含住宿) · 예상 경비</div>
+     <div class="v">约 ₩${totalMin.toLocaleString()} <small>~ 起</small></div>
+   </div>
+   <div class="savebar">
+     <button onclick="openSave()">💾 保存行程 + 微信收藏 · 저장하기</button>
+     <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
+   </div>
+   <div class="foot">Quration Korea · 在韩国做更好的选择</div>`;
+
+  document.getElementById('form').style.display='none';
+  const r=document.getElementById('result');
+  r.innerHTML=html; r.style.display='block';
+  window.scrollTo(0,0);
+}
+
+function toggleFav(id,btn){
+  if(favorites[id]){delete favorites[id];btn.classList.remove('on');}
+  else{favorites[id]=window['_spot_'+id];btn.classList.add('on');}
+}
+
+// ---------- 저장 = DB 수집 훅 (위챗) ----------
+function openSave(){
+  const favs=Object.values(favorites);
+  const list=favs.length?favs:Object.values(favorites);
+  let savedHtml=favs.length
+    ? `<div class="saved-list">${favs.map(s=>`<div>♥ ${s.zh} <span style="color:#9aa">/ ${s.ko}</span></div>`).join('')}</div>`
+    : `<div class="d">💡 先点 ♥ 收藏喜欢的地点，再保存会更准 · 마음에 드는 곳 ♥ 먼저 누르면 더 정확해요</div>`;
+  document.getElementById('sheet').innerHTML=`
+    <button class="close" onclick="closeSave()">×</button>
+    <h3>💾 保存你的专属行程</h3>
+    <div class="d">留下微信，我们把完整行程 + 商家优惠发给你<br>위챗 남기면 전체 코스 + 제휴 혜택 보내드려요</div>
+    ${savedHtml}
+    <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
+    <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
+    <button class="submit" onclick="submitLead()">领取完整行程 · 받기</button>
+    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">提交即同意保存联系方式用于行程推送</div>`;
+  document.getElementById('ov').classList.add('show');
+}
+function closeSave(){document.getElementById('ov').classList.remove('show');}
+
+function submitLead(){
+  const wx=document.getElementById('wx').value.trim();
+  if(!wx){alert("请填写微信号 · 위챗 입력해주세요");return;}
+  // 데모: localStorage에 리드 저장 (실제로는 서버/에어테이블/노션 CRM으로 전송)
+  const lead={wx,name:document.getElementById('nm').value.trim(),
+    city:state.city,days:state.days,budget:state.budget,interests:state.interests,
+    saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()};
+  const db=JSON.parse(localStorage.getItem('quration_leads')||'[]');
+  db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
+  document.getElementById('sheet').innerHTML=`
+    <div class="ok">
+      <div class="big">🎉</div>
+      <h3>收藏成功！감사합니다</h3>
+      <p>完整行程 + 商家优惠将通过微信发送给你<br>전체 코스를 위챗으로 보내드릴게요</p>
+      <p style="margin-top:10px;font-size:11px;color:#b9bbc0">已收集 ${db.length} 个意向客户 (데모 DB)</p>
+    </div>
+    <button class="submit" onclick="closeSave()" style="margin-top:8px">完成 확인</button>`;
+}
+
+function restart(){
+  document.getElementById('result').style.display='none';
+  document.getElementById('form').style.display='block';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
