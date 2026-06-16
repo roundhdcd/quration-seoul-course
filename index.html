@@ -197,7 +197,8 @@
 const RELAY_URL = "";              // 구글 앱스스크립트 배포 URL (DB+알람). 비면 로컬저장(테스트).
 const XHS_URL   = "";              // 샤오홍슈 프로필 공유링크(xhslink) 받으면 채움 → 바로 이동
 const XHS_ID    = "94342747991";   // 샤오홍슈 ID (Rami)
-const WECHAT_ID = "quration_kr";   // 위챗 ID (샘플 — 실제 ID 받으면 교체)
+const WECHAT_ID = "Quration_Korea";   // 위챗 ID (Rami)
+const WECHAT_QR = "wechat-qr.jpg";    // 위챗 추가 QR
 
 const SPOTS = [
  {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",tags:["kpop"],area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328},
@@ -244,9 +245,23 @@ function follow(t){
   if(t==='xhs'){
     if(XHS_URL){window.open(XHS_URL,'_blank');}
     else{ if(navigator.clipboard) navigator.clipboard.writeText(XHS_ID); showToast("小红书号已复制: "+XHS_ID+" — 去小红书搜索关注～"); }
-  } else { if(navigator.clipboard) navigator.clipboard.writeText(WECHAT_ID); showToast("微信号已复制: "+WECHAT_ID+" · 위챗ID 복사됨"); }
+  } else { openWeChat(); }
   return false;
 }
+function wcCard(){
+  return `<img src="${WECHAT_QR}" style="width:100%;max-width:260px;display:block;margin:4px auto 10px;border-radius:14px;border:1px solid var(--line)">
+    <div style="text-align:center;font-size:13.5px">微信号 WeChat: <b>${WECHAT_ID}</b></div>`;
+}
+function openWeChat(){
+  document.getElementById('sheet').innerHTML=`
+    <button class="close" onclick="closeSheet()">×</button>
+    <h3>💬 加我微信 · 위챗 추가</h3>
+    <div class="d">长按二维码识别 或 截图扫码加好友，问题我直接回复你<br>QR 길게눌러 인식/스캔 → 친구추가하면 바로 답변</div>
+    ${wcCard()}
+    <button class="submit" onclick="copyWX()" style="margin-top:12px">复制微信号 · ID 복사</button>`;
+  document.getElementById('ov').classList.add('show');
+}
+function copyWX(){ if(navigator.clipboard) navigator.clipboard.writeText(WECHAT_ID); showToast("微信号已复制: "+WECHAT_ID); }
 
 function generate(){
   if(state.interests.length===0){alert("请至少选一个目的 · 목적 1개 이상 선택");return;}
@@ -361,7 +376,7 @@ function submitInquiry(){
   const q=document.getElementById('iq').value.trim(), wx=document.getElementById('iwx').value.trim();
   if(!q){alert("请写下问题 · 질문을 적어주세요");return;} if(!wx){alert("请填微信号 · 위챗 입력");return;}
   saveLead({type:'inquiry',q,wx,city:state.city,interests:state.interests,ts:new Date().toISOString()});
-  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">📨</div><h3>문의 접수 완료! 已收到</h3><p>곧 微信으로 답변드릴게요<br>我们会尽快通过微信回复你</p></div><button class="submit" onclick="closeSheet()" style="margin-top:8px">확인 完成</button>`;
+  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">📨</div><h3>문의 접수 완료! 已收到</h3><p>👇 加我微信，我直接回复你<br>위챗 추가하면 더 빨리 답변드려요</p></div>${wcCard()}<button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
 }
 function openSave(){
   const favs=Object.values(favorites);
@@ -385,7 +400,7 @@ function submitLead(){
   const wx=document.getElementById('wx').value.trim();
   if(!wx){alert("请填微信号 · 위챗 입력해주세요");return;}
   const n=saveLead({type:'member',wx,name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
-  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>完整行程 + 每周韩国情报将通过微信送达<br>전체 코스 + 매주 정보를 위챗으로</p><p style="margin-top:10px;font-size:11px;color:#b9bbc0">第 ${n} 位会员 (데모 DB)</p></div><button class="submit" onclick="closeSheet()" style="margin-top:8px">확인 完成</button>`;
+  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>👇 加我微信，马上把完整行程发你<br>위챗 추가하면 전체 코스 바로 보내드려요</p></div>${wcCard()}<p style="text-align:center;font-size:11px;color:#b9bbc0;margin-top:6px">第 ${n} 位会员 (데모 DB)</p><button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
 }
 function closeSheet(){document.getElementById('ov').classList.remove('show');}
 function restart(){document.getElementById('result').style.display='none';document.getElementById('form').style.display='block';window.scrollTo(0,0);}
