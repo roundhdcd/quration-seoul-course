@@ -59,13 +59,10 @@
   .summary h2{font-size:17px;margin-bottom:6px}.summary p{font-size:12.5px;opacity:.9}
   .summary .meta{margin-top:11px;display:flex;gap:7px;flex-wrap:wrap}
   .summary .meta span{background:rgba(255,255,255,.16);padding:5px 10px;border-radius:20px;font-size:11px}
-  .today{background:linear-gradient(135deg,#fff3e6,#ffe9ef);border:1px solid #ffd9c2;border-radius:16px;padding:15px;margin-bottom:16px}
-  .today .th{font-size:13.5px;font-weight:800;color:#d4332f;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-  .today .th span{font-size:10px;background:#fff;color:#e23a5e;padding:3px 8px;border-radius:20px;font-weight:700}
-  .today .ti2{font-size:13.5px;padding:8px 0;border-top:1px solid rgba(212,51,47,.12);line-height:1.45}
-  .today .ti2 b{font-weight:800}
-  .today .tg{font-size:10px;background:#ffe1d6;color:#c0392b;padding:1px 7px;border-radius:6px;font-weight:700;margin-left:4px}
-  .today .kohint{font-size:11.5px;color:var(--sub)}
+  .spotevt{background:linear-gradient(135deg,#fff3e6,#ffe9ef);border:1px solid #ffd9c2;border-radius:10px;padding:9px 11px;margin-top:8px;font-size:12.5px;line-height:1.45}
+  .spotevt b{color:#d4332f}
+  .spotevt .tg{font-size:9.5px;background:#ffe1d6;color:#c0392b;padding:1px 7px;border-radius:6px;font-weight:800;margin-left:4px}
+  .spotevt .kohint{font-size:11.5px;color:var(--sub)}
   .day{margin-bottom:20px}
   .day-h{display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-left:2px}
   .day-n{background:var(--accent);color:#fff;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
@@ -208,27 +205,27 @@ const WECHAT_ID = "Quration_Korea";   // 위챗 ID (Rami)
 const WECHAT_QR = "wechat-qr.jpg";    // 위챗 추가 QR
 
 const SPOTS = [
- {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328},
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328,event:{tag:"팝업",zh:"设计师品牌限时快闪进行中",ko:"디자이너 브랜드 팝업 진행중",when:"~6月底"}},
  {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",rev:"空间太大，随便拍都好看",rec:156},
  {zh:"圣水手工鞋街",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",rev:"真皮手工，比国内划算",rec:64},
  {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"view",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫绝佳",rev:"散步遛娃都合适，还免费",rec:201},
 
  {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"culture",area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288},
  {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"culture",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276},
- {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"culture",area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"culture",area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301,event:{tag:"이벤트",zh:"韩服免费拍照活动",ko:"한복 무료 포토 이벤트",when:"주말"}},
  {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114},
 
  {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",rev:"该买的都能买齐，热闹",rec:410},
- {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512},
+ {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512,event:{tag:"할인",zh:"外国人折扣周",ko:"외국인 할인 위크",when:"本周"}},
  {zh:"明洞刀削面(明洞饺子)",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",rev:"汤头惊艳，排队也值",rec:289},
  {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"view",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355},
 
  {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",rev:"小众设计店多，好逛",rec:130},
  {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88},
- {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"view",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"view",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240,event:{tag:"전시",zh:"媒体艺术展展出中",ko:"미디어아트展 전시중"}},
  {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51},
 
- {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198},
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198,event:{tag:"공연",zh:"周末街头演出",ko:"주말 버스킹",when:"토·일"}},
  {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"culture",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367},
  {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121},
 
@@ -241,15 +238,6 @@ const SPOTS = [
 const CAT_LABEL={food:"🍜 美食 먹거리",cafe:"☕ 感性咖啡 감성카페",shop:"🛍 购物 쇼핑",view:"🌆 美景 좋은뷰",culture:"🏯 文化体验 문화체험",beauty:"💄 美妆 뷰티",medical:"🏥 医美·体检 의료관광"};
 const STYLE_LABEL={eco:"经济型 가성비",std:"标准型 일반",lux:"轻奢型 프리미엄"};
 
-// 오늘의 정보 (지역별 "왜 지금" — 매주 운영자가 업데이트하는 핵심 차별화 데이터. 지금은 샘플)
-const TODAY={
- "성수":[{tag:"팝업",zh:"设计师品牌限时快闪店",ko:"디자이너 브랜드 팝업",when:"~6月底"},{tag:"체험",zh:"香水定制体验工房",ko:"향수 커스텀 체험"},{tag:"전시",zh:"免费艺术展",ko:"무료 아트 전시"}],
- "한남":[{tag:"전시",zh:"Leeum 特别展",ko:"리움 특별전",when:"~7月"},{tag:"팝업",zh:"汉南洞概念店快闪",ko:"한남동 컨셉 팝업"}],
- "홍대":[{tag:"공연",zh:"周末街头演出",ko:"주말 버스킹",when:"매주 토·일"},{tag:"팝업",zh:"潮牌快闪店",ko:"스트릿 브랜드 팝업"}],
- "명동":[{tag:"할인",zh:"Olive Young 外国人折扣周",ko:"올영 외국인 할인위크"}],
- "강남":[{tag:"전시",zh:"COEX 媒体艺术展",ko:"코엑스 미디어아트"}],
- "북촌":[{tag:"체험",zh:"韩服免费拍照活动",ko:"한복 무료 포토 이벤트",when:"주말"}]
-};
 
 let state={city:"seoul",interests:["food","cafe"],style:"std",budget:"",dates:"",days:3};
 let favorites={};
@@ -320,14 +308,6 @@ function render(days){
        ${state.budget?`<span>💵 ${state.budget}</span>`:''}
      </div>
    </div>`;
-  var areasInPlan=[...new Set(days.flat().map(s=>s.area))];
-  var todayItems=[]; areasInPlan.forEach(function(a){ if(TODAY[a]) TODAY[a].forEach(function(it){ todayItems.push(it); }); });
-  if(todayItems.length){
-    var medals=['🥇','🥈','🥉'];
-    html+='<div class="today"><div class="th">🔥 今天值得去 · 지금 가야 하는 이유 <span>本周更新·이번주</span></div>';
-    todayItems.slice(0,3).forEach(function(it,k){ html+='<div class="ti2">'+(medals[k]||'•')+' <b>'+it.zh+'</b><span class="tg">'+it.tag+'</span><br><span class="kohint">'+it.ko+(it.when?' · '+it.when:'')+'</span></div>'; });
-    html+='</div>';
-  }
   days.forEach((spots,i)=>{
     const dayAreas=[...new Set(spots.map(s=>s.areaZh))].join(' · ');
     html+=`<div class="day"><div class="day-h"><div class="day-n">D${i+1}</div><b>${dayAreas}</b><small>${spots.length} 个地点</small></div>`;
@@ -341,6 +321,7 @@ function render(days){
         <div class="ko-box"><span class="sign">看招牌 간판</span><span class="ko">${s.ko}</span><span class="pron">${s.pron}</span></div>
         <div class="reason"><b>推荐理由 추천이유:</b> ${s.why_zh}</div>
         ${s.rev?`<div class="rev">💬 中国朋友：“${s.rev}”</div>`:''}
+        ${s.event?`<div class="spotevt">🔥 <b>现在!지금</b> ${s.event.zh}<span class="tg">${s.event.tag}</span><br><span class="kohint">${s.event.ko}${s.event.when?' · '+s.event.when:''}</span></div>`:''}
         ${med}
         <div class="ft">⏱ 推荐停留 <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
         <div class="links">
