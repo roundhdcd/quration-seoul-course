@@ -41,6 +41,21 @@
   .gen{width:100%;padding:16px;border:none;border-radius:14px;background:var(--ink);color:#fff;font-size:15.5px;
     font-weight:700;cursor:pointer;margin-top:4px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(26,29,36,.25)}
   .gen:active{transform:scale(.99)}
+  .tin{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;font-weight:600;font-family:inherit}
+  .tin:focus{outline:none;border-color:var(--accent)}
+  .tin::placeholder{color:#b9bbc0;font-weight:500}
+  .opt.soon{border-style:dashed;color:var(--sub)}
+  .opt.soon small{color:var(--accent)}
+  .hint{font-size:11px;color:var(--sub);margin-top:9px;line-height:1.45}
+  .ask{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);
+    font-size:14px;font-weight:700;cursor:pointer;margin-top:10px}
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:14px}
+  .faq h4{font-size:13px;margin-bottom:6px}
+  .faq .qa{font-size:12px;color:#4b5563;padding:7px 0;border-top:1px solid var(--line);line-height:1.5}
+  .faq .qa b{color:var(--ink);display:block;margin-bottom:2px}
+  .sheet textarea{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;
+    font-family:inherit;resize:vertical;min-height:74px}
+  .sheet textarea:focus{outline:none;border-color:var(--accent)}
   /* result */
   #result{padding:0 16px 40px;display:none}
   .summary{background:linear-gradient(135deg,#1c3f8f,#2a4fa0);color:#fff;border-radius:16px;padding:18px;margin:6px 0 18px}
@@ -113,14 +128,17 @@
       <div class="label">📍 城市 <small>城市 / 도시</small></div>
       <div class="row">
         <div class="opt on" data-city="seoul">首尔<small>서울 Seoul</small></div>
-        <div class="opt" style="opacity:.45;pointer-events:none">釜山<small>곧 출시</small></div>
-        <div class="opt" style="opacity:.45;pointer-events:none">济州<small>곧 출시</small></div>
+        <div class="opt soon" onclick="reqCity('仁川 인천')">仁川<small>인천 · 신청</small></div>
+        <div class="opt soon" onclick="reqCity('釜山 부산')">釜山<small>부산 · 신청</small></div>
+        <div class="opt soon" onclick="reqCity('济州 제주')">济州<small>제주 · 신청</small></div>
       </div>
+      <div class="hint">🚧 다른 도시는 출시 예정! 원하는 도시를 눌러 신청하면 먼저 알려드려요<br>想去其他城市？点一下，开通后第一时间通知你</div>
     </div>
 
     <div class="blk">
-      <div class="label">🗓 行程天数 <small>일정 / days</small></div>
-      <div class="row" id="days">
+      <div class="label">🗓 行程 <small>여행 날짜 + 코스 길이</small></div>
+      <input class="tin" id="dates" placeholder="여행 날짜 입력 (예: 6/20~6/22) · 旅行日期">
+      <div class="row" id="days" style="margin-top:9px">
         <div class="opt" data-d="2">2天1夜<small>1박2일</small></div>
         <div class="opt on" data-d="3">3天2夜<small>2박3일</small></div>
         <div class="opt" data-d="4">4天3夜<small>3박4일</small></div>
@@ -128,12 +146,8 @@
     </div>
 
     <div class="blk">
-      <div class="label">💰 预算 <small>1인 예산(숙박 제외)</small></div>
-      <div class="row" id="budget">
-        <div class="opt" data-b="low">经济<small>~30만원</small></div>
-        <div class="opt on" data-b="mid">舒适<small>30~70만</small></div>
-        <div class="opt" data-b="high">高端<small>70만+</small></div>
-      </div>
+      <div class="label">💰 预算 <small>1인 예산 직접 입력 (숙박 제외)</small></div>
+      <input class="tin" id="budget" placeholder="예: 50만원 · 你的预算 (例: 3000元)">
     </div>
 
     <div class="blk">
@@ -151,6 +165,14 @@
     </div>
 
     <button class="gen" onclick="generate()">⚡ 生成专属行程 · 코스 생성</button>
+    <button class="ask" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题？点这里问</button>
+
+    <div class="faq">
+      <h4>❓ 자주 묻는 질문 · 常见问题</h4>
+      <div class="qa"><b>免费吗? 무료인가요?</b>完全免费，输入兴趣即可生成行程 · 관심사만 넣으면 코스 무료 생성</div>
+      <div class="qa"><b>其他城市? 다른 도시는?</b>仁川/釜山/济州 即将开通，点城市申请 · 인천·부산·제주 신청 가능</div>
+      <div class="qa"><b>有问题怎么办? 궁금한 점은?</b>点上方"问一问"留言+微信，我们直接回复 · 문의 남기면 바로 답변드려요</div>
+    </div>
     <div class="foot">Quration Korea · 검증된 선택 Curate · Verify · Select</div>
   </div>
 
@@ -203,12 +225,11 @@ const SPOTS = [
 const CAT_LABEL={food:"美食 맛집",cafe:"咖啡 카페",shop:"购物 쇼핑",beauty:"美妆 뷰티",skin:"皮肤科 피부과",check:"体检 검진",photo:"拍照 포토",kids:"亲子 아이동반"};
 const BUDGET_KRW={low:250000,mid:500000,high:900000};
 
-let state={city:"seoul",days:3,budget:"mid",interests:["food","cafe"]};
+let state={city:"seoul",days:3,dates:"",budget:"",interests:["food","cafe"]};
 let favorites={};
 
 // ---------- 폼 인터랙션 ----------
 document.querySelectorAll('#days .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#days .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.days=+o.dataset.d});
-document.querySelectorAll('#budget .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#budget .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.budget=o.dataset.b});
 document.querySelectorAll('#interests .chip').forEach(c=>c.onclick=()=>{
   c.classList.toggle('on');
   state.interests=[...document.querySelectorAll('#interests .chip.on')].map(x=>x.dataset.i);
@@ -217,6 +238,8 @@ document.querySelectorAll('#interests .chip').forEach(c=>c.onclick=()=>{
 // ---------- 코스 생성 로직 ----------
 function generate(){
   if(state.interests.length===0){alert("请至少选择一个兴趣 · 관심사 1개 이상 선택");return;}
+  state.dates=document.getElementById('dates').value.trim();
+  state.budget=document.getElementById('budget').value.trim();
   // 1) 관심사에 맞는 스팟 필터
   let pool=SPOTS.filter(s=>state.interests.includes(s.cat)||(state.interests.includes("kids")&&s.kids));
   // 의료(skin/check)는 선택 안하면 제외
@@ -256,7 +279,8 @@ function render(days){
      <p>根据你的兴趣，已避开踩雷、优化路线 · 동선 최적화 완료</p>
      <div class="meta">
        <span>📍 ${state.days}天 ${state.days-1}夜</span>
-       <span>💰 ${({low:"经济",mid:"舒适",high:"高端"})[state.budget]}</span>
+       ${state.dates?`<span>📅 ${state.dates}</span>`:''}
+       ${state.budget?`<span>💰 ${state.budget}</span>`:''}
        ${state.interests.map(i=>`<span>${CAT_LABEL[i].split(' ')[0]}</span>`).join('')}
      </div>
    </div>`;
@@ -293,6 +317,7 @@ function render(days){
    </div>
    <div class="savebar">
      <button onclick="openSave()">💾 保存行程 + 微信收藏 · 저장하기</button>
+     <button class="restart" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题问一问</button>
      <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
    </div>
    <div class="foot">Quration Korea · 在韩国做更好的选择</div>`;
@@ -351,6 +376,39 @@ function restart(){
   document.getElementById('result').style.display='none';
   document.getElementById('form').style.display='block';
   window.scrollTo(0,0);
+}
+
+// ---------- 문의/도시신청 (DB 수집) ----------
+function reqCity(name){ openInquiry('城市申请 도시신청: '+name); }
+
+function openInquiry(prefill){
+  document.getElementById('sheet').innerHTML=`
+    <button class="close" onclick="closeSave()">×</button>
+    <h3>💬 궁금한 점·문의</h3>
+    <div class="d">질문을 남기고 微信를 적어주시면 직접 답변드려요<br>留下问题和微信，我们会直接回复你</div>
+    <div class="field"><label>궁금한 점 / 问题 *</label>
+      <textarea id="iq" placeholder="${prefill||'예: 피부과 비용이 궁금해요 / 这家好吃吗?'}">${prefill||''}</textarea></div>
+    <div class="field"><label>微信号 WeChat ID *</label><input id="iwx" placeholder="例: quration_kr"></div>
+    <button class="submit" onclick="submitInquiry()">문의 보내기 · 提交</button>
+    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">제출 시 답변 발송을 위해 연락처가 저장됩니다</div>`;
+  document.getElementById('ov').classList.add('show');
+}
+
+function submitInquiry(){
+  const q=document.getElementById('iq').value.trim();
+  const wx=document.getElementById('iwx').value.trim();
+  if(!q){alert("请写下你的问题 · 궁금한 점을 적어주세요");return;}
+  if(!wx){alert("请填写微信号 · 위챗을 입력해주세요");return;}
+  const lead={type:'inquiry',q,wx,city:state.city,interests:state.interests,ts:new Date().toISOString()};
+  const db=JSON.parse(localStorage.getItem('quration_leads')||'[]');
+  db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
+  document.getElementById('sheet').innerHTML=`
+    <div class="ok">
+      <div class="big">📨</div>
+      <h3>문의 접수 완료! 已收到</h3>
+      <p>곧 微信으로 답변드릴게요<br>我们会尽快通过微信回复你</p>
+    </div>
+    <button class="submit" onclick="closeSave()" style="margin-top:8px">확인 完成</button>`;
 }
 </script>
 </body>
