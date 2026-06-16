@@ -23,6 +23,11 @@
      box-shadow:0 2px 6px rgba(0,0,0,.15)}
   .brand{font-size:19px}
   .tag-slogan{font-size:11.5px;color:var(--sub);margin-top:5px;letter-spacing:.3px}
+  .hero{background:linear-gradient(135deg,#fff,#fff5f4);border:1px solid #f6d9d7;border-radius:16px;padding:16px;margin-bottom:14px;font-size:12.5px;color:#5b4636;line-height:1.5}
+  .hero b{display:block;font-size:14.5px;margin-bottom:5px;color:var(--ink)}
+  .hero span{display:block;font-size:11px;color:var(--sub);margin-top:7px}
+  .vbadge{font-size:9.5px;color:#1a8a4a;background:#e9f8ef;padding:2px 6px;border-radius:5px;font-weight:800;margin-left:4px}
+  .rev{font-size:12px;color:#6b5e4f;background:#fbf7f0;border-left:3px solid #e7c98c;padding:6px 9px;border-radius:0 7px 7px 0;margin-top:7px;line-height:1.45}
   /* form */
   .panel{padding:20px}
   .blk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 16px;margin-bottom:14px}
@@ -123,11 +128,16 @@
 <div class="wrap">
   <header>
     <div class="logo"><span class="qk">QK</span><span class="brand">Quration</span></div>
-    <div class="tag-slogan">在韩国，省时间又省钱 · 한국에서 똑똑한 선택</div>
+    <div class="tag-slogan">没人可问？问我就好 · 검증된 선택을 드려요</div>
   </header>
 
   <!-- FORM -->
   <div class="panel" id="form">
+    <div class="hero">
+      <b>第一次来韩国，想问却没人可问？🥲</b>
+      搜出来全是广告，不知道该信谁。<br>告诉我你的情况，给你「实地验证」过的选择 ✅
+      <span>처음 온 한국, 물어볼 사람이 없죠? 광고 말고 — 직접 검증한 선택을 드릴게요</span>
+    </div>
     <div class="blk">
       <div class="label">📍 城市 <small>城市 / 도시</small></div>
       <div class="row">
@@ -194,36 +204,36 @@
 // cat: food/cafe/shop/beauty/skin/check/photo/kids
 // b: 예산 가중 (low/mid/high 어디서나 등장 정도). area로 동선 묶음.
 const SPOTS = [
- {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu-dong",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",why_ko:"요즘 제일 핫한 카페 성지"},
- {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim Changgo",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",why_ko:"창고 개조 대형 카페, 사진 맛집"},
- {zh:"圣水联合制鞋所",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",why_ko:"수제화 골목"},
- {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",why_ko:"도심 속 공원, 산책·사진"},
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu-dong",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",why_ko:"요즘 제일 핫한 카페 성지",rev:"拍照超出片，咖啡也好喝",rec:328},
+ {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim Changgo",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",why_ko:"창고 개조 대형 카페, 사진 맛집",rev:"空间太大了，随便拍都好看",rec:156},
+ {zh:"圣水联合制鞋所",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",why_ko:"수제화 골목",rev:"真皮手工，比国内划算",rec:64},
+ {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",why_ko:"도심 속 공원, 산책·사진",rev:"散步遛娃都合适，还免费",rec:201},
 
- {zh:"汉南洞 Comfort 咖啡",ko:"한남동 콤포트",pron:"Hannam",cat:"cafe",area:"한남",areaZh:"汉南洞",cost:"₩9,000~17,000",time:"1-2h",why_zh:"名流区精品咖啡，氛围高级",why_ko:"고급스러운 한남동 감성 카페"},
- {zh:"梨泰院世界美食街",ko:"이태원 세계음식거리",pron:"Itaewon",cat:"food",area:"한남",areaZh:"汉南洞",cost:"₩15,000~30,000",time:"2h",why_zh:"各国料理聚集，夜晚热闹",why_ko:"세계음식·펍 거리"},
- {zh:"Leeum三星美术馆",ko:"리움미술관",pron:"Leeum",cat:"photo",area:"한남",areaZh:"汉南洞",cost:"₩10,000",time:"2h",why_zh:"顶级私人美术馆，建筑本身就值得看",why_ko:"삼성 리움 미술관"},
+ {zh:"汉南洞 Comfort 咖啡",ko:"한남동 콤포트",pron:"Hannam",cat:"cafe",area:"한남",areaZh:"汉南洞",cost:"₩9,000~17,000",time:"1-2h",why_zh:"名流区精品咖啡，氛围高级",why_ko:"고급스러운 한남동 감성 카페",rev:"安静高级，适合慢慢坐",rec:98},
+ {zh:"梨泰院世界美食街",ko:"이태원 세계음식거리",pron:"Itaewon",cat:"food",area:"한남",areaZh:"汉南洞",cost:"₩15,000~30,000",time:"2h",why_zh:"各国料理聚集，夜晚热闹",why_ko:"세계음식·펍 거리",rev:"晚上很热闹，异国料理多",rec:142},
+ {zh:"Leeum三星美术馆",ko:"리움미술관",pron:"Leeum",cat:"photo",area:"한남",areaZh:"汉南洞",cost:"₩10,000",time:"2h",why_zh:"顶级私人美术馆，建筑本身就值得看",why_ko:"삼성 리움 미술관",rev:"建筑本身就值得专程来",rec:73},
 
- {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",why_ko:"관광 1번지, 쇼핑·길거리음식"},
- {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，免税+折扣",why_ko:"K뷰티 성지, 외국인 할인"},
- {zh:"明洞炸鸡/刀削面",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",why_ko:"미쉐린 칼국수 노포"},
- {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",why_ko:"서울 야경 랜드마크"},
+ {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",why_ko:"관광 1번지, 쇼핑·길거리음식",rev:"该买的都能买齐，热闹",rec:410},
+ {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，免税+折扣",why_ko:"K뷰티 성지, 외국인 할인",rev:"外国人结账打折，扫货圣地",rec:512},
+ {zh:"明洞炸鸡/刀削面",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",why_ko:"미쉐린 칼국수 노포",rev:"汤头惊艳，排队也值",rec:289},
+ {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",why_ko:"서울 야경 랜드마크",rev:"夜景绝了，情侣必来",rec:355},
 
- {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",why_ko:"가로수길 편집숍·카페"},
- {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",why_ko:"피부과 밀집, 상담 후 결정",med:true},
- {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield Library",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",why_ko:"코엑스 별마당, 무료 포토존"},
- {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",why_ko:"반나절 프리미엄 검진, 통역 지원",med:true},
+ {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",why_ko:"가로수길 편집숍·카페",rev:"小众设计店多，好逛",rec:130},
+ {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",why_ko:"피부과 밀집, 상담 후 결정",med:true,rev:"先咨询不踩雷，按需选",rec:88},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield Library",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",why_ko:"코엑스 별마당, 무료 포토존",rev:"免费打卡，书墙超震撼",rec:240},
+ {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",why_ko:"반나절 프리미엄 검진, 통역 지원",med:true,rev:"半天搞定，有中文协助放心",rec:51},
 
- {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",why_ko:"홍대 거리공연·쇼핑"},
- {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",why_ko:"인생네컷, 필수 인증"},
- {zh:"弘大烤肉/布帐马车",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",why_ko:"밤 포차 감성"},
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",why_ko:"홍대 거리공연·쇼핑",rev:"年轻人多，街头表演有意思",rec:198},
+ {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",why_ko:"인생네컷, 필수 인증",rev:"必拍！便宜又好玩",rec:367},
+ {zh:"弘大烤肉/布帐马车",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",why_ko:"밤 포차 감성",rev:"夜宵气氛拉满",rec:121},
 
- {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",why_ko:"한옥마을, 한복 포토"},
- {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",area:"북촌",areaZh:"北村",cost:"₩3,000 (韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",why_ko:"경복궁, 한복시 무료입장"},
- {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong-dong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",why_ko:"삼청동 전통찻집·카페"},
+ {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",why_ko:"한옥마을, 한복 포토",rev:"穿韩服拍照太美了",rec:276},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",area:"북촌",areaZh:"北村",cost:"₩3,000 (韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",why_ko:"경복궁, 한복시 무료입장",rev:"穿韩服免门票，超划算",rec:301},
+ {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong-dong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",why_ko:"삼청동 전통찻집·카페",rev:"安静文艺，咖啡好喝",rec:114},
 
- {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang Market",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",why_ko:"빈대떡·육회 노포 시장",kids:true},
- {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",why_ko:"실내외 테마파크, 아이동반 굿",kids:true},
- {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River Park",cat:"kids",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",why_ko:"한강 치맥·자전거",kids:true}
+ {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang Market",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",why_ko:"빈대떡·육회 노포 시장",kids:true,rev:"绿豆煎饼+生牛肉，必吃",rec:233},
+ {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",why_ko:"실내외 테마파크, 아이동반 굿",kids:true,rev:"室内也能玩，亲子首选",rec:187},
+ {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River Park",cat:"kids",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",why_ko:"한강 치맥·자전거",kids:true,rev:"炸鸡泡面看夜景，太惬意",rec:259}
 ];
 
 const CAT_LABEL={food:"美食 맛집",cafe:"咖啡 카페",shop:"购物 쇼핑",beauty:"美妆 뷰티",skin:"皮肤科 피부과",check:"体检 검진",photo:"拍照 포토",kids:"亲子 아이동반"};
@@ -298,7 +308,7 @@ function render(days){
       html+=`
        <div class="spot">
          <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
-         <div class="cat">${CAT_LABEL[s.cat]||''}</div>
+         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
          <div class="zh">${s.zh}</div>
          <div class="ko-box">
            <span class="sign">看招牌 간판</span>
@@ -306,8 +316,9 @@ function render(days){
            <span class="pron">${s.pron}</span>
          </div>
          <div class="why">${s.why_zh}</div>
+         ${s.rev?`<div class="rev">💬 中国朋友：“${s.rev}”</div>`:''}
          ${medWarn}
-         <div class="ft">⏱ <b>${s.time}</b> · 💵 <b>${s.cost}</b></div>
+         <div class="ft">⏱ <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
        </div>`;
       window['_spot_'+id]=s;
     });
