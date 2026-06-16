@@ -28,6 +28,13 @@
   .hero span{display:block;font-size:11px;color:var(--sub);margin-top:7px}
   .vbadge{font-size:9.5px;color:#1a8a4a;background:#e9f8ef;padding:2px 6px;border-radius:5px;font-weight:800;margin-left:4px}
   .rev{font-size:12px;color:#6b5e4f;background:#fbf7f0;border-left:3px solid #e7c98c;padding:6px 9px;border-radius:0 7px 7px 0;margin-top:7px;line-height:1.45}
+  .tips{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:14px}
+  .tips h4{font-size:13px;margin-bottom:8px}
+  .tips .ti{font-size:12px;color:#4b5563;padding:6px 0;border-top:1px solid var(--line);line-height:1.5}
+  .tips .ti b{color:var(--ink)}
+  .share{width:100%;padding:14px;border:none;border-radius:13px;background:#22c55e;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;margin-top:8px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1a1d24;color:#fff;padding:12px 20px;border-radius:30px;font-size:13px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
+  .toast.show{opacity:1}
   /* form */
   .panel{padding:20px}
   .blk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 16px;margin-bottom:14px}
@@ -198,6 +205,7 @@
 <div class="ov" id="ov">
   <div class="sheet" id="sheet"></div>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
 // ---------- 데이터 (서울 샘플 스팟) ----------
@@ -285,6 +293,7 @@ function generate(){
 
 function render(days){
   favorites={};
+  window.lastDays=days;
   const areaNames=[...new Set(days.flat().map(s=>s.areaZh))];
   let totalMin=days.flat().reduce((sum,s)=>{const m=(s.cost.match(/[\d,]+/g)||["0"]);return sum+parseInt(m[0].replace(/,/g,''))||sum;},0);
   let html=`
@@ -330,7 +339,18 @@ function render(days){
      <div class="t">预计花费(不含住宿) · 예상 경비</div>
      <div class="v">约 ₩${totalMin.toLocaleString()} <small>~ 起</small></div>
    </div>
+
+   <div class="tips">
+     <h4>🧳 出行贴士 · 한국 여행 꿀팁 (验证过 검증됨)</h4>
+     <div class="ti"><b>💳 支付 결제</b>便利店/大店多支持支付宝·微信支付，小店备点现金 · 알리페이·위챗페이 점점 되지만 현금도 챙기기</div>
+     <div class="ti"><b>🧾 退税 택스리펀</b>单店满₩15,000可退，机场/市区退税机办理 · 1.5만원↑ 환급</div>
+     <div class="ti"><b>🚇 交通 교통</b>买张 T-money 卡，地铁公交一卡搞定 · 티머니 카드 하나면 끝</div>
+     <div class="ti"><b>💱 换钱 환전</b>明洞/东大门换钱所汇率最好，别在机场换 · 명동 환전소 추천</div>
+     <div class="ti"><b>📅 预约 예약</b>热门餐厅用 Catchtable/Naver 提前订 · 인기맛집 예약앱</div>
+   </div>
+
    <div class="savebar">
+     <button class="share" onclick="genShare()">📋 复制小红书文案 · 샤오홍슈 문구 복사</button>
      <button onclick="openSave()">🎫 加入会员·保存行程 · 멤버십 가입하고 받기</button>
      <button class="restart" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题问一问</button>
      <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
@@ -398,6 +418,38 @@ function restart(){
   document.getElementById('result').style.display='none';
   document.getElementById('form').style.display='block';
   window.scrollTo(0,0);
+}
+
+// ---------- 小红书 문구 자동생성 (바이럴 루프) ----------
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+function genShare(){
+  const days=window.lastDays||[];
+  const areas=[...new Set(days.flat().map(s=>s.areaZh))].slice(0,3).join('·');
+  const allSpots=days.flat();
+  const titles=["不踩雷的本地路线","姐妹们冲就完了","这条路线我封神了","首尔本地人私藏"];
+  const t=titles[(allSpots.length+state.days)%titles.length];
+  let txt=`首尔${state.days}天${state.days-1}夜 | ${t}🇰🇷✨\n\n`;
+  txt+=`谁懂啊…第一次来首尔真的会无从下手😭 把验证过的路线整理好了，照着走就行👇\n\n`;
+  days.forEach((spots,i)=>{
+    txt+=`📍Day${i+1} ${[...new Set(spots.map(s=>s.areaZh))].join('·')}\n`;
+    spots.forEach(s=>{ txt+=`· ${s.zh}（${s.ko}）${s.rev?'— '+s.rev:''}\n`; });
+    txt+=`\n`;
+  });
+  txt+=`💡 支付/退税/换钱贴士都帮你整理好啦\n`;
+  txt+=`完整行程+避雷攻略，评论区扣「1」我发你～\n\n`;
+  txt+=`#首尔旅游 #首尔攻略 #韩国自由行 #首尔美食 #${areas.replace(/·/g,' #')} #出片圣地 #首尔citywalk #不踩雷`;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>showToast("✅ 已复制！去小红书粘贴 · 복사완료"))
+      .catch(()=>fallbackCopy(txt));
+  } else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+  ta.select(); try{document.execCommand('copy');showToast("✅ 已复制 · 복사완료");}catch(e){showToast("长按选择复制 · 길게눌러 복사");}
+  document.body.removeChild(ta);
 }
 
 // ---------- 문의/도시신청 (DB 수집) ----------
