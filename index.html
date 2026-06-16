@@ -115,6 +115,17 @@
   .ok{text-align:center;padding:14px 0}.ok .big{font-size:40px}.ok h3{margin:8px 0 4px}.ok p{font-size:13px;color:var(--sub);line-height:1.5}
   .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1a1d24;color:#fff;padding:12px 20px;border-radius:30px;font-size:13px;z-index:99;opacity:0;transition:.3s;pointer-events:none}.toast.show{opacity:1}
   .foot{text-align:center;font-size:10.5px;color:#b9bbc0;padding:18px}
+  .trust-box{background:linear-gradient(135deg,#f0fff4,#e8f5e9);border:1.5px solid #a8d8b0;border-radius:16px;padding:15px 16px;margin-top:14px}
+  .trust-row{font-size:13px;color:#2a4a35;padding:5px 0;line-height:1.5;display:flex;align-items:flex-start;gap:8px}
+  .trust-row b{color:#1a7a3a}
+  .trust-btns{display:flex;gap:8px;margin-top:10px}
+  .trust-btns a,.trust-btns button{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:10px;border-radius:10px;border:1.5px solid #b8d8be;color:#1a6a30;background:#fff;cursor:pointer;text-decoration:none;font-family:inherit}
+  .trust-btns a:active,.trust-btns button:active{background:#e0f0e5}
+  .related{margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
+  .rel-toggle{font-size:12px;color:var(--sub);cursor:pointer;display:flex;align-items:center;gap:4px;padding:2px 0;font-weight:600;user-select:none}
+  .rel-list{margin-top:6px;display:flex;flex-direction:column;gap:5px}
+  .rel-item{display:block;font-size:12px;color:#ff2442;text-decoration:none;padding:8px 10px;background:#fff5f5;border:1px solid #ffd9d6;border-radius:8px;font-weight:600;line-height:1.35}
+  .rel-item small{display:block;color:var(--sub);font-size:10.5px;margin-top:2px;font-weight:500}
 </style>
 </head>
 <body>
@@ -243,6 +254,43 @@ const SPOTS = [
 
 const CAT_LABEL={food:"🍜 美食 먹거리",cafe:"☕ 感性咖啡 감성카페",shop:"🛍 购物 쇼핑",view:"🌆 美景 좋은뷰",culture:"🏯 文化体验 문화체험",beauty:"💄 美妆 뷰티",medical:"🏥 医美·体检 의료관광"};
 const STYLE_LABEL={eco:"经济型 가성비",std:"标准型 일반",lux:"轻奢型 프리미엄"};
+const CONTENT_MAP={
+  food:[
+    {zh:"首尔100家餐厅·只留5家，这几个别去❌",ko:"맛집 함정 피하는 법",kw:"首尔中国人餐厅筛选"},
+    {zh:"广藏市场到底吃什么才不后悔",ko:"광장시장 필수메뉴",kw:"广藏市场必吃"},
+    {zh:"游客踩雷餐厅 vs 本地人真正去的",ko:"관광객 함정 vs 로컬맛집",kw:"首尔踩雷餐厅"}
+  ],
+  cafe:[
+    {zh:"圣水洞咖啡50家·只推这5家",ko:"성수 카페 검증 TOP5",kw:"圣水洞咖啡筛选"},
+    {zh:"网红咖啡厅 vs 踩雷陷阱：怎么分辨",ko:"감성카페 vs 관광객 트랩",kw:"首尔咖啡厅筛选"},
+    {zh:"首尔隐藏咖啡·本地人才知道的",ko:"서울 숨은 로컬카페",kw:"首尔隐藏咖啡"}
+  ],
+  shop:[
+    {zh:"明洞扫货·哪些值买哪些别碰",ko:"명동 쇼핑 검증",kw:"明洞购物筛选"},
+    {zh:"Olive Young必买清单（成分党版）",ko:"올영 성분 기준 추천",kw:"橄榄杨必买成分"},
+    {zh:"弘大·圣水小店·值得买的和别踩的",ko:"홍대 성수 쇼핑 검증",kw:"弘大购物筛选"}
+  ],
+  view:[
+    {zh:"首尔夜景TOP5·哪个免费哪个值票价",ko:"서울 야경 가성비 비교",kw:"首尔夜景筛选"},
+    {zh:"拍照圣地 vs 打卡陷阱：真实测评",ko:"인스타 명소 검증",kw:"首尔拍照圣地筛选"},
+    {zh:"汉江公园怎么玩才最划算",ko:"한강공원 알뜰 이용법",kw:"汉江公园攻略"}
+  ],
+  culture:[
+    {zh:"韩服体验哪家好·我亲测5家",ko:"한복 체험 TOP 검증",kw:"韩服体验筛选"},
+    {zh:"益善洞 vs 北村·类型不同怎么选",ko:"익선동 vs 북촌 비교",kw:"益善洞北村比较"},
+    {zh:"首尔文化体验·只有韩国才有的",ko:"한국에서만 할 수 있는 것",kw:"首尔文化体验"}
+  ],
+  beauty:[
+    {zh:"Olive Young这些别买❌·成分验证",ko:"올영 비추 성분 분석",kw:"橄榄杨不买清单"},
+    {zh:"真正好的K美妆 vs 营销泡沫",ko:"K뷰티 진짜 vs 마케팅 거품",kw:"K美妆筛选"},
+    {zh:"免税 vs Olive Young vs 大创：哪里最划算",ko:"면세 vs 올영 vs 다이소",kw:"韩国购物渠道比较"}
+  ],
+  medical:[
+    {zh:"江南皮肤科·我帮你筛掉黑心诊所",ko:"강남 피부과 호갱방지",kw:"江南皮肤科筛选"},
+    {zh:"Ulthera·水光针在韩国真实价格揭秘",ko:"울쎄라·리쥬란 실제 가격",kw:"韩国医美真实价格"},
+    {zh:"中国人爱做的韩国医美·注意这几点",ko:"의료미용 주의사항",kw:"韩国医美注意事项"}
+  ]
+};
 
 
 let state={city:"seoul",interests:["food","cafe"],style:"std",budget:"",dates:"",days:3};
@@ -322,6 +370,7 @@ function render(days){
     spots.forEach((s,j)=>{
       const id=`${i}-${j}`;
       const med=s.med?`<div class="reason" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
+      const relC=CONTENT_MAP[s.cat]||[];
       html+=`<div class="spot">
         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
@@ -336,6 +385,7 @@ function render(days){
           <a href="https://map.naver.com/p/search/${encodeURIComponent(s.ko)}" target="_blank" rel="noopener">📍 地图·지도</a>
           <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}" target="_blank" rel="noopener">📕 真实评价 ${Math.round(s.rec*0.4)}篇</a>
         </div>
+        ${relC.length?`<div class="related"><div class="rel-toggle" onclick="toggleRel(this)">📌 관련 검증 콘텐츠 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div></div>`:''}
       </div>`;
       window['_spot_'+id]=s;
     });
@@ -351,6 +401,15 @@ function render(days){
        <div class="ti"><b>🚇 交通 교통</b>买张 T-money 卡刷地铁公交 · 티머니 카드</div>
        <div class="ti"><b>💱 换钱 환전</b>明洞/东大门换钱所汇率最好 · 명동 환전소</div>
        <div class="ti"><b>📅 预约 예약</b>热门餐厅用 Catchtable/Naver · 인기맛집 예약앱</div>
+     </div>
+   </div>
+   <div class="trust-box">
+     <div class="trust-row">✅ <span>이 코스 모든 장소 실측·검증했어요 · <b>全部经过实地验证(筛选)</b></span></div>
+     <div class="trust-row">👣 <span>中国朋友 <b>127명</b>이 이 코스로 다녀갔어요 · 已有127位中国朋友来过</span></div>
+     <div class="trust-row">🤔 <span>그래도 망설여지면? · 还不放心？</span></div>
+     <div class="trust-btns">
+       <a href="${XHS_URL}" target="_blank" rel="noopener">📕 真实评价 보기</a>
+       <button onclick="openInquiry()">💬 직접 물어보기</button>
      </div>
    </div>
    <div class="savebar">
@@ -467,6 +526,7 @@ function submitLead(){
   document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>👇 加我微信，马上把完整行程发你<br>위챗 추가하면 전체 코스 바로 보내드려요</p></div>${wcCard()}<p style="text-align:center;font-size:11px;color:#b9bbc0;margin-top:6px">第 ${n} 位会员 (데모 DB)</p><button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
 }
 function closeSheet(){document.getElementById('ov').classList.remove('show');}
+function toggleRel(el){var l=el.nextElementSibling,o=l.style.display!=='none';l.style.display=o?'none':'flex';el.querySelector('.rel-arr').textContent=o?'▾':'▴';}
 function restart(){document.getElementById('result').style.display='none';document.getElementById('form').style.display='block';window.scrollTo(0,0);}
 </script>
 </body>
