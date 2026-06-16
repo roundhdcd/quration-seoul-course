@@ -102,6 +102,10 @@
   .sheet .d{font-size:12.5px;color:var(--sub);margin-bottom:16px}
   .sheet .saved-list{background:var(--soft);border-radius:11px;padding:11px 13px;margin-bottom:15px;font-size:12.5px;max-height:120px;overflow:auto}
   .sheet .saved-list div{padding:3px 0;color:#374151}
+  .benefits{background:#fff7f0;border:1px solid #fde4d3;border-radius:12px;padding:13px 14px;margin-bottom:14px}
+  .benefits .bt{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.4px;margin-bottom:8px}
+  .benefits .bi{font-size:12.5px;color:#5b4636;padding:4px 0;display:flex;gap:7px;align-items:flex-start;line-height:1.45}
+  .benefits .bi span{flex-shrink:0}
   .field{margin-bottom:13px}
   .field label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
   .field input{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px}
@@ -316,7 +320,7 @@ function render(days){
      <div class="v">约 ₩${totalMin.toLocaleString()} <small>~ 起</small></div>
    </div>
    <div class="savebar">
-     <button onclick="openSave()">💾 保存行程 + 微信收藏 · 저장하기</button>
+     <button onclick="openSave()">🎫 加入会员·保存行程 · 멤버십 가입하고 받기</button>
      <button class="restart" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题问一问</button>
      <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
    </div>
@@ -342,13 +346,20 @@ function openSave(){
     : `<div class="d">💡 先点 ♥ 收藏喜欢的地点，再保存会更准 · 마음에 드는 곳 ♥ 먼저 누르면 더 정확해요</div>`;
   document.getElementById('sheet').innerHTML=`
     <button class="close" onclick="closeSave()">×</button>
-    <h3>💾 保存你的专属行程</h3>
-    <div class="d">留下微信，我们把完整行程 + 商家优惠发给你<br>위챗 남기면 전체 코스 + 제휴 혜택 보내드려요</div>
+    <h3>🎫 加入 Quration 会员</h3>
+    <div class="d">한국생활 멤버십 · 무료 가입하고 전체 코스 받기<br>免费加入，领取完整行程 + 持续的韩国情报</div>
+    <div class="benefits">
+      <div class="bt">会员福利 · 멤버 혜택</div>
+      <div class="bi"><span>🗓</span>每周首尔新热点更新 · 매주 서울 핫플 업데이트</div>
+      <div class="bi"><span>💄</span>Olive Young 新品·折扣情报 · 올리브영 신상·할인 정보</div>
+      <div class="bi"><span>✅</span>实地验证的美食/医美清单 · 검증된 맛집·뷰티·병원 리스트</div>
+      <div class="bi"><span>💬</span>会员专属提问，真人回复 · 회원 전용 질문, 사람이 직접 답변</div>
+    </div>
     ${savedHtml}
     <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
     <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
-    <button class="submit" onclick="submitLead()">领取完整行程 · 받기</button>
-    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">提交即同意保存联系方式用于行程推送</div>`;
+    <button class="submit" onclick="submitLead()">免费加入 + 领取行程 · 무료 가입하고 받기</button>
+    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">加入即同意保存联系方式用于会员情报推送</div>`;
   document.getElementById('ov').classList.add('show');
 }
 function closeSave(){document.getElementById('ov').classList.remove('show');}
@@ -365,9 +376,9 @@ function submitLead(){
   document.getElementById('sheet').innerHTML=`
     <div class="ok">
       <div class="big">🎉</div>
-      <h3>收藏成功！감사합니다</h3>
-      <p>完整行程 + 商家优惠将通过微信发送给你<br>전체 코스를 위챗으로 보내드릴게요</p>
-      <p style="margin-top:10px;font-size:11px;color:#b9bbc0">已收集 ${db.length} 个意向客户 (데모 DB)</p>
+      <h3>欢迎加入！멤버십 가입 완료</h3>
+      <p>完整行程已发送，每周韩国情报也会通过微信送达<br>전체 코스 + 매주 한국 정보를 위챗으로 보내드릴게요</p>
+      <p style="margin-top:10px;font-size:11px;color:#b9bbc0">第 ${db.length} 位会员 (데모 DB)</p>
     </div>
     <button class="submit" onclick="closeSave()" style="margin-top:8px">完成 확인</button>`;
 }
