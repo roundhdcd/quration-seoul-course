@@ -121,6 +121,9 @@
   .trust-btns{display:flex;gap:8px;margin-top:10px}
   .trust-btns a,.trust-btns button{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:10px;border-radius:10px;border:1.5px solid #b8d8be;color:#1a6a30;background:#fff;cursor:pointer;text-decoration:none;font-family:inherit}
   .trust-btns a:active,.trust-btns button:active{background:#e0f0e5}
+  .plt-row{display:flex;gap:8px;margin-bottom:0}
+  .plt{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;background:#fff;color:var(--sub);font-family:inherit;transition:.15s}
+  .plt.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
   .related{margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
   .rel-toggle{font-size:12px;color:var(--sub);cursor:pointer;display:flex;align-items:center;gap:4px;padding:2px 0;font-weight:600;user-select:none}
   .rel-list{margin-top:6px;display:flex;flex-direction:column;gap:5px}
@@ -459,8 +462,9 @@ function copyShare(){
 // ====== DB 수집 (relay 준비됨) ======
 function leadMsg(l){
   var t = l.type==='inquiry' ? '💬 새 문의' : '🎫 새 가입';
+  var pltLabel = l.platform==='xhs' ? '📕 샤오홍슈' : '💬 위챗';
   return '🔔 **Quration '+t+'**\n'
-    +'微信/위챗: `'+(l.wx||'-')+'`\n'
+    +pltLabel+' ID: `'+(l.contact||l.wx||'-')+'`\n'
     +(l.q?'질문: '+l.q+'\n':'')
     +(l.name?'닉네임: '+l.name+'\n':'')
     +'관심사: '+((l.interests||[]).join(', ')||'-')+'\n'
@@ -502,8 +506,9 @@ function openSave(){
   const favs=Object.values(favorites);
   const savedHtml=favs.length?`<div class="saved-list">${favs.map(s=>`<div>♥ ${s.zh} <span style="color:#9aa">/ ${s.ko}</span></div>`).join('')}</div>`:`<div class="d">💡 ♥ 마음에 드는 곳 먼저 누르면 더 정확해요 · 先收藏喜欢的地点</div>`;
   const head=favs.length
-    ? {h:`❤️ 已收藏 ${favs.length} 个地点！`, d:`把这些整理成「专属行程报告」发到你微信～<br>저장한 ${favs.length}곳을 맞춤 리포트로 위챗에 보내드려요 (무료)`}
-    : {h:`📋 领取你的专属行程报告`, d:`保存就把行程报告 + 每周韩国情报发给你<br>저장하면 맞춤 리포트 + 주간 정보를 위챗으로 (무료)`};
+    ? {h:`❤️ 已收藏 ${favs.length} 个地点！`, d:`把行程报告发到你的微信/小红书～<br>저장한 ${favs.length}곳 맞춤 리포트 보내드려요 (무료)`}
+    : {h:`📋 领取你的专属行程报告`, d:`行程报告 + 每周韩国情报发给你<br>맞춤 리포트 + 주간 정보 보내드려요 (무료)`};
+  window._selPlt='wx';
   document.getElementById('sheet').innerHTML=`
     <button class="close" onclick="closeSheet()">×</button>
     <h3>${head.h}</h3>
@@ -514,16 +519,31 @@ function openSave(){
       <div class="bi">✅ 实地验证清单 · 검증된 맛집·뷰티·병원</div>
       <div class="bi">💬 会员专属真人解答 · 회원 전용 직접 답변</div></div>
     ${savedHtml}
-    <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
+    <div class="field"><label>어디로 받을래요? · 选择接收方式 *</label>
+      <div class="plt-row">
+        <button class="plt on" id="plt-wx" onclick="selPlt('wx')">💬 위챗 WeChat</button>
+        <button class="plt" id="plt-xhs" onclick="selPlt('xhs')">📕 샤오홍슈 小红书</button>
+      </div></div>
+    <div class="field"><label id="id-label">微信号 WeChat ID *</label><input id="contact-id" placeholder="예: quration_korea"></div>
     <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
     <button class="submit" onclick="submitLead()">📩 领取行程报告 · 리포트 받기</button>`;
   document.getElementById('ov').classList.add('show');
 }
+function selPlt(p){
+  document.querySelectorAll('.plt').forEach(b=>b.classList.remove('on'));
+  document.getElementById('plt-'+p).classList.add('on');
+  var isXhs=p==='xhs';
+  document.getElementById('id-label').textContent=isXhs?'小红书号 샤오홍슈 ID *':'微信号 WeChat ID *';
+  document.getElementById('contact-id').placeholder=isXhs?'예: 94342747991':'예: quration_korea';
+  window._selPlt=p;
+}
 function submitLead(){
-  const wx=document.getElementById('wx').value.trim();
-  if(!wx){alert("请填微信号 · 위챗 입력해주세요");return;}
-  const n=saveLead({type:'member',wx,name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
-  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>👇 加我微信，马上把完整行程发你<br>위챗 추가하면 전체 코스 바로 보내드려요</p></div>${wcCard()}<p style="text-align:center;font-size:11px;color:#b9bbc0;margin-top:6px">第 ${n} 位会员 (데모 DB)</p><button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
+  const contact=document.getElementById('contact-id').value.trim();
+  const plt=window._selPlt||'wx';
+  if(!contact){alert(plt==='xhs'?'请填小红书号 · 샤오홍슈 ID 입력해주세요':'请填微信号 · 위챗 입력해주세요');return;}
+  const n=saveLead({type:'member',platform:plt,contact,wx:plt==='wx'?contact:'',name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
+  const isXhs=plt==='xhs';
+  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>${isXhs?'📕 小红书 DM으로 보내드려요<br>샤오홍슈 DM 확인해주세요':'👇 加我微信，马上把完整行程发你<br>위챗 추가하면 전체 코스 바로 보내드려요'}</p></div>${isXhs?`<div style="text-align:center;font-size:13px;color:#4b5563;padding:8px 0">小红书号: <b>${XHS_ID}</b><br><span style="font-size:11px">검색 후 팔로우하면 DM 드려요</span></div>`:wcCard()}<p style="text-align:center;font-size:11px;color:#b9bbc0;margin-top:6px">第 ${n} 位会员</p><button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
 }
 function closeSheet(){document.getElementById('ov').classList.remove('show');}
 function toggleRel(el){var l=el.nextElementSibling,o=l.style.display!=='none';l.style.display=o?'none':'flex';el.querySelector('.rel-arr').textContent=o?'▾':'▴';}
