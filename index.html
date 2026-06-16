@@ -3,162 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Quration · 首尔行程生成器</title>
+<title>Quration · 한국 여행 의사결정 파트너</title>
 <style>
-  :root{
-    --ink:#1a1d24; --sub:#6b7280; --line:#ececf0; --bg:#f6f5f2;
-    --card:#ffffff; --red:#d4332f; --blue:#1c3f8f; --accent:#d4332f;
-    --soft:#faf9f7; --tag:#f1f0ee;
-  }
+  :root{--ink:#1a1d24;--sub:#6b7280;--line:#ececf0;--bg:#f6f5f2;--card:#fff;
+    --red:#d4332f;--blue:#1c3f8f;--accent:#d4332f;--soft:#faf9f7;}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{font-family:-apple-system,"PingFang SC","Apple SD Gothic Neo","Malgun Gothic",Roboto,sans-serif;
     background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}
-  /* header */
-  header{padding:22px 20px 16px;text-align:center;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  header{padding:20px 20px 14px;text-align:center;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
   .logo{display:inline-flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.5px}
-  .qk{width:30px;height:30px;border-radius:50%;background:
-     conic-gradient(from 135deg, var(--red) 0 50%, var(--blue) 50% 100%);
-     display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;
-     box-shadow:0 2px 6px rgba(0,0,0,.15)}
-  .brand{font-size:19px}
-  .tag-slogan{font-size:11.5px;color:var(--sub);margin-top:5px;letter-spacing:.3px}
-  .hero{background:linear-gradient(135deg,#fff,#fff5f4);border:1px solid #f6d9d7;border-radius:16px;padding:16px;margin-bottom:14px;font-size:12.5px;color:#5b4636;line-height:1.5}
-  .hero b{display:block;font-size:14.5px;margin-bottom:5px;color:var(--ink)}
-  .hero span{display:block;font-size:11px;color:var(--sub);margin-top:7px}
-  .vbadge{font-size:9.5px;color:#1a8a4a;background:#e9f8ef;padding:2px 6px;border-radius:5px;font-weight:800;margin-left:4px}
-  .rev{font-size:12px;color:#6b5e4f;background:#fbf7f0;border-left:3px solid #e7c98c;padding:6px 9px;border-radius:0 7px 7px 0;margin-top:7px;line-height:1.45}
-  .tips{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:14px}
-  .tips h4{font-size:13px;margin-bottom:8px}
-  .tips .ti{font-size:12px;color:#4b5563;padding:6px 0;border-top:1px solid var(--line);line-height:1.5}
-  .tips .ti b{color:var(--ink)}
-  .share{width:100%;padding:14px;border:none;border-radius:13px;background:#22c55e;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;margin-top:8px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
-  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1a1d24;color:#fff;padding:12px 20px;border-radius:30px;font-size:13px;z-index:99;opacity:0;transition:.3s;pointer-events:none}
-  .toast.show{opacity:1}
-  /* form */
-  .panel{padding:20px}
-  .blk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 16px;margin-bottom:14px}
+  .qk{width:30px;height:30px;border-radius:50%;background:conic-gradient(from 135deg,var(--red) 0 50%,var(--blue) 50% 100%);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .brand{font-size:19px}.brand small{font-size:11px;font-weight:600;color:var(--sub);margin-left:3px}
+  .tag-slogan{font-size:11.5px;color:var(--sub);margin-top:4px;letter-spacing:.2px}
+  .panel{padding:18px}
+  .hero{background:linear-gradient(135deg,#fff,#fff5f4);border:1px solid #f6d9d7;border-radius:16px;padding:17px;margin-bottom:14px}
+  .hero .big{font-size:18px;font-weight:800;line-height:1.35;margin-bottom:6px}
+  .hero .sub{font-size:12.5px;color:#5b4636;line-height:1.5}
+  .hero .ko{font-size:11px;color:var(--sub);margin-top:8px;display:block;line-height:1.5}
+  .follow{display:flex;gap:8px;margin-bottom:14px}
+  .follow a{flex:1;text-decoration:none;text-align:center;padding:11px;border-radius:12px;font-size:12.5px;font-weight:700;border:1.5px solid var(--line);color:var(--ink);background:#fff;display:flex;align-items:center;justify-content:center;gap:6px}
+  .follow .xhs{border-color:#ffd9d6;color:#ff2442}
+  .follow .wc{border-color:#cdeccf;color:#1aad19}
+  .blk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:13px}
   .label{font-size:13px;font-weight:700;margin-bottom:11px;display:flex;align-items:center;gap:6px}
   .label small{font-weight:500;color:var(--sub);font-size:11px}
+  .step{font-size:10px;font-weight:800;color:var(--accent);letter-spacing:.5px;margin-bottom:7px}
   .row{display:flex;gap:8px;flex-wrap:wrap}
-  .opt{flex:1;min-width:60px;text-align:center;padding:11px 6px;border:1.5px solid var(--line);border-radius:11px;
-    font-size:13px;cursor:pointer;background:#fff;transition:.15s;font-weight:600;color:var(--sub)}
+  .opt{flex:1;min-width:60px;text-align:center;padding:11px 6px;border:1.5px solid var(--line);border-radius:11px;font-size:13px;cursor:pointer;background:#fff;transition:.15s;font-weight:600;color:var(--sub)}
   .opt small{display:block;font-size:10px;font-weight:500;margin-top:2px;opacity:.8}
   .opt.on{border-color:var(--accent);background:#fff5f4;color:var(--accent)}
+  .opt.soon{border-style:dashed}.opt.soon small{color:var(--accent)}
   .chips{display:flex;gap:8px;flex-wrap:wrap}
-  .chip{padding:9px 14px;border:1.5px solid var(--line);border-radius:30px;font-size:13px;cursor:pointer;
-    background:#fff;transition:.15s;font-weight:600;color:var(--sub);display:flex;flex-direction:column;align-items:center;line-height:1.25}
+  .chip{padding:9px 13px;border:1.5px solid var(--line);border-radius:30px;font-size:13px;cursor:pointer;background:#fff;transition:.15s;font-weight:600;color:var(--sub);display:flex;flex-direction:column;align-items:center;line-height:1.25}
   .chip small{font-size:9.5px;font-weight:500;opacity:.75}
   .chip.on{border-color:var(--accent);background:#fff5f4;color:var(--accent)}
-  .gen{width:100%;padding:16px;border:none;border-radius:14px;background:var(--ink);color:#fff;font-size:15.5px;
-    font-weight:700;cursor:pointer;margin-top:4px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(26,29,36,.25)}
-  .gen:active{transform:scale(.99)}
   .tin{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;font-weight:600;font-family:inherit}
-  .tin:focus{outline:none;border-color:var(--accent)}
-  .tin::placeholder{color:#b9bbc0;font-weight:500}
-  .opt.soon{border-style:dashed;color:var(--sub)}
-  .opt.soon small{color:var(--accent)}
+  .tin:focus{outline:none;border-color:var(--accent)}.tin::placeholder{color:#b9bbc0;font-weight:500}
   .hint{font-size:11px;color:var(--sub);margin-top:9px;line-height:1.45}
-  .ask{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);
-    font-size:14px;font-weight:700;cursor:pointer;margin-top:10px}
+  .gen{width:100%;padding:16px;border:none;border-radius:14px;background:var(--ink);color:#fff;font-size:15.5px;font-weight:700;cursor:pointer;margin-top:4px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(26,29,36,.25)}
+  .gen:active{transform:scale(.99)}
+  .ask{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-size:14px;font-weight:700;cursor:pointer;margin-top:10px}
   .faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:14px}
   .faq h4{font-size:13px;margin-bottom:6px}
   .faq .qa{font-size:12px;color:#4b5563;padding:7px 0;border-top:1px solid var(--line);line-height:1.5}
   .faq .qa b{color:var(--ink);display:block;margin-bottom:2px}
-  .sheet textarea{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;
-    font-family:inherit;resize:vertical;min-height:74px}
-  .sheet textarea:focus{outline:none;border-color:var(--accent)}
-  /* result */
   #result{padding:0 16px 40px;display:none}
-  .summary{background:linear-gradient(135deg,#1c3f8f,#2a4fa0);color:#fff;border-radius:16px;padding:18px;margin:6px 0 18px}
-  .summary h2{font-size:17px;margin-bottom:6px}
-  .summary p{font-size:12.5px;opacity:.9}
+  .decis{background:#1a1d24;color:#fff;border-radius:14px;padding:14px 16px;margin:6px 0 14px;font-size:13px;line-height:1.55}
+  .decis b{color:#ffd24a}
+  .decis span{display:block;font-size:11px;color:#b9bbc0;margin-top:5px}
+  .summary{background:linear-gradient(135deg,#1c3f8f,#2a4fa0);color:#fff;border-radius:16px;padding:18px;margin-bottom:16px}
+  .summary h2{font-size:17px;margin-bottom:6px}.summary p{font-size:12.5px;opacity:.9}
   .summary .meta{margin-top:11px;display:flex;gap:7px;flex-wrap:wrap}
   .summary .meta span{background:rgba(255,255,255,.16);padding:5px 10px;border-radius:20px;font-size:11px}
-  .day{margin-bottom:22px}
-  .day-h{display:flex;align-items:center;gap:9px;margin-bottom:12px;padding-left:2px}
-  .day-n{background:var(--accent);color:#fff;width:30px;height:30px;border-radius:9px;display:flex;
-    align-items:center;justify-content:center;font-weight:800;font-size:13px}
-  .day-h b{font-size:15px}
-  .day-h small{color:var(--sub);font-size:11.5px;margin-left:auto}
+  .day{margin-bottom:20px}
+  .day-h{display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-left:2px}
+  .day-n{background:var(--accent);color:#fff;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .day-h b{font-size:15px}.day-h small{color:var(--sub);font-size:11.5px;margin-left:auto}
   .spot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;position:relative}
-  .spot .cat{font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.5px;margin-bottom:5px}
+  .spot .cat{font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.4px;margin-bottom:5px}
+  .vbadge{font-size:9.5px;color:#1a8a4a;background:#e9f8ef;padding:2px 6px;border-radius:5px;font-weight:800;margin-left:4px}
   .spot .zh{font-size:16.5px;font-weight:800;margin-bottom:3px}
-  .ko-box{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px dashed #e0ddd6;border-radius:9px;
-    padding:7px 10px;margin:7px 0}
+  .ko-box{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px dashed #e0ddd6;border-radius:9px;padding:7px 10px;margin:7px 0}
   .ko-box .sign{font-size:9px;color:#b08a3a;font-weight:800;background:#fdf6e6;padding:2px 6px;border-radius:5px;white-space:nowrap}
-  .ko-box .ko{font-size:15px;font-weight:800;color:#2a2d34}
-  .ko-box .pron{font-size:11px;color:var(--sub);margin-left:auto}
-  .spot .why{font-size:12.5px;color:#4b5563;margin-top:4px}
-  .spot .ft{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:11px;color:var(--sub)}
-  .spot .ft b{color:var(--ink);font-weight:700}
-  .fav{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
-    background:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#cfcfcf}
+  .ko-box .ko{font-size:15px;font-weight:800;color:#2a2d34}.ko-box .pron{font-size:11px;color:var(--sub);margin-left:auto}
+  .reason{font-size:12.5px;color:#4b5563;margin-top:4px}
+  .reason b{color:var(--ink)}
+  .rev{font-size:12px;color:#6b5e4f;background:#fbf7f0;border-left:3px solid #e7c98c;padding:6px 9px;border-radius:0 7px 7px 0;margin-top:7px;line-height:1.45}
+  .ft{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:11px;color:var(--sub)}.ft b{color:var(--ink);font-weight:700}
+  .fav{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#cfcfcf}
   .fav.on{color:var(--accent);border-color:#f6cdcb;background:#fff5f4}
-  .est{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center;margin-top:6px}
-  .est .t{font-size:12px;color:var(--sub)}
-  .est .v{font-size:22px;font-weight:800;margin-top:3px}
-  .est .v small{font-size:12px;color:var(--sub);font-weight:600}
-  .savebar{position:sticky;bottom:0;background:linear-gradient(transparent,#f6f5f2 28%);padding:16px 0 14px;margin-top:8px}
-  .savebar button{width:100%;padding:15px;border:none;border-radius:13px;background:var(--accent);color:#fff;
-    font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(212,51,47,.32)}
-  .restart{display:block;width:100%;text-align:center;background:none;border:none;color:var(--sub);
-    font-size:12.5px;margin-top:10px;cursor:pointer;text-decoration:underline}
-  /* modal */
-  .ov{position:fixed;inset:0;background:rgba(20,22,28,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
-  .ov.show{display:flex}
-  .sheet{background:#fff;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom));
-    animation:up .25s ease}
+  .est{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center}
+  .est .t{font-size:12px;color:var(--sub)}.est .v{font-size:22px;font-weight:800;margin-top:3px}.est .v small{font-size:12px;color:var(--sub);font-weight:600}
+  .tips{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:14px}
+  .tips h4{font-size:13px;margin-bottom:8px}.tips .ti{font-size:12px;color:#4b5563;padding:6px 0;border-top:1px solid var(--line);line-height:1.5}.tips .ti b{color:var(--ink)}
+  .savebar{padding:14px 0 8px;margin-top:8px}
+  .share{width:100%;padding:14px;border:none;border-radius:13px;background:#22c55e;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:9px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
+  .savebar .join{width:100%;padding:15px;border:none;border-radius:13px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(212,51,47,.32)}
+  .restart{display:block;width:100%;text-align:center;background:none;border:1.5px solid var(--line);border-radius:12px;padding:12px;color:var(--ink);font-size:13px;margin-top:9px;cursor:pointer;font-weight:700}
+  .ov{position:fixed;inset:0;background:rgba(20,22,28,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}.ov.show{display:flex}
+  .sheet{background:#fff;width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom));animation:up .25s ease;position:relative}
   @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-  .sheet h3{font-size:18px;margin-bottom:5px}
-  .sheet .d{font-size:12.5px;color:var(--sub);margin-bottom:16px}
-  .sheet .saved-list{background:var(--soft);border-radius:11px;padding:11px 13px;margin-bottom:15px;font-size:12.5px;max-height:120px;overflow:auto}
-  .sheet .saved-list div{padding:3px 0;color:#374151}
+  .sheet h3{font-size:18px;margin-bottom:5px}.sheet .d{font-size:12.5px;color:var(--sub);margin-bottom:15px;line-height:1.5}
+  .saved-list{background:var(--soft);border-radius:11px;padding:11px 13px;margin-bottom:14px;font-size:12.5px;max-height:120px;overflow:auto}.saved-list div{padding:3px 0;color:#374151}
   .benefits{background:#fff7f0;border:1px solid #fde4d3;border-radius:12px;padding:13px 14px;margin-bottom:14px}
   .benefits .bt{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.4px;margin-bottom:8px}
-  .benefits .bi{font-size:12.5px;color:#5b4636;padding:4px 0;display:flex;gap:7px;align-items:flex-start;line-height:1.45}
-  .benefits .bi span{flex-shrink:0}
-  .field{margin-bottom:13px}
-  .field label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
-  .field input{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px}
-  .field input:focus{outline:none;border-color:var(--accent)}
+  .benefits .bi{font-size:12.5px;color:#5b4636;padding:4px 0;display:flex;gap:7px;line-height:1.45}
+  .field{margin-bottom:13px}.field label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
+  .field input,.sheet textarea{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:11px;font-size:14px;font-family:inherit}
+  .sheet textarea{resize:vertical;min-height:74px}.field input:focus,.sheet textarea:focus{outline:none;border-color:var(--accent)}
   .submit{width:100%;padding:15px;border:none;border-radius:12px;background:var(--ink);color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px}
   .close{position:absolute;top:14px;right:18px;font-size:24px;color:#bbb;cursor:pointer;background:none;border:none}
-  .ok{text-align:center;padding:14px 0}
-  .ok .big{font-size:40px}
-  .ok h3{margin:8px 0 4px}
-  .ok p{font-size:13px;color:var(--sub)}
+  .ok{text-align:center;padding:14px 0}.ok .big{font-size:40px}.ok h3{margin:8px 0 4px}.ok p{font-size:13px;color:var(--sub);line-height:1.5}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#1a1d24;color:#fff;padding:12px 20px;border-radius:30px;font-size:13px;z-index:99;opacity:0;transition:.3s;pointer-events:none}.toast.show{opacity:1}
   .foot{text-align:center;font-size:10.5px;color:#b9bbc0;padding:18px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="logo"><span class="qk">QK</span><span class="brand">Quration</span></div>
-    <div class="tag-slogan">没人可问？问我就好 · 검증된 선택을 드려요</div>
+    <div class="logo"><span class="qk">QK</span><span class="brand">Quration<small>Korea</small></span></div>
+    <div class="tag-slogan">你的韩国旅行决策助手 · 한국 여행 의사결정 파트너</div>
   </header>
 
-  <!-- FORM -->
   <div class="panel" id="form">
     <div class="hero">
-      <b>第一次来韩国，想问却没人可问？🥲</b>
-      搜出来全是广告，不知道该信谁。<br>告诉我你的情况，给你「实地验证」过的选择 ✅
-      <span>처음 온 한국, 물어볼 사람이 없죠? 광고 말고 — 직접 검증한 선택을 드릴게요</span>
+      <div class="big">韩国太多选择？<br>我们帮你决定 🇰🇷</div>
+      <div class="sub">不是又一个攻略整理 — 告诉你「为什么值得去」，给你验证过的选择 ✅</div>
+      <span class="ko">한국엔 선택지가 너무 많죠? 우리가 결정해드립니다 — 검색 말고, 검증된 선택을.</span>
     </div>
+
+    <div class="follow">
+      <a class="xhs" href="#" id="lnk-xhs" onclick="return follow('xhs')">📕 关注小红书 · 샤오홍슈</a>
+      <a class="wc" href="#" id="lnk-wc" onclick="return follow('wc')">💬 加微信 · 위챗 추가</a>
+    </div>
+
     <div class="blk">
-      <div class="label">📍 城市 <small>城市 / 도시</small></div>
+      <div class="step">STEP 1</div>
+      <div class="label">📍 城市 <small>도시</small></div>
       <div class="row">
         <div class="opt on" data-city="seoul">首尔<small>서울 Seoul</small></div>
         <div class="opt soon" onclick="reqCity('仁川 인천')">仁川<small>인천 · 신청</small></div>
         <div class="opt soon" onclick="reqCity('釜山 부산')">釜山<small>부산 · 신청</small></div>
         <div class="opt soon" onclick="reqCity('济州 제주')">济州<small>제주 · 신청</small></div>
       </div>
-      <div class="hint">🚧 다른 도시는 출시 예정! 원하는 도시를 눌러 신청하면 먼저 알려드려요<br>想去其他城市？点一下，开通后第一时间通知你</div>
+      <div class="hint">🚧 다른 도시는 출시 예정 — 눌러서 신청하면 먼저 알려드려요</div>
     </div>
 
     <div class="blk">
+      <div class="step">STEP 2</div>
+      <div class="label">🎯 旅行目的 <small>여행 목적 (복수선택) — 어디가 아니라 "뭘 하고 싶은지"</small></div>
+      <div class="chips" id="interests">
+        <div class="chip on" data-i="food">美食<small>맛집</small></div>
+        <div class="chip on" data-i="cafe">咖啡<small>카페</small></div>
+        <div class="chip" data-i="hanok">韩屋体验<small>한옥감성</small></div>
+        <div class="chip" data-i="night">夜景<small>야경</small></div>
+        <div class="chip" data-i="kpop">KPOP<small>케이팝</small></div>
+        <div class="chip" data-i="shop">购物<small>쇼핑</small></div>
+        <div class="chip" data-i="beauty">美妆<small>뷰티</small></div>
+        <div class="chip" data-i="photo">拍照<small>인생네컷</small></div>
+        <div class="chip" data-i="skin">皮肤科<small>피부과</small></div>
+        <div class="chip" data-i="check">体检<small>건강검진</small></div>
+        <div class="chip" data-i="kids">亲子<small>아이동반</small></div>
+      </div>
+    </div>
+
+    <div class="blk">
+      <div class="step">STEP 3</div>
+      <div class="label">💰 旅行风格 <small>여행 스타일</small></div>
+      <div class="row" id="style">
+        <div class="opt" data-s="eco">经济型<small>가성비</small></div>
+        <div class="opt on" data-s="std">标准型<small>일반</small></div>
+        <div class="opt" data-s="lux">轻奢型<small>프리미엄</small></div>
+      </div>
+      <input class="tin" id="budget" style="margin-top:9px" placeholder="(선택) 구체 예산 입력 · 예: 50만원 / 例: 3000元">
+    </div>
+
+    <div class="blk">
+      <div class="step">STEP 4</div>
       <div class="label">🗓 行程 <small>여행 날짜 + 코스 길이</small></div>
-      <input class="tin" id="dates" placeholder="여행 날짜 입력 (예: 6/20~6/22) · 旅行日期">
+      <input class="tin" id="dates" placeholder="여행 날짜 (예: 6/20~6/22) · 旅行日期">
       <div class="row" id="days" style="margin-top:9px">
         <div class="opt" data-d="2">2天1夜<small>1박2일</small></div>
         <div class="opt on" data-d="3">3天2夜<small>2박3일</small></div>
@@ -166,324 +171,218 @@
       </div>
     </div>
 
-    <div class="blk">
-      <div class="label">💰 预算 <small>1인 예산 직접 입력 (숙박 제외)</small></div>
-      <input class="tin" id="budget" placeholder="예: 50만원 · 你的预算 (例: 3000元)">
-    </div>
-
-    <div class="blk">
-      <div class="label">❤️ 兴趣 <small>관심사 (복수선택)</small></div>
-      <div class="chips" id="interests">
-        <div class="chip on" data-i="food">美食<small>맛집</small></div>
-        <div class="chip on" data-i="cafe">咖啡<small>카페</small></div>
-        <div class="chip" data-i="shop">购物<small>쇼핑</small></div>
-        <div class="chip" data-i="beauty">美妆<small>뷰티</small></div>
-        <div class="chip" data-i="skin">皮肤科<small>피부과</small></div>
-        <div class="chip" data-i="check">体检<small>건강검진</small></div>
-        <div class="chip" data-i="photo">拍照<small>인생네컷</small></div>
-        <div class="chip" data-i="kids">亲子<small>아이동반</small></div>
-      </div>
-    </div>
-
-    <button class="gen" onclick="generate()">⚡ 生成专属行程 · 코스 생성</button>
+    <button class="gen" onclick="generate()">⚡ 帮我决定 · 일정 만들어줘</button>
     <button class="ask" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题？点这里问</button>
 
     <div class="faq">
       <h4>❓ 자주 묻는 질문 · 常见问题</h4>
-      <div class="qa"><b>免费吗? 무료인가요?</b>完全免费，输入兴趣即可生成行程 · 관심사만 넣으면 코스 무료 생성</div>
-      <div class="qa"><b>其他城市? 다른 도시는?</b>仁川/釜山/济州 即将开通，点城市申请 · 인천·부산·제주 신청 가능</div>
-      <div class="qa"><b>有问题怎么办? 궁금한 점은?</b>点上方"问一问"留言+微信，我们直接回复 · 문의 남기면 바로 답변드려요</div>
+      <div class="qa"><b>免费吗? 무료인가요?</b>完全免费，选目的即可生成 · 목적만 고르면 무료 생성</div>
+      <div class="qa"><b>其他城市? 다른 도시는?</b>仁川/釜山/济州 即将开通 · 인천·부산·제주 신청 가능</div>
+      <div class="qa"><b>有问题? 궁금한 점은?</b>留言+微信，真人直接回复 · 문의 남기면 바로 답변</div>
     </div>
     <div class="foot">Quration Korea · 검증된 선택 Curate · Verify · Select</div>
   </div>
 
-  <!-- RESULT -->
   <div id="result"></div>
 </div>
 
-<!-- SAVE MODAL -->
-<div class="ov" id="ov">
-  <div class="sheet" id="sheet"></div>
-</div>
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-// ---------- 데이터 (서울 샘플 스팟) ----------
-// cat: food/cafe/shop/beauty/skin/check/photo/kids
-// b: 예산 가중 (low/mid/high 어디서나 등장 정도). area로 동선 묶음.
+// ====== 연결 설정 (relay/계정) — 받으면 여기만 채우면 됨 ======
+const RELAY_URL = "";              // 구글 앱스스크립트 배포 URL (DB+알람). 비면 로컬저장(테스트).
+const XHS_URL   = "";              // 너 샤오홍슈 프로필 링크
+const WECHAT_ID = "quration_kr";   // 너 위챗 ID (지금은 샘플)
+
 const SPOTS = [
- {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu-dong",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",why_ko:"요즘 제일 핫한 카페 성지",rev:"拍照超出片，咖啡也好喝",rec:328},
- {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim Changgo",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",why_ko:"창고 개조 대형 카페, 사진 맛집",rev:"空间太大了，随便拍都好看",rec:156},
- {zh:"圣水联合制鞋所",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",why_ko:"수제화 골목",rev:"真皮手工，比国内划算",rec:64},
- {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",why_ko:"도심 속 공원, 산책·사진",rev:"散步遛娃都合适，还免费",rec:201},
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",tags:["kpop"],area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328},
+ {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",rev:"空间太大，随便拍都好看",rec:156},
+ {zh:"圣水手工鞋街",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",rev:"真皮手工，比国内划算",rec:64},
+ {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",rev:"散步遛娃都合适，还免费",rec:201},
 
- {zh:"汉南洞 Comfort 咖啡",ko:"한남동 콤포트",pron:"Hannam",cat:"cafe",area:"한남",areaZh:"汉南洞",cost:"₩9,000~17,000",time:"1-2h",why_zh:"名流区精品咖啡，氛围高级",why_ko:"고급스러운 한남동 감성 카페",rev:"安静高级，适合慢慢坐",rec:98},
- {zh:"梨泰院世界美食街",ko:"이태원 세계음식거리",pron:"Itaewon",cat:"food",area:"한남",areaZh:"汉南洞",cost:"₩15,000~30,000",time:"2h",why_zh:"各国料理聚集，夜晚热闹",why_ko:"세계음식·펍 거리",rev:"晚上很热闹，异国料理多",rec:142},
- {zh:"Leeum三星美术馆",ko:"리움미술관",pron:"Leeum",cat:"photo",area:"한남",areaZh:"汉南洞",cost:"₩10,000",time:"2h",why_zh:"顶级私人美术馆，建筑本身就值得看",why_ko:"삼성 리움 미술관",rev:"建筑本身就值得专程来",rec:73},
+ {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"cafe",tags:["hanok"],area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288},
+ {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301},
+ {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114},
 
- {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",why_ko:"관광 1번지, 쇼핑·길거리음식",rev:"该买的都能买齐，热闹",rec:410},
- {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，免税+折扣",why_ko:"K뷰티 성지, 외국인 할인",rev:"外国人结账打折，扫货圣地",rec:512},
- {zh:"明洞炸鸡/刀削面",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",why_ko:"미쉐린 칼국수 노포",rev:"汤头惊艳，排队也值",rec:289},
- {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",why_ko:"서울 야경 랜드마크",rev:"夜景绝了，情侣必来",rec:355},
+ {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",rev:"该买的都能买齐，热闹",rec:410},
+ {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512},
+ {zh:"明洞刀削面(明洞饺子)",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",rev:"汤头惊艳，排队也值",rec:289},
+ {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",tags:["night"],area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355},
 
- {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",why_ko:"가로수길 편집숍·카페",rev:"小众设计店多，好逛",rec:130},
- {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",why_ko:"피부과 밀집, 상담 후 결정",med:true,rev:"先咨询不踩雷，按需选",rec:88},
- {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield Library",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",why_ko:"코엑스 별마당, 무료 포토존",rev:"免费打卡，书墙超震撼",rec:240},
- {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",why_ko:"반나절 프리미엄 검진, 통역 지원",med:true,rev:"半天搞定，有中文协助放心",rec:51},
+ {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",rev:"小众设计店多，好逛",rec:130},
+ {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240},
+ {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51},
 
- {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",why_ko:"홍대 거리공연·쇼핑",rev:"年轻人多，街头表演有意思",rec:198},
- {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",why_ko:"인생네컷, 필수 인증",rev:"必拍！便宜又好玩",rec:367},
- {zh:"弘大烤肉/布帐马车",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",why_ko:"밤 포차 감성",rev:"夜宵气氛拉满",rec:121},
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",tags:["kpop"],area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198},
+ {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",tags:["kpop"],area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367},
+ {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",tags:["night"],area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121},
 
- {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",why_ko:"한옥마을, 한복 포토",rev:"穿韩服拍照太美了",rec:276},
- {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",area:"북촌",areaZh:"北村",cost:"₩3,000 (韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",why_ko:"경복궁, 한복시 무료입장",rev:"穿韩服免门票，超划算",rec:301},
- {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong-dong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",why_ko:"삼청동 전통찻집·카페",rev:"安静文艺，咖啡好喝",rec:114},
-
- {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang Market",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",why_ko:"빈대떡·육회 노포 시장",kids:true,rev:"绿豆煎饼+生牛肉，必吃",rec:233},
- {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",why_ko:"실내외 테마파크, 아이동반 굿",kids:true,rev:"室内也能玩，亲子首选",rec:187},
- {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River Park",cat:"kids",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",why_ko:"한강 치맥·자전거",kids:true,rev:"炸鸡泡面看夜景，太惬意",rec:259}
+ {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",kids:true,rev:"绿豆煎饼+生牛肉，必吃",rec:233},
+ {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"photo",tags:["night"],area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176},
+ {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",kids:true,rev:"室内也能玩，亲子首选",rec:187},
+ {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"kids",tags:["night"],area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",kids:true,rev:"炸鸡泡面看夜景，太惬意",rec:259}
 ];
 
 const CAT_LABEL={food:"美食 맛집",cafe:"咖啡 카페",shop:"购物 쇼핑",beauty:"美妆 뷰티",skin:"皮肤科 피부과",check:"体检 검진",photo:"拍照 포토",kids:"亲子 아이동반"};
-const BUDGET_KRW={low:250000,mid:500000,high:900000};
+const STYLE_LABEL={eco:"经济型 가성비",std:"标准型 일반",lux:"轻奢型 프리미엄"};
 
-let state={city:"seoul",days:3,dates:"",budget:"",interests:["food","cafe"]};
+let state={city:"seoul",interests:["food","cafe"],style:"std",budget:"",dates:"",days:3};
 let favorites={};
 
-// ---------- 폼 인터랙션 ----------
 document.querySelectorAll('#days .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#days .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.days=+o.dataset.d});
-document.querySelectorAll('#interests .chip').forEach(c=>c.onclick=()=>{
-  c.classList.toggle('on');
-  state.interests=[...document.querySelectorAll('#interests .chip.on')].map(x=>x.dataset.i);
-});
+document.querySelectorAll('#style .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#style .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');state.style=o.dataset.s});
+document.querySelectorAll('#interests .chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');state.interests=[...document.querySelectorAll('#interests .chip.on')].map(x=>x.dataset.i)});
 
-// ---------- 코스 생성 로직 ----------
+function follow(t){
+  if(t==='xhs'){ if(XHS_URL){location.href=XHS_URL;} else showToast("小红书账号即将上线 · 샤오홍슈 곧 연결"); }
+  else{ if(navigator.clipboard) navigator.clipboard.writeText(WECHAT_ID); showToast("微信号已复制: "+WECHAT_ID+" · 위챗ID 복사됨"); }
+  return false;
+}
+
 function generate(){
-  if(state.interests.length===0){alert("请至少选择一个兴趣 · 관심사 1개 이상 선택");return;}
+  if(state.interests.length===0){alert("请至少选一个目的 · 목적 1개 이상 선택");return;}
   state.dates=document.getElementById('dates').value.trim();
   state.budget=document.getElementById('budget').value.trim();
-  // 1) 관심사에 맞는 스팟 필터
-  let pool=SPOTS.filter(s=>state.interests.includes(s.cat)||(state.interests.includes("kids")&&s.kids));
-  // 의료(skin/check)는 선택 안하면 제외
-  if(!state.interests.includes("skin")) pool=pool.filter(s=>s.cat!=="skin");
-  if(!state.interests.includes("check")) pool=pool.filter(s=>s.cat!=="check");
-  // 2) 동선(area)별 그룹
-  const byArea={};
-  pool.forEach(s=>{(byArea[s.area]=byArea[s.area]||[]).push(s)});
+  let pool=SPOTS.filter(s=>state.interests.some(i=> i===s.cat || (s.tags&&s.tags.includes(i)) || (i==='kids'&&s.kids)));
+  if(!state.interests.includes('skin')) pool=pool.filter(s=>s.cat!=='skin');
+  if(!state.interests.includes('check')) pool=pool.filter(s=>s.cat!=='check');
+  const byArea={}; pool.forEach(s=>{(byArea[s.area]=byArea[s.area]||[]).push(s)});
   let areas=Object.keys(byArea).sort((a,b)=>byArea[b].length-byArea[a].length);
-  // 3) Day별로 area 배분 (하루 1~2 area, 3~4 스팟)
-  const days=[];
-  let ai=0;
+  const days=[]; let ai=0;
   for(let d=0;d<state.days;d++){
-    let dayspots=[];
-    let want=4;
-    while(dayspots.length<want && ai<areas.length){
-      const a=areas[ai];
-      dayspots=dayspots.concat(byArea[a].slice(0,3));
-      ai++;
-      if(dayspots.length>=3) break;
-    }
-    if(dayspots.length===0){ // 풀 소진되면 재활용
-      const all=pool.slice(); dayspots=all.slice((d*3)%all.length,(d*3)%all.length+3);
-    }
-    days.push(dayspots.slice(0,4));
+    let ds=[];
+    while(ds.length<3 && ai<areas.length){ ds=ds.concat(byArea[areas[ai]].slice(0,3)); ai++; if(ds.length>=3)break; }
+    if(ds.length===0){ const all=pool.slice(); ds=all.slice((d*3)%Math.max(all.length,1),(d*3)%Math.max(all.length,1)+3); }
+    days.push(ds.slice(0,4));
   }
   render(days);
 }
 
 function render(days){
-  favorites={};
-  window.lastDays=days;
-  const areaNames=[...new Set(days.flat().map(s=>s.areaZh))];
-  let totalMin=days.flat().reduce((sum,s)=>{const m=(s.cost.match(/[\d,]+/g)||["0"]);return sum+parseInt(m[0].replace(/,/g,''))||sum;},0);
+  favorites={}; window.lastDays=days;
+  const totalMin=days.flat().reduce((s,sp)=>{const m=(sp.cost.match(/[\d,]+/g)||["0"]);return s+(parseInt(m[0].replace(/,/g,''))||0);},0);
   let html=`
+   <div class="decis">今天不是推荐你去哪里，<b>而是告诉你为什么值得去</b>。
+     <span>어디 가라가 아니라, 왜 지금 가야 하는지를 알려드려요.</span></div>
    <div class="summary">
-     <h2>🇰🇷 首尔 ${state.days}天 专属行程</h2>
-     <p>根据你的兴趣，已避开踩雷、优化路线 · 동선 최적화 완료</p>
+     <h2>🇰🇷 首尔 ${state.days}天 决策方案</h2>
+     <p>按你的目的，避开踩雷、优化动线 · 목적 기반 동선 완성</p>
      <div class="meta">
-       <span>📍 ${state.days}天 ${state.days-1}夜</span>
+       <span>📍 ${state.days}天${state.days-1}夜</span>
+       <span>💰 ${STYLE_LABEL[state.style].split(' ')[0]}</span>
        ${state.dates?`<span>📅 ${state.dates}</span>`:''}
-       ${state.budget?`<span>💰 ${state.budget}</span>`:''}
-       ${state.interests.map(i=>`<span>${CAT_LABEL[i].split(' ')[0]}</span>`).join('')}
+       ${state.budget?`<span>💵 ${state.budget}</span>`:''}
      </div>
    </div>`;
-
   days.forEach((spots,i)=>{
     const dayAreas=[...new Set(spots.map(s=>s.areaZh))].join(' · ');
     html+=`<div class="day"><div class="day-h"><div class="day-n">D${i+1}</div><b>${dayAreas}</b><small>${spots.length} 个地点</small></div>`;
     spots.forEach((s,j)=>{
       const id=`${i}-${j}`;
-      const medWarn=s.med?`<div class="why" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
-      html+=`
-       <div class="spot">
-         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
-         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
-         <div class="zh">${s.zh}</div>
-         <div class="ko-box">
-           <span class="sign">看招牌 간판</span>
-           <span class="ko">${s.ko}</span>
-           <span class="pron">${s.pron}</span>
-         </div>
-         <div class="why">${s.why_zh}</div>
-         ${s.rev?`<div class="rev">💬 中国朋友：“${s.rev}”</div>`:''}
-         ${medWarn}
-         <div class="ft">⏱ <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
-       </div>`;
+      const med=s.med?`<div class="reason" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
+      html+=`<div class="spot">
+        <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
+        <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
+        <div class="zh">${s.zh}</div>
+        <div class="ko-box"><span class="sign">看招牌 간판</span><span class="ko">${s.ko}</span><span class="pron">${s.pron}</span></div>
+        <div class="reason"><b>推荐理由 추천이유:</b> ${s.why_zh}</div>
+        ${s.rev?`<div class="rev">💬 中国朋友：“${s.rev}”</div>`:''}
+        ${med}
+        <div class="ft">⏱ <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
+      </div>`;
       window['_spot_'+id]=s;
     });
     html+=`</div>`;
   });
-
   html+=`
-   <div class="est">
-     <div class="t">预计花费(不含住宿) · 예상 경비</div>
-     <div class="v">约 ₩${totalMin.toLocaleString()} <small>~ 起</small></div>
-   </div>
-
+   <div class="est"><div class="t">预计花费(不含住宿) · 예상 경비</div><div class="v">约 ₩${totalMin.toLocaleString()} <small>~ 起</small></div></div>
    <div class="tips">
-     <h4>🧳 出行贴士 · 한국 여행 꿀팁 (验证过 검증됨)</h4>
-     <div class="ti"><b>💳 支付 결제</b>便利店/大店多支持支付宝·微信支付，小店备点现金 · 알리페이·위챗페이 점점 되지만 현금도 챙기기</div>
-     <div class="ti"><b>🧾 退税 택스리펀</b>单店满₩15,000可退，机场/市区退税机办理 · 1.5만원↑ 환급</div>
-     <div class="ti"><b>🚇 交通 교통</b>买张 T-money 卡，地铁公交一卡搞定 · 티머니 카드 하나면 끝</div>
-     <div class="ti"><b>💱 换钱 환전</b>明洞/东大门换钱所汇率最好，别在机场换 · 명동 환전소 추천</div>
-     <div class="ti"><b>📅 预约 예약</b>热门餐厅用 Catchtable/Naver 提前订 · 인기맛집 예약앱</div>
+     <h4>🧳 出行贴士 · 한국 여행 꿀팁 (검증됨)</h4>
+     <div class="ti"><b>💳 支付 결제</b>便利店/大店多支持支付宝·微信支付，小店备现金 · 알리페이·위챗페이 점점 됨</div>
+     <div class="ti"><b>🧾 退税 택스리펀</b>单店满₩15,000可退，机场/市区办理 · 1.5만원↑ 환급</div>
+     <div class="ti"><b>🚇 交通 교통</b>买张 T-money 卡刷地铁公交 · 티머니 카드</div>
+     <div class="ti"><b>💱 换钱 환전</b>明洞/东大门换钱所汇率最好 · 명동 환전소</div>
+     <div class="ti"><b>📅 预约 예약</b>热门餐厅用 Catchtable/Naver · 인기맛집 예약앱</div>
    </div>
-
    <div class="savebar">
      <button class="share" onclick="genShare()">📋 复制小红书文案 · 샤오홍슈 문구 복사</button>
-     <button onclick="openSave()">🎫 加入会员·保存行程 · 멤버십 가입하고 받기</button>
+     <button class="join" onclick="openSave()">🎫 加入会员·保存行程 · 멤버십 가입하고 받기</button>
      <button class="restart" onclick="openInquiry()">💬 궁금한 점 문의하기 · 有问题问一问</button>
      <button class="restart" onclick="restart()">↺ 重新生成 · 다시 만들기</button>
    </div>
-   <div class="foot">Quration Korea · 在韩国做更好的选择</div>`;
-
+   <div class="foot">Quration Korea · 你的韩国旅行决策助手</div>`;
   document.getElementById('form').style.display='none';
-  const r=document.getElementById('result');
-  r.innerHTML=html; r.style.display='block';
-  window.scrollTo(0,0);
+  const r=document.getElementById('result'); r.innerHTML=html; r.style.display='block'; window.scrollTo(0,0);
 }
 
-function toggleFav(id,btn){
-  if(favorites[id]){delete favorites[id];btn.classList.remove('on');}
-  else{favorites[id]=window['_spot_'+id];btn.classList.add('on');}
-}
+function toggleFav(id,btn){ if(favorites[id]){delete favorites[id];btn.classList.remove('on');}else{favorites[id]=window['_spot_'+id];btn.classList.add('on');} }
 
-// ---------- 저장 = DB 수집 훅 (위챗) ----------
-function openSave(){
-  const favs=Object.values(favorites);
-  const list=favs.length?favs:Object.values(favorites);
-  let savedHtml=favs.length
-    ? `<div class="saved-list">${favs.map(s=>`<div>♥ ${s.zh} <span style="color:#9aa">/ ${s.ko}</span></div>`).join('')}</div>`
-    : `<div class="d">💡 先点 ♥ 收藏喜欢的地点，再保存会更准 · 마음에 드는 곳 ♥ 먼저 누르면 더 정확해요</div>`;
-  document.getElementById('sheet').innerHTML=`
-    <button class="close" onclick="closeSave()">×</button>
-    <h3>🎫 加入 Quration 会员</h3>
-    <div class="d">한국생활 멤버십 · 무료 가입하고 전체 코스 받기<br>免费加入，领取完整行程 + 持续的韩国情报</div>
-    <div class="benefits">
-      <div class="bt">会员福利 · 멤버 혜택</div>
-      <div class="bi"><span>🗓</span>每周首尔新热点更新 · 매주 서울 핫플 업데이트</div>
-      <div class="bi"><span>💄</span>Olive Young 新品·折扣情报 · 올리브영 신상·할인 정보</div>
-      <div class="bi"><span>✅</span>实地验证的美食/医美清单 · 검증된 맛집·뷰티·병원 리스트</div>
-      <div class="bi"><span>💬</span>会员专属提问，真人回复 · 회원 전용 질문, 사람이 직접 답변</div>
-    </div>
-    ${savedHtml}
-    <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
-    <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
-    <button class="submit" onclick="submitLead()">免费加入 + 领取行程 · 무료 가입하고 받기</button>
-    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">加入即同意保存联系方式用于会员情报推送</div>`;
-  document.getElementById('ov').classList.add('show');
-}
-function closeSave(){document.getElementById('ov').classList.remove('show');}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 
-function submitLead(){
-  const wx=document.getElementById('wx').value.trim();
-  if(!wx){alert("请填写微信号 · 위챗 입력해주세요");return;}
-  // 데모: localStorage에 리드 저장 (실제로는 서버/에어테이블/노션 CRM으로 전송)
-  const lead={wx,name:document.getElementById('nm').value.trim(),
-    city:state.city,days:state.days,budget:state.budget,interests:state.interests,
-    saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()};
-  const db=JSON.parse(localStorage.getItem('quration_leads')||'[]');
-  db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
-  document.getElementById('sheet').innerHTML=`
-    <div class="ok">
-      <div class="big">🎉</div>
-      <h3>欢迎加入！멤버십 가입 완료</h3>
-      <p>完整行程已发送，每周韩国情报也会通过微信送达<br>전체 코스 + 매주 한국 정보를 위챗으로 보내드릴게요</p>
-      <p style="margin-top:10px;font-size:11px;color:#b9bbc0">第 ${db.length} 位会员 (데모 DB)</p>
-    </div>
-    <button class="submit" onclick="closeSave()" style="margin-top:8px">完成 확인</button>`;
-}
-
-function restart(){
-  document.getElementById('result').style.display='none';
-  document.getElementById('form').style.display='block';
-  window.scrollTo(0,0);
-}
-
-// ---------- 小红书 문구 자동생성 (바이럴 루프) ----------
-function showToast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
 function genShare(){
   const days=window.lastDays||[];
   const areas=[...new Set(days.flat().map(s=>s.areaZh))].slice(0,3).join('·');
-  const allSpots=days.flat();
   const titles=["不踩雷的本地路线","姐妹们冲就完了","这条路线我封神了","首尔本地人私藏"];
-  const t=titles[(allSpots.length+state.days)%titles.length];
-  let txt=`首尔${state.days}天${state.days-1}夜 | ${t}🇰🇷✨\n\n`;
-  txt+=`谁懂啊…第一次来首尔真的会无从下手😭 把验证过的路线整理好了，照着走就行👇\n\n`;
-  days.forEach((spots,i)=>{
-    txt+=`📍Day${i+1} ${[...new Set(spots.map(s=>s.areaZh))].join('·')}\n`;
-    spots.forEach(s=>{ txt+=`· ${s.zh}（${s.ko}）${s.rev?'— '+s.rev:''}\n`; });
-    txt+=`\n`;
-  });
-  txt+=`💡 支付/退税/换钱贴士都帮你整理好啦\n`;
-  txt+=`完整行程+避雷攻略，评论区扣「1」我发你～\n\n`;
-  txt+=`#首尔旅游 #首尔攻略 #韩国自由行 #首尔美食 #${areas.replace(/·/g,' #')} #出片圣地 #首尔citywalk #不踩雷`;
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(()=>showToast("✅ 已复制！去小红书粘贴 · 복사완료"))
-      .catch(()=>fallbackCopy(txt));
-  } else fallbackCopy(txt);
-}
-function fallbackCopy(txt){
-  const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
-  ta.select(); try{document.execCommand('copy');showToast("✅ 已复制 · 복사완료");}catch(e){showToast("长按选择复制 · 길게눌러 복사");}
-  document.body.removeChild(ta);
+  const t=titles[(days.flat().length+state.days)%titles.length];
+  let txt=`首尔${state.days}天${state.days-1}夜 | ${t}🇰🇷✨\n\n谁懂啊…第一次来首尔真的会无从下手😭 选择太多，帮你直接决定好了👇\n\n`;
+  days.forEach((sp,i)=>{ txt+=`📍Day${i+1} ${[...new Set(sp.map(s=>s.areaZh))].join('·')}\n`; sp.forEach(s=>{txt+=`· ${s.zh}（${s.ko}）${s.rev?'— '+s.rev:''}\n`;}); txt+=`\n`; });
+  txt+=`💡 支付/退税/换钱贴士都帮你整理好啦\n完整行程+避雷攻略，评论区扣「1」我发你～\n\n#首尔旅游 #首尔攻略 #韩国自由行 #首尔美食 #${areas.replace(/·/g,' #')} #出片圣地 #首尔citywalk #不踩雷`;
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>showToast("✅ 已复制！去小红书粘贴 · 복사완료")).catch(()=>fb(txt));}else fb(txt);
+  function fb(x){const ta=document.createElement('textarea');ta.value=x;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');showToast("✅ 已复制 · 복사완료");}catch(e){showToast("长按复制 · 길게눌러 복사");}document.body.removeChild(ta);}
 }
 
-// ---------- 문의/도시신청 (DB 수집) ----------
+// ====== DB 수집 (relay 준비됨) ======
+function saveLead(lead){
+  const db=JSON.parse(localStorage.getItem('quration_leads')||'[]'); db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
+  if(RELAY_URL){ try{ fetch(RELAY_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(lead)}); }catch(e){} }
+  return db.length;
+}
 function reqCity(name){ openInquiry('城市申请 도시신청: '+name); }
-
 function openInquiry(prefill){
   document.getElementById('sheet').innerHTML=`
-    <button class="close" onclick="closeSave()">×</button>
+    <button class="close" onclick="closeSheet()">×</button>
     <h3>💬 궁금한 점·문의</h3>
-    <div class="d">질문을 남기고 微信를 적어주시면 직접 답변드려요<br>留下问题和微信，我们会直接回复你</div>
-    <div class="field"><label>궁금한 점 / 问题 *</label>
-      <textarea id="iq" placeholder="${prefill||'예: 피부과 비용이 궁금해요 / 这家好吃吗?'}">${prefill||''}</textarea></div>
+    <div class="d">질문 + 微信 남기면 직접 답해드려요<br>留下问题和微信，我们直接回复你</div>
+    <div class="field"><label>问题 궁금한 점 *</label><textarea id="iq" placeholder="${prefill||'예: 피부과 비용? / 这家好吃吗?'}">${prefill||''}</textarea></div>
     <div class="field"><label>微信号 WeChat ID *</label><input id="iwx" placeholder="例: quration_kr"></div>
-    <button class="submit" onclick="submitInquiry()">문의 보내기 · 提交</button>
-    <div class="d" style="margin-top:11px;text-align:center;font-size:10.5px">제출 시 답변 발송을 위해 연락처가 저장됩니다</div>`;
+    <button class="submit" onclick="submitInquiry()">문의 보내기 · 提交</button>`;
   document.getElementById('ov').classList.add('show');
 }
-
 function submitInquiry(){
-  const q=document.getElementById('iq').value.trim();
-  const wx=document.getElementById('iwx').value.trim();
-  if(!q){alert("请写下你的问题 · 궁금한 점을 적어주세요");return;}
-  if(!wx){alert("请填写微信号 · 위챗을 입력해주세요");return;}
-  const lead={type:'inquiry',q,wx,city:state.city,interests:state.interests,ts:new Date().toISOString()};
-  const db=JSON.parse(localStorage.getItem('quration_leads')||'[]');
-  db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
-  document.getElementById('sheet').innerHTML=`
-    <div class="ok">
-      <div class="big">📨</div>
-      <h3>문의 접수 완료! 已收到</h3>
-      <p>곧 微信으로 답변드릴게요<br>我们会尽快通过微信回复你</p>
-    </div>
-    <button class="submit" onclick="closeSave()" style="margin-top:8px">확인 完成</button>`;
+  const q=document.getElementById('iq').value.trim(), wx=document.getElementById('iwx').value.trim();
+  if(!q){alert("请写下问题 · 질문을 적어주세요");return;} if(!wx){alert("请填微信号 · 위챗 입력");return;}
+  saveLead({type:'inquiry',q,wx,city:state.city,interests:state.interests,ts:new Date().toISOString()});
+  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">📨</div><h3>문의 접수 완료! 已收到</h3><p>곧 微信으로 답변드릴게요<br>我们会尽快通过微信回复你</p></div><button class="submit" onclick="closeSheet()" style="margin-top:8px">확인 完成</button>`;
 }
+function openSave(){
+  const favs=Object.values(favorites);
+  const savedHtml=favs.length?`<div class="saved-list">${favs.map(s=>`<div>♥ ${s.zh} <span style="color:#9aa">/ ${s.ko}</span></div>`).join('')}</div>`:`<div class="d">💡 ♥ 마음에 드는 곳 먼저 누르면 더 정확해요 · 先收藏喜欢的地点</div>`;
+  document.getElementById('sheet').innerHTML=`
+    <button class="close" onclick="closeSheet()">×</button>
+    <h3>🎫 加入 Quration 会员</h3>
+    <div class="d">한국생활 멤버십 · 무료 가입하고 전체 코스 받기<br>免费加入，领取完整行程 + 持续的韩国情报</div>
+    <div class="benefits"><div class="bt">会员福利 · 멤버 혜택</div>
+      <div class="bi">🗓 每周首尔新热点 · 매주 서울 핫플</div>
+      <div class="bi">💄 Olive Young 新品·折扣 · 올리브영 신상·할인</div>
+      <div class="bi">✅ 实地验证清单 · 검증된 맛집·뷰티·병원</div>
+      <div class="bi">💬 会员专属真人解答 · 회원 전용 직접 답변</div></div>
+    ${savedHtml}
+    <div class="field"><label>微信号 WeChat ID *</label><input id="wx" placeholder="例: quration_kr"></div>
+    <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
+    <button class="submit" onclick="submitLead()">免费加入 + 领取行程 · 무료 가입하고 받기</button>`;
+  document.getElementById('ov').classList.add('show');
+}
+function submitLead(){
+  const wx=document.getElementById('wx').value.trim();
+  if(!wx){alert("请填微信号 · 위챗 입력해주세요");return;}
+  const n=saveLead({type:'member',wx,name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
+  document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>完整行程 + 每周韩国情报将通过微信送达<br>전체 코스 + 매주 정보를 위챗으로</p><p style="margin-top:10px;font-size:11px;color:#b9bbc0">第 ${n} 位会员 (데모 DB)</p></div><button class="submit" onclick="closeSheet()" style="margin-top:8px">확인 完成</button>`;
+}
+function closeSheet(){document.getElementById('ov').classList.remove('show');}
+function restart(){document.getElementById('result').style.display='none';document.getElementById('form').style.display='block';window.scrollTo(0,0);}
 </script>
 </body>
 </html>
