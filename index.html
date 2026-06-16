@@ -143,17 +143,13 @@
       <div class="step">STEP 2</div>
       <div class="label">🎯 旅行目的 <small>여행 목적 (복수선택) — 어디가 아니라 "뭘 하고 싶은지"</small></div>
       <div class="chips" id="interests">
-        <div class="chip on" data-i="food">美食<small>맛집</small></div>
-        <div class="chip on" data-i="cafe">咖啡<small>카페</small></div>
-        <div class="chip" data-i="hanok">韩屋体验<small>한옥감성</small></div>
-        <div class="chip" data-i="night">夜景<small>야경</small></div>
-        <div class="chip" data-i="kpop">KPOP<small>케이팝</small></div>
-        <div class="chip" data-i="shop">购物<small>쇼핑</small></div>
-        <div class="chip" data-i="beauty">美妆<small>뷰티</small></div>
-        <div class="chip" data-i="photo">拍照<small>인생네컷</small></div>
-        <div class="chip" data-i="skin">皮肤科<small>피부과</small></div>
-        <div class="chip" data-i="check">体检<small>건강검진</small></div>
-        <div class="chip" data-i="kids">亲子<small>아이동반</small></div>
+        <div class="chip on" data-i="food">🍜 美食<small>먹거리</small></div>
+        <div class="chip on" data-i="cafe">☕ 感性咖啡<small>감성카페</small></div>
+        <div class="chip" data-i="shop">🛍 购物<small>쇼핑</small></div>
+        <div class="chip" data-i="view">🌆 美景夜景<small>좋은뷰</small></div>
+        <div class="chip" data-i="culture">🏯 文化体验<small>문화체험</small></div>
+        <div class="chip" data-i="beauty">💄 美妆<small>뷰티</small></div>
+        <div class="chip" data-i="medical">🏥 医美体检<small>의료관광</small></div>
       </div>
     </div>
 
@@ -205,37 +201,37 @@ const WECHAT_ID = "Quration_Korea";   // 위챗 ID (Rami)
 const WECHAT_QR = "wechat-qr.jpg";    // 위챗 추가 QR
 
 const SPOTS = [
- {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",tags:["kpop"],area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328},
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328},
  {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",rev:"空间太大，随便拍都好看",rec:156},
  {zh:"圣水手工鞋街",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",rev:"真皮手工，比国内划算",rec:64},
- {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"photo",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫拍照绝佳",rev:"散步遛娃都合适，还免费",rec:201},
+ {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"view",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫绝佳",rev:"散步遛娃都合适，还免费",rec:201},
 
- {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"cafe",tags:["hanok"],area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288},
- {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"photo",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276},
- {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"photo",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301},
- {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",tags:["hanok"],area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114},
+ {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"culture",area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288},
+ {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"culture",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"culture",area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301},
+ {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114},
 
  {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",rev:"该买的都能买齐，热闹",rec:410},
  {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512},
  {zh:"明洞刀削面(明洞饺子)",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",rev:"汤头惊艳，排队也值",rec:289},
- {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"photo",tags:["night"],area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355},
+ {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"view",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355},
 
  {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",rev:"小众设计店多，好逛",rec:130},
- {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"skin",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88},
- {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"photo",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240},
- {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"check",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51},
+ {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"view",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240},
+ {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51},
 
- {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",tags:["kpop"],area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198},
- {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"photo",tags:["kpop"],area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367},
- {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",tags:["night"],area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121},
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198},
+ {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"culture",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367},
+ {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121},
 
- {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",kids:true,rev:"绿豆煎饼+生牛肉，必吃",rec:233},
- {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"photo",tags:["night"],area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176},
- {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"kids",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，亲子最爱",kids:true,rev:"室内也能玩，亲子首选",rec:187},
- {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"kids",tags:["night"],area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，亲子情侣都行",kids:true,rev:"炸鸡泡面看夜景，太惬意",rec:259}
+ {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",rev:"绿豆煎饼+生牛肉，必吃",rec:233},
+ {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"view",area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176},
+ {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"culture",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，体验感满分",rev:"室内也能玩，超好玩",rec:187},
+ {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"view",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，惬意首尔日常",rev:"炸鸡泡面看夜景，太惬意",rec:259}
 ];
 
-const CAT_LABEL={food:"美食 맛집",cafe:"咖啡 카페",shop:"购物 쇼핑",beauty:"美妆 뷰티",skin:"皮肤科 피부과",check:"体检 검진",photo:"拍照 포토",kids:"亲子 아이동반"};
+const CAT_LABEL={food:"🍜 美食 먹거리",cafe:"☕ 感性咖啡 감성카페",shop:"🛍 购物 쇼핑",view:"🌆 美景 좋은뷰",culture:"🏯 文化体验 문화체험",beauty:"💄 美妆 뷰티",medical:"🏥 医美·体检 의료관광"};
 const STYLE_LABEL={eco:"经济型 가성비",std:"标准型 일반",lux:"轻奢型 프리미엄"};
 
 let state={city:"seoul",interests:["food","cafe"],style:"std",budget:"",dates:"",days:3};
@@ -278,9 +274,7 @@ function copyWX(){ if(navigator.clipboard) navigator.clipboard.writeText(WECHAT_
 function generate(){
   if(state.interests.length===0){alert("请至少选一个目的 · 목적 1개 이상 선택");return;}
   state.budget=document.getElementById('budget').value.trim();
-  let pool=SPOTS.filter(s=>state.interests.some(i=> i===s.cat || (s.tags&&s.tags.includes(i)) || (i==='kids'&&s.kids)));
-  if(!state.interests.includes('skin')) pool=pool.filter(s=>s.cat!=='skin');
-  if(!state.interests.includes('check')) pool=pool.filter(s=>s.cat!=='check');
+  let pool=SPOTS.filter(s=>state.interests.includes(s.cat));
   const byArea={}; pool.forEach(s=>{(byArea[s.area]=byArea[s.area]||[]).push(s)});
   let areas=Object.keys(byArea).sort((a,b)=>byArea[b].length-byArea[a].length);
   const days=[]; let ai=0;
