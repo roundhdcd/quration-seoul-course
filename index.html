@@ -469,7 +469,8 @@ function leadMsg(l){
     +(l.name?'닉네임: '+l.name+'\n':'')
     +'관심사: '+((l.interests||[]).join(', ')||'-')+'\n'
     +(l.saved&&l.saved.length?'찜: '+l.saved.join(' / ')+'\n':'')
-    +'도시: '+(l.city||'-')+(l.days?' · '+l.days+'일':'')+(l.budget?' · '+l.budget:'');
+    +'도시: '+(l.city||'-')+(l.days?' · '+l.days+'일':'')+(l.budget?' · '+l.budget:'')
+    +(l.subscribe?'\n📬 매주 소식 구독 YES':'\n📋 일정만 받기');
 }
 function saveLead(lead){
   const db=JSON.parse(localStorage.getItem('quration_leads')||'[]'); db.push(lead); localStorage.setItem('quration_leads',JSON.stringify(db));
@@ -526,7 +527,11 @@ function openSave(){
       </div></div>
     <div class="field"><label id="id-label">微信号 WeChat ID *</label><input id="contact-id" placeholder="예: quration_korea"></div>
     <div class="field"><label>昵称 닉네임</label><input id="nm" placeholder="选填 (선택)"></div>
-    <button class="submit" onclick="submitLead()">📩 领取行程报告 · 리포트 받기</button>`;
+    <label style="display:flex;align-items:flex-start;gap:10px;padding:11px 13px;background:#fff7f0;border:1px solid #fde4d3;border-radius:11px;cursor:pointer;font-size:13px;color:#5b4636;line-height:1.5;margin-bottom:4px">
+      <input type="checkbox" id="sub" style="width:18px;height:18px;margin-top:1px;accent-color:var(--accent);flex-shrink:0">
+      <span>📬 매주 서울 소식도 받기 · <b>每周首尔情报</b><br><span style="font-size:11px;color:var(--sub)">핫플·올영신상·팝업 정보 (선택 · 선택 안 해도 이 일정은 받아요)</span></span>
+    </label>
+    <button class="submit" onclick="submitLead()">📩 이 일정 받기 · 领取我的行程</button>`;
   document.getElementById('ov').classList.add('show');
 }
 function selPlt(p){
@@ -541,7 +546,8 @@ function submitLead(){
   const contact=document.getElementById('contact-id').value.trim();
   const plt=window._selPlt||'wx';
   if(!contact){alert(plt==='xhs'?'请填小红书号 · 샤오홍슈 ID 입력해주세요':'请填微信号 · 위챗 입력해주세요');return;}
-  const n=saveLead({type:'member',platform:plt,contact,wx:plt==='wx'?contact:'',name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
+  const subscribe=document.getElementById('sub')&&document.getElementById('sub').checked;
+  const n=saveLead({type:'member',platform:plt,contact,wx:plt==='wx'?contact:'',subscribe,name:document.getElementById('nm').value.trim(),city:state.city,days:state.days,style:state.style,budget:state.budget,interests:state.interests,saved:Object.values(favorites).map(s=>s.ko),ts:new Date().toISOString()});
   const isXhs=plt==='xhs';
   document.getElementById('sheet').innerHTML=`<div class="ok"><div class="big">🎉</div><h3>欢迎加入！멤버십 가입 완료</h3><p>${isXhs?'📕 小红书 DM으로 보내드려요<br>샤오홍슈 DM 확인해주세요':'👇 加我微信，马上把完整行程发你<br>위챗 추가하면 전체 코스 바로 보내드려요'}</p></div>${isXhs?`<div style="text-align:center;font-size:13px;color:#4b5563;padding:8px 0">小红书号: <b>${XHS_ID}</b><br><span style="font-size:11px">검색 후 팔로우하면 DM 드려요</span></div>`:wcCard()}<p style="text-align:center;font-size:11px;color:#b9bbc0;margin-top:6px">第 ${n} 位会员</p><button class="submit" onclick="closeSheet()" style="margin-top:10px">확인 完成</button>`;
 }
