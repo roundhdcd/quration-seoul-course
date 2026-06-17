@@ -133,6 +133,7 @@
   .pcard.avoid{border-left:4px solid var(--red)}
   .pcard-img{width:100%;height:160px;object-fit:contain;display:block;background:#fff;padding:8px;box-sizing:border-box}
   .pcard-img-ph{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:42px;background:linear-gradient(135deg,#f5f0fa,#fce8f0)}
+  .spot-img{width:100%;height:160px;object-fit:cover;display:block;border-radius:8px;margin-bottom:10px}
   .pcard-body{padding:13px 14px 14px}
   .pcard .verdict{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
   .pcard.rec .verdict{background:#e9f8ef;color:#1a8a4a}
@@ -292,36 +293,36 @@ const WECHAT_ID = "Quration_Korea";   // 위챗 ID (Rami)
 const WECHAT_QR = "wechat-qr.jpg";    // 위챗 추가 QR
 
 const SPOTS = [
- {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328,event:{tag:"팝업",zh:"MARITHÉ 设计师快闪店",ko:"마리떼 디자이너 팝업",where:"성수 연무장길",when:"~6/30",price:"免费入场·무료"}},
- {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",rev:"空间太大，随便拍都好看",rec:156},
- {zh:"圣水手工鞋街",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",rev:"真皮手工，比国内划算",rec:64},
- {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"view",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫绝佳",rev:"散步遛娃都合适，还免费",rec:201},
+ {zh:"圣水洞咖啡街",ko:"성수동 카페거리",pron:"Seongsu",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩8,000~15,000",time:"2-3h",why_zh:"首尔最潮咖啡区，工业风网红店密集",rev:"拍照超出片，咖啡也好喝",rec:328,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Evening_street_in_Seongsu-dong.jpg/960px-Evening_street_in_Seongsu-dong.jpg",event:{tag:"팝업",zh:"MARITHÉ 设计师快闪店",ko:"마리떼 디자이너 팝업",where:"성수 연무장길",when:"~6/30",price:"免费入场·무료"}},
+ {zh:"大林仓库画廊咖啡",ko:"대림창고",pron:"Daerim",cat:"cafe",area:"성수",areaZh:"圣水洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"旧仓库改造，超大空间打卡圣地",rev:"空间太大，随便拍都好看",rec:156,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Evening_street_in_Seongsu-dong.jpg/960px-Evening_street_in_Seongsu-dong.jpg"},
+ {zh:"圣水手工鞋街",ko:"성수수제화거리",pron:"Suje-hwa",cat:"shop",area:"성수",areaZh:"圣水洞",cost:"₩50,000~",time:"1h",why_zh:"手工皮鞋一条街，性价比高",rev:"真皮手工，比国内划算",rec:64,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Evening_street_in_Seongsu-dong.jpg/960px-Evening_street_in_Seongsu-dong.jpg"},
+ {zh:"首尔之林",ko:"서울숲",pron:"Seoul Forest",cat:"view",area:"성수",areaZh:"圣水洞",cost:"免费 무료",time:"1-2h",why_zh:"市区大公园，春樱秋枫绝佳",rev:"散步遛娃都合适，还免费",rec:201,img:"https://upload.wikimedia.org/wikipedia/commons/f/f5/SeoulForest.jpg"},
 
- {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"culture",area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288},
- {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"culture",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276},
- {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"culture",area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301,event:{tag:"이벤트",zh:"韩服免费拍照日",ko:"한복 무료 포토데이",where:"광화문 광장",when:"매주 토·일",price:"免费·무료"}},
- {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114},
+ {zh:"益善洞韩屋街",ko:"익선동",pron:"Ikseon-dong",cat:"culture",area:"익선동",areaZh:"益善洞",cost:"₩9,000~16,000",time:"1-2h",why_zh:"韩屋改造咖啡+窄巷，只有韩国才有的体验",rev:"韩屋拍照绝了，巷子超有味道",rec:288,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/View_of_Ikseon-dong_from_National_Tax_Service_Jongno_District_Office.jpg/960px-View_of_Ikseon-dong_from_National_Tax_Service_Jongno_District_Office.jpg"},
+ {zh:"北村韩屋村",ko:"북촌한옥마을",pron:"Bukchon Hanok",cat:"culture",area:"북촌",areaZh:"北村",cost:"免费 무료",time:"2h",why_zh:"传统韩屋巷弄，韩服拍照绝美",rev:"穿韩服拍照太美了",rec:276,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Bukchon_Hanok_Village_01.jpg/960px-Bukchon_Hanok_Village_01.jpg"},
+ {zh:"景福宫",ko:"경복궁",pron:"Gyeongbokgung",cat:"culture",area:"북촌",areaZh:"北村",cost:"₩3,000(韩服免费)",time:"2h",why_zh:"朝鲜王宫，穿韩服免门票",rev:"穿韩服免门票，超划算",rec:301,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/%EA%B4%91%ED%99%94%EB%AC%B8_%EC%9B%94%EB%8C%80.jpg/960px-%EA%B4%91%ED%99%94%EB%AC%B8_%EC%9B%94%EB%8C%80.jpg",event:{tag:"이벤트",zh:"韩服免费拍照日",ko:"한복 무료 포토데이",where:"광화문 광장",when:"매주 토·일",price:"免费·무료"}},
+ {zh:"三清洞茶屋街",ko:"삼청동",pron:"Samcheong",cat:"cafe",area:"북촌",areaZh:"北村",cost:"₩9,000~15,000",time:"1-2h",why_zh:"安静茶屋+小众咖啡，文艺路线",rev:"安静文艺，咖啡好喝",rec:114,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Seoul-Samcheong.dong-01.jpg/960px-Seoul-Samcheong.dong-01.jpg"},
 
- {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",rev:"该买的都能买齐，热闹",rec:410},
- {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512,event:{tag:"할인",zh:"外国人专属折扣周",ko:"외국인 할인위크",where:"명동타운점",when:"~6/30",price:"凭护照9折·여권시 10%"}},
- {zh:"OFF BEAUTY 明洞店（折扣仓）",ko:"오프뷰티 명동점",pron:"Off Beauty",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩2,000~",time:"1h",why_zh:"韩国版COSTCO美妆！直接买断省中间商，最高90%折扣。닥터지·이니스프리·설화수·샤넬 同款，价格低到你不信",rev:"아이크림 2천원, 닥터지 선크림 1만원 실화냐..다 샀다",rec:387},
- {zh:"明洞刀削面(明洞饺子)",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",rev:"汤头惊艳，排队也值",rec:289},
- {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"view",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355},
+ {zh:"明洞购物街",ko:"명동거리",pron:"Myeong-dong",cat:"shop",area:"명동",areaZh:"明洞",cost:"自由",time:"2-3h",why_zh:"游客必去，化妆品+小吃一条龙",rev:"该买的都能买齐，热闹",rec:410,img:"https://upload.wikimedia.org/wikipedia/commons/2/23/Seoul-Myeongdong-02.jpg"},
+ {zh:"Olive Young 明洞旗舰店",ko:"올리브영 명동타운",pron:"Olive Young",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩30,000~",time:"1-2h",why_zh:"韩国美妆一站式，外国人结账打折",rev:"扫货圣地，退税方便",rec:512,img:"https://upload.wikimedia.org/wikipedia/commons/2/23/Seoul-Myeongdong-02.jpg",event:{tag:"할인",zh:"外国人专属折扣周",ko:"외국인 할인위크",where:"명동타운점",when:"~6/30",price:"凭护照9折·여권시 10%"}},
+ {zh:"OFF BEAUTY 明洞店（折扣仓）",ko:"오프뷰티 명동점",pron:"Off Beauty",cat:"beauty",area:"명동",areaZh:"明洞",cost:"₩2,000~",time:"1h",why_zh:"韩国版COSTCO美妆！直接买断省中间商，最高90%折扣。닥터지·이니스프리·설화수·샤넬 同款，价格低到你不信",rev:"아이크림 2천원, 닥터지 선크림 1만원 실화냐..다 샀다",rec:387,img:"https://upload.wikimedia.org/wikipedia/commons/2/23/Seoul-Myeongdong-02.jpg"},
+ {zh:"明洞刀削面(明洞饺子)",ko:"명동교자",pron:"Myeongdong Gyoja",cat:"food",area:"명동",areaZh:"明洞",cost:"₩10,000~14,000",time:"1h",why_zh:"米其林必比登刀削面老店",rev:"汤头惊艳，排队也值",rec:289,img:"https://upload.wikimedia.org/wikipedia/commons/2/23/Seoul-Myeongdong-02.jpg"},
+ {zh:"南山首尔塔",ko:"남산서울타워",pron:"N Seoul Tower",cat:"view",area:"명동",areaZh:"明洞",cost:"₩21,000",time:"2h",why_zh:"情侣锁+夜景，首尔地标",rev:"夜景绝了，情侣必来",rec:355,img:"https://upload.wikimedia.org/wikipedia/commons/0/0f/N_Seoul_Tower_Panorama_001.jpg"},
 
- {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",rev:"小众设计店多，好逛",rec:130},
- {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88},
- {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"view",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240,event:{tag:"전시",zh:"沉浸式媒体艺术展",ko:"미디어아트 전시",where:"COEX 1F",when:"常设·상설",price:"免费·무료"}},
- {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51},
+ {zh:"林荫道(新沙)",ko:"가로수길",pron:"Garosu-gil",cat:"shop",area:"강남",areaZh:"江南",cost:"自由",time:"2h",why_zh:"设计师品牌+网红店林立",rev:"小众设计店多，好逛",rec:130,img:"https://upload.wikimedia.org/wikipedia/commons/4/4b/Apple_%EA%B0%80%EB%A1%9C%EC%88%98%EA%B8%B8_04.jpg"},
+ {zh:"江南皮肤科一条街",ko:"강남 피부과거리",pron:"Gangnam",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"1-2h",why_zh:"激光/水光/提升，先咨询再决定",med:true,rev:"先咨询不踩雷，按需选",rec:88,img:""},
+ {zh:"COEX 星空图书馆",ko:"별마당도서관",pron:"Starfield",cat:"view",area:"강남",areaZh:"江南",cost:"免费 무료",time:"1h",why_zh:"超高书墙，免费打卡名所",rev:"免费打卡，书墙超震撼",rec:240,img:"https://upload.wikimedia.org/wikipedia/commons/c/c9/Library_in_Seoul_%2853608036346%29.jpg",event:{tag:"전시",zh:"沉浸式媒体艺术展",ko:"미디어아트 전시",where:"COEX 1F",when:"常设·상설",price:"免费·무료"}},
+ {zh:"江南高端体检中心",ko:"강남 종합검진센터",pron:"Health Check",cat:"medical",area:"강남",areaZh:"江南",cost:"咨询 상담",time:"반나절",why_zh:"半天高端套餐，中文协助",med:true,rev:"半天搞定，有中文协助放心",rec:51,img:""},
 
- {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198,event:{tag:"공연",zh:"周末街头演出(버스킹)",ko:"주말 버스킹",where:"홍대 걷고싶은거리",when:"토·일 저녁",price:"免费·무료"}},
- {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"culture",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367},
- {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121},
+ {zh:"弘大购物步行街",ko:"홍대걷고싶은거리",pron:"Hongdae",cat:"shop",area:"홍대",areaZh:"弘大",cost:"自由",time:"2-3h",why_zh:"年轻人聚集，街头表演+小店",rev:"街头表演有意思，超青春",rec:198,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Street_hongdae_Seoul.jpg/960px-Street_hongdae_Seoul.jpg",event:{tag:"공연",zh:"周末街头演出(버스킹)",ko:"주말 버스킹",where:"홍대 걷고싶은거리",when:"토·일 저녁",price:"免费·무료"}},
+ {zh:"人生四格自拍馆",ko:"인생네컷",pron:"Insaeng Netcut",cat:"culture",area:"홍대",areaZh:"弘大",cost:"₩4,000~6,000",time:"30m",why_zh:"韩国必玩四格拍照，留作纪念",rev:"必拍！便宜又好玩",rec:367,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Street_hongdae_Seoul.jpg/960px-Street_hongdae_Seoul.jpg"},
+ {zh:"弘大布帐马车(夜宵)",ko:"홍대 포장마차",pron:"Pojangmacha",cat:"food",area:"홍대",areaZh:"弘大",cost:"₩15,000~25,000",time:"1-2h",why_zh:"夜晚街边烤肉+烧酒体验",rev:"夜宵气氛拉满",rec:121,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Street_hongdae_Seoul.jpg/960px-Street_hongdae_Seoul.jpg"},
 
- {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",rev:"绿豆煎饼+生牛肉，必吃",rec:233},
- {zh:"OFF BEAUTY 广藏市场店",ko:"오프뷰티 광장시장점",pron:"Off Beauty",cat:"beauty",area:"종로",areaZh:"钟路",cost:"₩2,000~",time:"1h",why_zh:"창고형 K뷰티 아울렛·最高90%折！外国游客口碑爆棚 — 广藏市场逛完顺路必去",rev:"외국인 관광객들을 노린 창고형 화장품 할인 매장, 가격 미쳤음",rec:387},
- {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"view",area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176},
- {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"culture",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，体验感满分",rev:"室内也能玩，超好玩",rec:187},
- {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"view",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，惬意首尔日常",rev:"炸鸡泡面看夜景，太惬意",rec:259}
+ {zh:"广藏市场美食",ko:"광장시장",pron:"Gwangjang",cat:"food",area:"종로",areaZh:"钟路",cost:"₩10,000~20,000",time:"1-2h",why_zh:"绿豆煎饼+生拌牛肉，传统市场美食",rev:"绿豆煎饼+生牛肉，必吃",rec:233,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Gwangjang_Market%2C_Seoul%2C_Korea.jpg/1280px-Gwangjang_Market%2C_Seoul%2C_Korea.jpg"},
+ {zh:"OFF BEAUTY 广藏市场店",ko:"오프뷰티 광장시장점",pron:"Off Beauty",cat:"beauty",area:"종로",areaZh:"钟路",cost:"₩2,000~",time:"1h",why_zh:"창고형 K뷰티 아울렛·最高90%折！外国游客口碑爆棚 — 广藏市场逛完顺路必去",rev:"외국인 관광객들을 노린 창고형 화장품 할인 매장, 가격 미쳤음",rec:387,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Gwangjang_Market%2C_Seoul%2C_Korea.jpg/1280px-Gwangjang_Market%2C_Seoul%2C_Korea.jpg"},
+ {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"view",area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/LotteWorldTower_%26_Lotte_World_Mall_from_Seokchon_Lake%2C_Seoul_Korea.jpg/960px-LotteWorldTower_%26_Lotte_World_Mall_from_Seokchon_Lake%2C_Seoul_Korea.jpg"},
+ {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"culture",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，体验感满分",rev:"室内也能玩，超好玩",rec:187,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/LotteWorldTower_%26_Lotte_World_Mall_from_Seokchon_Lake%2C_Seoul_Korea.jpg/960px-LotteWorldTower_%26_Lotte_World_Mall_from_Seokchon_Lake%2C_Seoul_Korea.jpg"},
+ {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"view",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，惬意首尔日常",rev:"炸鸡泡面看夜景，太惬意",rec:259,img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Hangang_Park_Overview_201604.jpg/960px-Hangang_Park_Overview_201604.jpg"}
 ];
 
 const PRODUCTS=[
@@ -508,6 +509,7 @@ function render(days){
       const med=s.med?`<div class="reason" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
       const relC=CONTENT_MAP[s.cat]||[];
       html+=`<div class="spot">
+        ${s.img?`<img class="spot-img" src="${s.img}" alt="${s.ko}" loading="lazy" onerror="this.style.display='none'">` : ''}
         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
         <div class="zh">${s.zh}</div>
