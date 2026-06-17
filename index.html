@@ -588,6 +588,7 @@ function render(days){
        ${state.budget?`<span>💵 ${state.budget}</span>`:''}
      </div>
    </div>`;
+  const seenSpotImgs=new Set();
   days.forEach((spots,i)=>{
     const dayAreas=[...new Set(spots.map(s=>s.areaZh))].join(' · ');
     html+=`<div class="day"><div class="day-h"><div class="day-n">D${i+1}</div><b>${dayAreas}</b><small>${spots.length} 个地点</small></div>`;
@@ -595,8 +596,10 @@ function render(days){
       const id=`${i}-${j}`;
       const med=s.med?`<div class="reason" style="color:#b08a3a">⚠️ 仅供参考，需现场咨询医生 · 의료광고 아님</div>`:"";
       const relC=CONTENT_MAP[s.cat]||[];
+      const showSpotImg=s.img&&!seenSpotImgs.has(s.img);
+      if(s.img)seenSpotImgs.add(s.img);
       html+=`<div class="spot">
-        ${s.img?`<img class="spot-img" src="${s.img}" alt="${s.ko}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${showSpotImg?`<img class="spot-img" src="${s.img}" alt="${s.ko}" loading="lazy" onerror="this.style.display='none'">`:''}
         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
         <div class="zh">${s.zh}</div>
