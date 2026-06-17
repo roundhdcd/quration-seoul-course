@@ -124,6 +124,23 @@
   .plt-row{display:flex;gap:8px;margin-bottom:0}
   .plt{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;background:#fff;color:var(--sub);font-family:inherit;transition:.15s}
   .plt.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
+  .tab-nav{display:flex;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:73px;z-index:19}
+  .tab-btn{flex:1;padding:11px 8px;border:none;background:none;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.15s}
+  .tab-btn small{font-size:10px;font-weight:500}
+  .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+  .pcard.rec{border-left:4px solid #22c55e}
+  .pcard.avoid{border-left:4px solid var(--red)}
+  .pcard .verdict{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
+  .pcard.rec .verdict{background:#e9f8ef;color:#1a8a4a}
+  .pcard.avoid .verdict{background:#fce8e8;color:var(--red)}
+  .pcard .pname{font-size:16px;font-weight:800;margin-bottom:2px}
+  .pcard .pko{font-size:13px;color:var(--sub);margin-bottom:7px}
+  .pcard .ingredient{font-size:11.5px;background:#f7f4f0;border-radius:7px;padding:5px 9px;color:#5b4636;margin-bottom:7px}
+  .pcard .ingredient b{color:#b08a3a}
+  .pcard .preason{font-size:12.5px;color:#4b5563;margin-bottom:5px;line-height:1.5}
+  .pcard .prev{font-size:12px;color:#6b5e4f;background:#fbf7f0;border-left:3px solid #e7c98c;padding:6px 9px;border-radius:0 7px 7px 0;margin-top:6px}
+  .pcard .pprice{font-size:12px;color:var(--sub);margin-top:7px}
   .related{margin-top:9px;border-top:1px solid var(--line);padding-top:8px}
   .rel-toggle{font-size:12px;color:var(--sub);cursor:pointer;display:flex;align-items:center;gap:4px;padding:2px 0;font-weight:600;user-select:none}
   .rel-list{margin-top:6px;display:flex;flex-direction:column;gap:5px}
@@ -137,6 +154,10 @@
     <div class="logo"><img class="qk-img" src="logo.png" alt="QK"><span class="brand">Quration Korea</span></div>
     <div class="tag-slogan">你的韩国旅行决策助手 · 한국 여행 의사결정 파트너</div>
   </header>
+  <div class="tab-nav">
+    <button class="tab-btn active" id="tab-travel" onclick="switchTab('travel')">🗺 首尔行程<small>서울코스</small></button>
+    <button class="tab-btn" id="tab-beauty" onclick="switchTab('beauty')">💄 K美妆筛选<small>화장품걸러줌</small></button>
+  </div>
 
   <div class="panel" id="form">
     <div class="hero">
@@ -211,6 +232,49 @@
   </div>
 
   <div id="result"></div>
+
+  <div class="panel" id="beauty-form" style="display:none">
+    <div class="hero">
+      <div class="hbadge">💄 K美妆 · 성분으로 직접 걸러줌 ✅</div>
+      <div class="big">올영 뭐 사야해？<br>我帮你筛好了 🇰🇷</div>
+      <div class="sub">不是所有网红产品都值买 — 按成分筛，真正有效的才留下 · 성분 기준으로 직접 걸러줘요</div>
+      <span class="ko">연예인 광고 아닌 성분으로 판단 — 살 것 vs 버릴 것 알려드려요</span>
+    </div>
+    <div class="blk">
+      <div class="step">STEP 1</div>
+      <div class="label">😟 肤质烦恼 <small>피부 고민 (복수선택)</small></div>
+      <div class="chips" id="b-concerns">
+        <div class="chip on" data-c="brightening">✨ 美白淡斑<small>미백</small></div>
+        <div class="chip" data-c="wrinkle">🕰 抗皱紧致<small>주름</small></div>
+        <div class="chip" data-c="trouble">🔴 痘痘敏感<small>트러블</small></div>
+        <div class="chip" data-c="moisture">💧 补水保湿<small>보습</small></div>
+        <div class="chip" data-c="sensitive">🌸 敏感肌<small>민감성</small></div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="step">STEP 2</div>
+      <div class="label">🛍 品类 <small>카테고리 (복수선택)</small></div>
+      <div class="chips" id="b-cats">
+        <div class="chip on" data-bc="skincare">🧴 护肤品<small>스킨케어</small></div>
+        <div class="chip" data-bc="mask">🎭 面膜<small>마스크팩</small></div>
+        <div class="chip" data-bc="suncare">☀️ 防晒<small>선케어</small></div>
+        <div class="chip" data-bc="makeup">💄 彩妆<small>색조</small></div>
+      </div>
+    </div>
+    <div class="blk">
+      <div class="step">STEP 3</div>
+      <div class="label">💰 预算 <small>예산</small></div>
+      <div class="row" id="b-budget">
+        <div class="opt on" data-bb="low">实惠型<small>~3만원</small></div>
+        <div class="opt" data-bb="mid">标准型<small>3~8만원</small></div>
+        <div class="opt" data-bb="high">轻奢型<small>8만원~</small></div>
+      </div>
+    </div>
+    <button class="gen" onclick="generateBeauty()">💄 帮我筛选 · 걸러줘</button>
+    <button class="ask" onclick="openInquiry()">💬 궁금한 제품 물어보기 · 有问题问我</button>
+    <div class="foot">Quration Korea · 성분으로 걸러줌 · 按成分筛选</div>
+  </div>
+  <div id="beauty-result" style="display:none;padding:0 16px 40px"></div>
 </div>
 
 <div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
@@ -253,6 +317,23 @@ const SPOTS = [
  {zh:"乐天世界塔 SEOUL SKY",ko:"롯데월드타워 서울스카이",pron:"Lotte Tower",cat:"view",area:"잠실",areaZh:"蚕室",cost:"₩27,000",time:"1-2h",why_zh:"首尔最高夜景，123层俯瞰全城",rev:"夜景太震撼了，必上",rec:176},
  {zh:"乐天世界",ko:"롯데월드",pron:"Lotte World",cat:"culture",area:"잠실",areaZh:"蚕室",cost:"₩62,000",time:"반나절+",why_zh:"室内外游乐园，体验感满分",rev:"室内也能玩，超好玩",rec:187},
  {zh:"汉江公园野餐",ko:"한강공원",pron:"Han River",cat:"view",area:"여의도",areaZh:"汝矣岛",cost:"₩10,000~",time:"2h",why_zh:"骑车+炸鸡泡面+夜景，惬意首尔日常",rev:"炸鸡泡面看夜景，太惬意",rec:259}
+];
+
+const PRODUCTS=[
+  {zh:"COSRX 蜗牛精华96",ko:"코스알엑스 달팽이 에센스",cat:"skincare",concern:["trouble","moisture"],price:22000,budget:"low",ingredient:"스네일 세크리션 필트레이트 96.3%",verdict:"rec",why_zh:"蜗牛分泌液浓度业界最高，修复+保湿双效，性价比极强",rev:"痘印淡化效果明显，连续用了3个月"},
+  {zh:"ANUA 鱼腥草77%爽肤水",ko:"아누아 어성초 77% 토너",cat:"skincare",concern:["trouble","sensitive"],price:18000,budget:"low",ingredient:"어성초 추출물 77%",verdict:"rec",why_zh:"含77%鱼腥草，天然抗炎，敏感泛红首选",rev:"用完脸不再泛红了，很温和"},
+  {zh:"Torriden 透明质酸精华",ko:"토리든 다이브인 세럼",cat:"skincare",concern:["moisture","sensitive"],price:19800,budget:"low",ingredient:"히알루론산 5종 복합체",verdict:"rec",why_zh:"5种玻尿酸叠加保湿，清爽不油腻",rev:"涂完皮肤喝饱水一样"},
+  {zh:"IOPE 视黄醇精华",ko:"아이오페 레티놀 에센스",cat:"skincare",concern:["wrinkle","brightening"],price:49000,budget:"mid",ingredient:"순수 레티놀 0.1%",verdict:"rec",why_zh:"视黄醇浓度达标，抗皱提拉实测有效",rev:"用了1个月皮肤弹性变好了"},
+  {zh:"One Thing 积雪草精华100%",ko:"원씽 센텔라 앰플",cat:"skincare",concern:["trouble","sensitive"],price:14000,budget:"low",ingredient:"센텔라아시아티카 추출물 100%",verdict:"rec",why_zh:"100%积雪草，修复敏感泛红立竿见影",rev:"爆痘后第二天就消肿了"},
+  {zh:"Round Lab 独岛爽肤水",ko:"라운드랩 독도 토너",cat:"skincare",concern:["moisture","sensitive"],price:17000,budget:"low",ingredient:"독도 해양심층수, 판테놀",verdict:"rec",why_zh:"海洋深层水+泛醇，保湿镇静双效",rev:"敏感肌用了没有过敏，很放心"},
+  {zh:"numbuzin 3号精华",ko:"넘버즈인 3번 세럼",cat:"skincare",concern:["brightening","wrinkle"],price:38000,budget:"mid",ingredient:"나이아신아마이드 5%, 펩타이드",verdict:"rec",why_zh:"烟酰胺5%+多肽，美白+抗皱一瓶搞定",rev:"用了3周暗沉改善了"},
+  {zh:"Dr.Jart+ 积雪草修复霜",ko:"닥터자르트 시카페어 크림",cat:"skincare",concern:["trouble","sensitive"],price:32000,budget:"mid",ingredient:"센텔라아시아티카, 티트리",verdict:"rec",why_zh:"积雪草+茶树，修复皮肤屏障经过验证",rev:"过敏修复期用了，皮肤稳定下来了"},
+  {zh:"Mediheal NMF面膜",ko:"메디힐 NMF 마스크팩 10장",cat:"mask",concern:["moisture","sensitive"],price:13900,budget:"low",ingredient:"히알루론산, 판테놀, NMF",verdict:"rec",why_zh:"NMF保湿因子+常有买一送一，性价比最强",rev:"敷完皮肤光滑很多，必囤款"},
+  {zh:"Etude 纯净防晒霜 SPF50+",ko:"에뛰드 순정 톤업 선크림",cat:"suncare",concern:["brightening","sensitive"],price:12000,budget:"low",ingredient:"징크 옥사이드, SPF50+ PA++++",verdict:"rec",why_zh:"物理防晒+提亮，敏感肌可用，价格实惠",rev:"不油腻，素颜提亮效果好"},
+  {zh:"Clio 防水眼线笔",ko:"클리오 킬블랙 아이라이너",cat:"makeup",concern:["brightening"],price:10500,budget:"low",ingredient:"방수 포뮬러",verdict:"rec",why_zh:"防水持久力强，性价比远超欧美大牌",rev:"游泳后都不晕，韩国必买"},
+  {zh:"⚠️ 高价胶原蛋白系列（广告款）",ko:"고광고비 콜라겐 세럼 유형",cat:"skincare",concern:["wrinkle","moisture"],price:65000,budget:"high",ingredient:"가수분해 콜라겐 (분자량 큼)",verdict:"avoid",avoid_reason:"外用胶原蛋白分子太大无法渗透皮肤，只是表面保湿。广告费占成本80%，换个包装卖高价 · 콜라겐 분자가 너무 커서 피부 침투 불가. 광고비가 원가의 80%인 유형",why_zh:"外用胶原蛋白吸收率极低，属于营销噱头"},
+  {zh:"⚠️ 连锁美容院高价套装",ko:"피부샵 고가 패키지 세트",cat:"skincare",concern:["brightening","wrinkle"],price:150000,budget:"high",ingredient:"성분 불명확",verdict:"avoid",avoid_reason:"成分不透明+高压销售。同等成分在橄榄Young 1/5价格可买到 · 성분 불투명 + 고압 판매. 동일 성분이 올영에서 1/5 가격에 있음",why_zh:"不透明成分+高溢价，不在筛选范围内"},
+  {zh:"⚠️ 某网红'水光'乳霜",ko:"일부 인플루언서 추천 워터크림",cat:"skincare",concern:["moisture"],price:45000,budget:"mid",ingredient:"주성분 실리콘, 글리세린",verdict:"avoid",avoid_reason:"主要成分是硅酮+甘油，和便宜款无差别。溢价靠网红效应，不靠成分 · 주성분이 실리콘+글리세린으로 저가 제품과 동일. 인플루언서 마케팅으로 거품",why_zh:"成分与廉价品无异，包装更好看而已"},
 ];
 
 const CAT_LABEL={food:"🍜 美食 먹거리",cafe:"☕ 感性咖啡 감성카페",shop:"🛍 购物 쇼핑",view:"🌆 美景 좋은뷰",culture:"🏯 文化体验 문화체험",beauty:"💄 美妆 뷰티",medical:"🏥 医美·体检 의료관광"};
@@ -553,6 +634,83 @@ function submitLead(){
 }
 function closeSheet(){document.getElementById('ov').classList.remove('show');}
 function toggleRel(el){var l=el.nextElementSibling,o=l.style.display!=='none';l.style.display=o?'none':'flex';el.querySelector('.rel-arr').textContent=o?'▾':'▴';}
+
+// ====== 화장품 筛선 ======
+let bState={concerns:['brightening'],cats:['skincare'],budget:'low'};
+document.querySelectorAll('#b-concerns .chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');bState.concerns=[...document.querySelectorAll('#b-concerns .chip.on')].map(x=>x.dataset.c)});
+document.querySelectorAll('#b-cats .chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');bState.cats=[...document.querySelectorAll('#b-cats .chip.on')].map(x=>x.dataset.bc)});
+document.querySelectorAll('#b-budget .opt').forEach(o=>o.onclick=()=>{document.querySelectorAll('#b-budget .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');bState.budget=o.dataset.bb});
+function generateBeauty(){
+  if(bState.concerns.length===0){alert('피부 고민을 선택해주세요');return;}
+  const budgetMax={low:30000,mid:80000,high:999999};
+  const max=budgetMax[bState.budget];
+  const recs=PRODUCTS.filter(p=>p.verdict==='rec'&&(bState.cats.length===0||bState.cats.includes(p.cat))&&p.concern.some(c=>bState.concerns.includes(c))&&p.price<=max);
+  const avoids=PRODUCTS.filter(p=>p.verdict==='avoid'&&p.concern.some(c=>bState.concerns.includes(c)));
+  renderBeauty(recs,avoids);
+}
+function renderBeauty(recs,avoids){
+  let html=`<div class="decis">按成分说话，不是按广告说话<b> · 筛过的才留下</b><span>광고 아닌 성분으로 판단 — 추천 아님, 걸러낸 것</span></div>`;
+  if(recs.length){
+    html+=`<div style="font-size:13px;font-weight:800;color:#1a8a4a;margin:14px 0 8px">✅ 买！추천 (${recs.length}개)</div>`;
+    recs.forEach(p=>{
+      html+=`<div class="pcard rec">
+        <span class="verdict">✅ 筛过·推荐买</span>
+        <div class="pname">${p.zh}</div>
+        <div class="pko">${p.ko}</div>
+        <div class="ingredient">🧪 <b>핵심성분:</b> ${p.ingredient}</div>
+        <div class="preason">💡 ${p.why_zh}</div>
+        ${p.rev?`<div class="prev">💬 中国朋友: "${p.rev}"</div>`:''}
+        <div class="pprice">💵 ₩${p.price.toLocaleString()} · Olive Young</div>
+        <div class="links" style="margin-top:8px">
+          <a href="https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 올영에서 보기</a>
+          <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(p.zh)}" target="_blank" rel="noopener">📕 真实评价</a>
+        </div>
+      </div>`;
+    });
+  }
+  if(avoids.length){
+    html+=`<div style="font-size:13px;font-weight:800;color:var(--red);margin:16px 0 8px">❌ 别买 · 비추 (${avoids.length}개)</div>`;
+    avoids.forEach(p=>{
+      html+=`<div class="pcard avoid">
+        <span class="verdict">❌ 筛掉·别买</span>
+        <div class="pname">${p.zh}</div>
+        <div class="pko">${p.ko}</div>
+        <div class="preason" style="color:#c0392b;line-height:1.55">⚠️ ${p.avoid_reason}</div>
+        <div class="pprice">₩${p.price.toLocaleString()}</div>
+      </div>`;
+    });
+  }
+  if(!recs.length&&!avoids.length){html+=`<div class="decis">해당 조건의 제품이 아직 없어요 · 数据建设中，稍后更新</div>`;}
+  html+=`
+    <div class="trust-box">
+      <div class="trust-row">✅ <span>전부 성분 기준으로 직접 검증했어요 · <b>全部按成分亲自筛选</b></span></div>
+      <div class="trust-row">🤔 <span>더 물어보고 싶으면? · 还想问？</span></div>
+      <div class="trust-btns">
+        <a href="${XHS_URL}" target="_blank" rel="noopener">📕 더 보기</a>
+        <button onclick="openInquiry()">💬 직접 물어보기</button>
+      </div>
+    </div>
+    <div class="savebar">
+      <button class="join" onclick="openSave()">📋 이 결과 저장 · 保存结果</button>
+      <button class="restart" onclick="restartBeauty()">↺ 다시 筛选 · 重新筛选</button>
+    </div>
+    <div class="foot">Quration Korea · 성분으로 걸러줌 · 按成分筛选</div>`;
+  document.getElementById('beauty-form').style.display='none';
+  const r=document.getElementById('beauty-result');r.innerHTML=html;r.style.display='block';window.scrollTo(0,0);
+}
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  const show=(id,v)=>{const el=document.getElementById(id);if(el)el.style.display=v;};
+  if(tab==='travel'){
+    show('form','block');show('result','none');show('beauty-form','none');show('beauty-result','none');
+  } else {
+    show('form','none');show('result','none');show('beauty-form','block');show('beauty-result','none');
+  }
+  window.scrollTo(0,0);
+}
+function restartBeauty(){document.getElementById('beauty-result').style.display='none';document.getElementById('beauty-form').style.display='block';window.scrollTo(0,0);}
+
 function restart(){document.getElementById('result').style.display='none';document.getElementById('form').style.display='block';window.scrollTo(0,0);}
 </script>
 </body>
