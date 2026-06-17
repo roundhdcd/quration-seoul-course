@@ -808,7 +808,7 @@ function renderBeauty(recs,avoids){
           ${p.rev?`<div class="prev">💬 中国朋友: "${p.rev}"</div>`:''}
           <div class="pprice">💵 ₩${p.price.toLocaleString()} · Olive Young</div>
           <div class="links" style="margin-top:8px">
-            <a href="https://www.oliveyoungglobal.com/search?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 Olive Young 글로벌</a>
+            <a href="https://global.oliveyoung.com/search?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 Olive Young 글로벌</a>
           </div>
           ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:'';})()}
         </div>
