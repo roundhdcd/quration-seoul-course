@@ -401,6 +401,34 @@ const CONTENT_MAP={
 };
 
 
+const BEAUTY_CONTENT_MAP={
+  trouble:[
+    {zh:"痘痘肌买什么·成分党筛选非广告版",ko:"트러블피부 성분 가이드",kw:"韩国痘痘肌护肤品筛选"},
+    {zh:"COSRX蜗牛精华真的有用吗·成分解析",ko:"달팽이 에센스 성분 분석",kw:"COSRX蜗牛精华成分"},
+    {zh:"积雪草精华哪家强·5款对比测评",ko:"센텔라 앰플 비교",kw:"积雪草精华比较韩国"}
+  ],
+  moisture:[
+    {zh:"玻尿酸精华怎么选·成分对照指南",ko:"히알루론산 세럼 선택법",kw:"韩国玻尿酸精华成分"},
+    {zh:"睡眠面膜哪款真保湿·亲测对比",ko:"수면팩 비교",kw:"韩国睡眠面膜保湿"},
+    {zh:"Olive Young保湿推荐·非广告版",ko:"올영 보습 성분 추천",kw:"橄榄杨保湿护肤品"}
+  ],
+  brightening:[
+    {zh:"美白成分怎么看·熊果苷vs烟酰胺对比",ko:"미백 성분 비교",kw:"韩国美白成分比较"},
+    {zh:"防晒推荐·成分党不踩雷指南",ko:"선크림 성분 가이드",kw:"韩国防晒筛选成分"},
+    {zh:"暗沉改善实测·用了3个月才说",ko:"칙칙함 개선 실사용 후기",kw:"韩国美白护肤实测"}
+  ],
+  wrinkle:[
+    {zh:"视黄醇护肤信吗·成分浓度对照表",ko:"레티놀 성분 가이드",kw:"韩国视黄醇护肤品"},
+    {zh:"抗老护肤成分选对比价格更重要",ko:"안티에이징 성분 우선순위",kw:"韩国抗老护肤成分"},
+    {zh:"肽类成分真的有效吗·科学验证",ko:"펩타이드 효과 검증",kw:"韩国多肽精华成分"}
+  ],
+  sensitive:[
+    {zh:"敏感肌成分黑名单·别再踩雷了",ko:"민감성피부 피해야 할 성분",kw:"敏感肌护肤成分禁忌"},
+    {zh:"神经酰胺值不值·成分解析",ko:"세라마이드 성분 가이드",kw:"神经酰胺护肤品韩国"},
+    {zh:"皮肤屏障修复·怎么选才对",ko:"피부장벽 회복 제품 선택법",kw:"皮肤屏障修复韩国"}
+  ]
+};
+
 let state={city:"seoul",interests:["food","cafe"],style:"std",budget:"",dates:"",days:3};
 let favorites={};
 let savePrompted=false;
@@ -693,6 +721,7 @@ function renderBeauty(recs,avoids){
           <div class="links" style="margin-top:8px">
             <a href="https://www.oliveyoungglobal.com/search?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 Olive Young 글로벌</a>
           </div>
+          ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-toggle" onclick="toggleRel(this)">📌 관련 검증 콘텐츠 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div></div>`:'';})()}
         </div>
       </div>`;
     });
