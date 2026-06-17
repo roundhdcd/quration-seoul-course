@@ -150,6 +150,7 @@
   .rel-list{margin-top:6px;display:flex;flex-direction:column;gap:5px}
   .rel-item{display:block;font-size:12px;color:#ff2442;text-decoration:none;padding:8px 10px;background:#fff5f5;border:1px solid #ffd9d6;border-radius:8px;font-weight:600;line-height:1.35}
   .rel-item small{display:block;color:var(--sub);font-size:10.5px;margin-top:2px;font-weight:500}
+  .rel-header{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:6px;display:flex;align-items:center;gap:4px;letter-spacing:.2px}
 </style>
 </head>
 <body>
@@ -609,7 +610,7 @@ function render(days){
           <a href="https://map.naver.com/p/search/${encodeURIComponent(s.ko)}" target="_blank" rel="noopener">📍 地图·지도</a>
           <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}" target="_blank" rel="noopener">📕 真实评价 ${Math.round(s.rec*0.4)}篇</a>
         </div>
-        ${relC.length?`<div class="related"><div class="rel-toggle" onclick="toggleRel(this)">📌 관련 검증 콘텐츠 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div></div>`:''}
+        ${relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:''}
       </div>`;
       window['_spot_'+id]=s;
     });
@@ -809,7 +810,7 @@ function renderBeauty(recs,avoids){
           <div class="links" style="margin-top:8px">
             <a href="https://www.oliveyoungglobal.com/search?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 Olive Young 글로벌</a>
           </div>
-          ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-toggle" onclick="toggleRel(this)">📌 관련 검증 콘텐츠 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div></div>`:'';})()}
+          ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:'';})()}
         </div>
       </div>`;
     });
