@@ -125,8 +125,26 @@
   .plt{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;background:#fff;color:var(--sub);font-family:inherit;transition:.15s}
   .plt.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
   .tab-nav{display:flex;background:#fff;border-bottom:2px solid var(--line);position:sticky;top:73px;z-index:19}
-  .tab-btn{flex:1;padding:11px 8px;border:none;background:none;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.15s}
-  .tab-btn small{font-size:10px;font-weight:500}
+  .tab-btn{flex:1;padding:10px 4px;border:none;background:none;font-size:11.5px;font-weight:700;color:var(--sub);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:3px solid transparent;margin-bottom:-2px;font-family:inherit;transition:.15s}
+  .tab-btn small{font-size:9.5px;font-weight:500}
+  .tip-card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .tip-head{padding:14px 16px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:9px;user-select:none;-webkit-tap-highlight-color:transparent}
+  .tip-head .tip-arr{margin-left:auto;font-size:12px;color:var(--sub);transition:.2s;display:inline-block}
+  .tip-head.open .tip-arr{transform:rotate(180deg)}
+  .tip-body{padding:0 16px 14px;font-size:13px;color:#4b5563;line-height:1.65;border-top:1px solid var(--line)}
+  .tip-body ul{padding-left:0;list-style:none}
+  .tip-body ul li{padding:4px 0;display:flex;gap:7px}
+  .tip-body ul li::before{content:"·";color:var(--accent);font-weight:900;flex-shrink:0}
+  .tip-body b{color:var(--ink)}
+  .tip-body .tip-warn{background:#fff8e8;border:1px solid #fde8a0;border-radius:8px;padding:6px 10px;margin-top:8px;font-size:12px;color:#7a5a00}
+  .pick-section-title{font-size:14px;font-weight:800;margin:20px 0 11px;display:flex;align-items:center;gap:7px}
+  .pick-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:11px;display:flex;gap:12px;align-items:flex-start}
+  .pick-card .pick-ico{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#fff0f3,#ffe8ee);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+  .pick-card .pick-info{flex:1;min-width:0}
+  .pick-card .pick-brand{font-size:12px;color:var(--sub);font-weight:600}
+  .pick-card .pick-name{font-size:15px;font-weight:800;margin:2px 0}
+  .pick-card .pick-zh{font-size:12.5px;color:#5b4636;line-height:1.45;margin-bottom:5px}
+  .pick-card .pick-badge{font-size:10px;background:var(--pink);color:#e23a5e;padding:2px 8px;border-radius:20px;font-weight:800;display:inline-block}
   .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
   .pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
   .pcard.rec{border-left:4px solid #22c55e}
@@ -162,6 +180,7 @@
   <div class="tab-nav">
     <button class="tab-btn" id="tab-travel" onclick="switchTab('travel')">🗺 首尔行程<small>서울코스</small></button>
     <button class="tab-btn active" id="tab-beauty" onclick="switchTab('beauty')">💄 K美妆筛选<small>화장품걸러줌</small></button>
+    <button class="tab-btn" id="tab-pick" onclick="switchTab('pick')">✨ 旅行必看<small>큐레이션픽</small></button>
   </div>
 
   <div class="panel" id="form" style="display:none">
@@ -611,9 +630,9 @@ function render(days){
         <div class="ft">⏱ 推荐停留 <b>${s.time}</b> · 💵 <b>${s.cost}</b>${s.rec?` · 👍 <b>${s.rec}</b>人推荐`:''}</div>
         <div class="links">
           <a href="https://map.naver.com/p/search/${encodeURIComponent(s.ko)}" target="_blank" rel="noopener">📍 地图·지도</a>
-          <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}" target="_blank" rel="noopener">📕 真实评价 ${Math.round(s.rec*0.4)}篇</a>
+          <a href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(s.zh)}&source=web_explore_feed" target="_blank" rel="noopener">📕 真实评价 ${Math.round(s.rec*0.4)}篇</a>
         </div>
-        ${relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:''}
+        ${relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}&source=web_explore_feed" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}&source=web_explore_feed" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:''}
       </div>`;
       window['_spot_'+id]=s;
     });
@@ -813,7 +832,7 @@ function renderBeauty(recs,avoids){
           <div class="links" style="margin-top:8px">
             <a href="https://global.oliveyoung.com/search?query=${encodeURIComponent(p.ko)}" target="_blank" rel="noopener">🛒 Olive Young 글로벌</a>
           </div>
-          ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:'';})()}
+          ${(()=>{const relKeys=[...new Set(p.concern)];const relC=relKeys.flatMap(k=>BEAUTY_CONTENT_MAP[k]||[]).slice(0,3);return relC.length?`<div class="related"><div class="rel-header">📌 相关验证内容 · 관련 검증 콘텐츠</div><a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(relC[0].kw)}&source=web_explore_feed" target="_blank" rel="noopener">${relC[0].zh}<small>${relC[0].ko}</small></a>${relC.length>1?`<div class="rel-toggle" onclick="toggleRel(this)">更多内容 ${relC.length-1}篇 <span class="rel-arr">▾</span></div><div class="rel-list" style="display:none">${relC.slice(1).map(c=>`<a class="rel-item" href="https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(c.kw)}&source=web_explore_feed" target="_blank" rel="noopener">${c.zh}<small>${c.ko}</small></a>`).join('')}</div>`:''}</div>`:'';})()}
         </div>
       </div>`;
     });
@@ -858,15 +877,219 @@ function switchTab(tab){
   document.getElementById('tab-'+tab).classList.add('active');
   const show=(id,v)=>{const el=document.getElementById(id);if(el)el.style.display=v;};
   if(tab==='travel'){
-    show('form','block');show('result','none');show('beauty-form','none');show('beauty-result','none');
+    show('form','block');show('result','none');show('beauty-form','none');show('beauty-result','none');show('pick-panel','none');
+  } else if(tab==='beauty'){
+    show('form','none');show('result','none');show('beauty-form','block');show('beauty-result','none');show('pick-panel','none');
   } else {
-    show('form','none');show('result','none');show('beauty-form','block');show('beauty-result','none');
+    show('form','none');show('result','none');show('beauty-form','none');show('beauty-result','none');show('pick-panel','block');
   }
   window.scrollTo(0,0);
+}
+function toggleTip(el){
+  el.classList.toggle('open');
+  const body=el.nextElementSibling;
+  body.style.display=body.style.display==='block'?'none':'block';
 }
 function restartBeauty(){document.getElementById('beauty-result').style.display='none';document.getElementById('beauty-form').style.display='block';window.scrollTo(0,0);}
 
 function restart(){document.getElementById('result').style.display='none';document.getElementById('form').style.display='block';window.scrollTo(0,0);}
 </script>
+
+<div id="pick-panel" style="display:none">
+  <div class="panel">
+    <div class="hero">
+      <div class="big">韩国旅行必看 · 여행 꿀팁 🧳</div>
+      <div class="sub">实际去过才知道的省钱攻略 + 避坑指南 — 中国游客最容易踩的坑都在这里</div>
+      <span class="ko">직접 다녀온 사람만 아는 꿀팁 — 중국인 여행자가 모르면 손해보는 것들</span>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">💱 换汇去哪里最划算？<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>明洞换汇所</b> 汇率最好，兑换主要金额（比银行好2–3%）</li>
+          <li>仁川机场汇率差，只换<b>最低生活费</b>就好</li>
+          <li>1万韩元 ≈ <b>50元人民币</b>（实时汇率请查当日）</li>
+          <li>大型商场支持<b>银联卡</b>，手续费约1%</li>
+        </ul>
+        <div class="tip-warn">⚠️ 명동 환전소는 밤 10시까지 영업 — 주말도 오픈</div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">🚇 交通怎么玩最顺？<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>T-money卡</b> 필수 — 지하철+버스 모두 사용, 편의점에서 구매·충전</li>
+          <li>인천공항 → 시내: <b>AREX 직통</b> 43분, ₩9,500</li>
+          <li>지도 앱: <b>Naver 地图</b> 중국어 지원, 지하철 경로 자동 안내</li>
+          <li>택시: <b>Kakao T</b> 앱, 카드결제 OK</li>
+        </ul>
+        <div class="tip-warn">💡 地铁比打车便宜10倍 — 지하철 기본요금 ₩1,400</div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">💳 支付方式全攻略<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>支付宝 / 微信</b>：大型商场·免税店·连锁餐厅 OK</li>
+          <li><b>VISA / Mastercard</b>：거의 모든 곳에서 사용 가능</li>
+          <li><b>现金</b>：광장시장·남대문 전통시장은 현금 우선</li>
+          <li>편의점(GS25·CU·세븐)：支付宝微信 모두 접수</li>
+        </ul>
+        <div class="tip-warn">⚠️ 소형 식당·노점은 현금만 — 현금 3–5만원 항상 소지</div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">🧾 退税怎么退？<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li>단일 매장 <b>₩15,000</b> 이상 구매 시 부가세(10%) 환급 신청 가능</li>
+          <li><b>시내 즉시환급</b>：KT/TAXBACK 표시 매장에서 계산대 즉시 환급</li>
+          <li><b>공항 환급</b>：출국 전 세관 도장 → 면세구역 창구에서 현금·카드 환급</li>
+          <li>올리브영도 退税 OK — 여권 필수 지참</li>
+        </ul>
+        <div class="tip-warn">💡 免税额度超$600需提前护照预约 · 免税店 구매는 사전 예약 필요</div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">📱 必装App清单<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li>🗺 <b>Naver Map</b> — 한국 지도 앱 1위, 중국어 지원, 지하철·버스 경로</li>
+          <li>🔤 <b>Papago</b> — 한국어 번역 정확도 Google보다 높음</li>
+          <li>🚕 <b>Kakao T</b> — 택시 앱, 중국어 설정 가능</li>
+          <li>🛒 <b>Olive Young App</b> — 온·오프라인 포인트, 재고 확인</li>
+          <li>🍽 <b>Naver 예약</b> — 인기 식당 예약 필수</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">🛍 올리브영 攻略<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>会员卡</b>：계산 전 앱 다운+가입, 당일 구매 즉시 포인트</li>
+          <li><b>세일 타이밍</b>：올영세일(매월 1–7일), 연간 4회 대형 세일</li>
+          <li>명동 플래그십 <b>24시간</b> 영업, 새벽 쇼핑 가능</li>
+          <li>₩30,000 이상 구매 시 退税 신청 — 계산대에서 처리</li>
+          <li>热销品<b>货比三家</b>：다이소·편의점이 더 저렴한 경우도 있음</li>
+        </ul>
+        <div class="tip-warn">💡 앱으로 재고 미리 확인 — 품절 방지 필수</div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">💊 약국 必买清单<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>정관장 홍삼</b> — 공항보다 시내 약국이 50% 저렴</li>
+          <li><b>우황청심원</b> — 소화불량·긴장 완화, 여행 필수 상비약</li>
+          <li><b>파스(湿布贴)</b> — 많이 걷다 다리 아플 때, 마트가 약국보다 저렴</li>
+          <li><b>미용 약국템</b>：닥터지·CNP·JMsolution 현장 구매 저렴</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-head" onclick="toggleTip(this)">📶 上网方案对比<span class="tip-arr">▾</span></div>
+      <div class="tip-body" style="display:none">
+        <ul>
+          <li><b>포켓 와이파이</b>：여러 명 공유 시 추천, 인천공항 대여·반납, 일 ₩5,000</li>
+          <li><b>한국 SIM카드</b>：개인 추천, KT/SKT 7일 ₩15,000–20,000, 공항 구매</li>
+          <li><b>중국 로밍</b>：비싸고 불안정 — 비추천</li>
+          <li>GS25·CU 편의점에서도 데이터 SIM 판매</li>
+        </ul>
+        <div class="tip-warn">💡 공항 도착 로비 SIM 자판기 — 24시간 구매 가능</div>
+      </div>
+    </div>
+
+    <div style="height:6px"></div>
+    <div class="pick-section-title">💎 Quration Pick · 검증된 브랜드 추천</div>
+
+    <div class="pick-card">
+      <div class="pick-ico">🐌</div>
+      <div class="pick-info">
+        <div class="pick-brand">COSRX · 코스알엑스</div>
+        <div class="pick-name">어드밴스드 스네일 96</div>
+        <div class="pick-zh">蜗牛精华液 — 韩国出口量No.1，96%蜗牛粘液，屏障修复+保湿双效，全肤质适用</div>
+        <span class="pick-badge">검증된 1위</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">🌿</div>
+      <div class="pick-info">
+        <div class="pick-brand">ANUA · 아뉴아</div>
+        <div class="pick-name">어성초 77 토너 패드</div>
+        <div class="pick-zh">鱼腥草控油爽肤水垫 — 敏感肌·痘痘肌救星，77%天然植物，TikTok全球爆款</div>
+        <span class="pick-badge">🔥 바이럴</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">👑</div>
+      <div class="pick-info">
+        <div class="pick-brand">Beauty of Joseon · 조선미인</div>
+        <div class="pick-name">감초 빛 세럼</div>
+        <div class="pick-zh">甘草焕亮精华 — 韩方+现代成分，提亮暗沉淡斑，成分党认证，性价比高</div>
+        <span class="pick-badge">성분 검증</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">🌱</div>
+      <div class="pick-info">
+        <div class="pick-brand">Skin1004 · 스킨1004</div>
+        <div class="pick-name">마다가스카르 센텔라 세럼</div>
+        <div class="pick-zh">积雪草精华 — 单一成分极简，修红舒缓，敏感肌终极之选，性价比极高</div>
+        <span class="pick-badge">가성비 픽</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">✨</div>
+      <div class="pick-info">
+        <div class="pick-brand">롬앤 · ROM&ND</div>
+        <div class="pick-name">쥬시 라스팅 틴트</div>
+        <div class="pick-zh">水润持色唇釉 — 韩国唇妆销量王，显色度高·滋润不拔干，45色以上可选</div>
+        <span class="pick-badge">립 No.1</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">🎨</div>
+      <div class="pick-info">
+        <div class="pick-brand">에뛰드 · ETUDE</div>
+        <div class="pick-name">드로잉 아이브로우</div>
+        <div class="pick-zh">自然裸感眉笔 — 2026流行「透明眉」必备，超细笔芯，稀疏眉补绘首选</div>
+        <span class="pick-badge">2026 트렌드</span>
+      </div>
+    </div>
+
+    <div class="pick-card">
+      <div class="pick-ico">🌸</div>
+      <div class="pick-info">
+        <div class="pick-brand">이니스프리 · INNISFREE</div>
+        <div class="pick-name">그린티 시드 세럼</div>
+        <div class="pick-zh">济州绿茶精华 — 经典百销款，抗氧化+长效保湿，敏感肌OK，가격 대비 최고</div>
+        <span class="pick-badge">클래식 픽</span>
+      </div>
+    </div>
+
+    <div class="trust-box" style="margin-top:14px">
+      <div class="trust-row">✅ <span>전부 성분 직접 검증 · <b>全部成分经过亲自验证</b></span></div>
+      <div class="trust-row">📕 <span>더 많은 검증 리뷰 보러오기</span></div>
+      <div class="trust-btns">
+        <a href="https://xhslink.com/m/4sU1stOW38l" target="_blank" rel="noopener">📕 小红书 팔로우</a>
+      </div>
+    </div>
+    <div class="foot">Quration Korea · 검증된 선택만 · 只做验证过的推荐</div>
+  </div>
+</div>
+
 </body>
 </html>
