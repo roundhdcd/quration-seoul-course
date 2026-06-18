@@ -151,7 +151,8 @@
   .pcard.avoid{border-left:4px solid var(--red)}
   .pcard-img{width:100%;height:160px;object-fit:contain;display:block;background:#fff;padding:8px;box-sizing:border-box}
   .pcard-img-ph{width:100%;height:120px;display:flex;align-items:center;justify-content:center;font-size:42px;background:linear-gradient(135deg,#f5f0fa,#fce8f0)}
-  .spot-img{width:100%;height:160px;object-fit:cover;display:block;border-radius:8px;margin-bottom:10px}
+  .spot-img-wrap{width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;margin-bottom:10px}
+  .spot-img{width:100%;height:100%;object-fit:cover;display:block}
   .pcard-body{padding:13px 14px 14px}
   .pcard .verdict{font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
   .pcard.rec .verdict{background:#e9f8ef;color:#1a8a4a}
@@ -419,7 +420,7 @@ const PRODUCTS=[
   {zh:"numbuzin 3号精华",ko:"넘버즈인 3번 세럼",cat:"skincare",concern:["brightening","wrinkle"],price:38000,budget:"mid",ingredient:"나이아신아마이드 5%, 펩타이드",verdict:"rec",why_zh:"烟酰胺5%+多肽，美白+抗皱一瓶搞定",rev:"用了3周暗沉改善了",img:"https://us.numbuzin.com/cdn/shop/files/250527_________09.jpg?v=1748507624&width=600"},
   {zh:"Dr.Jart+ 积雪草修复霜",ko:"닥터자르트 시카페어 크림",cat:"skincare",concern:["trouble","sensitive"],price:32000,budget:"mid",ingredient:"센텔라아시아티카, 티트리",verdict:"rec",why_zh:"积雪草+茶树，修复皮肤屏障经过验证",rev:"过敏修复期用了，皮肤稳定下来了",img:"https://cdn-image.oliveyoung.com/prdtImg/1822/1b8276dc-4025-439b-a11b-9a9814ca7476.jpg?RS=800x800&AR=0&QT=80"},
   {zh:"Mediheal NMF面膜",ko:"메디힐 NMF 마스크팩 10장",cat:"mask",concern:["moisture","sensitive"],price:13900,budget:"low",ingredient:"히알루론산, 판테놀, NMF",verdict:"rec",why_zh:"NMF保湿因子+常有买一送一，性价比最强",rev:"敷完皮肤光滑很多，必囤款",img:"https://cdn-image.oliveyoung.com/prdtImg/1271/60288a39-e776-4fcf-b720-cbccdd90fce0.jpg?RS=800x800&AR=0&QT=80"},
-  {zh:"Etude 纯净防晒霜 SPF50+",ko:"에뛰드 순정 톤업 선크림",cat:"suncare",concern:["brightening","sensitive"],price:12000,budget:"low",ingredient:"징크 옥사이드, SPF50+ PA++++",verdict:"rec",why_zh:"物理防晒+提亮，敏感肌可用，价格实惠",rev:"不油腻，素颜提亮效果好",img:"https://drive.google.com/uc?export=view&id=1u03fP5yi8X3irGLIAlkMqZr_qfI-geMz"},
+  {zh:"Etude 纯净防晒霜 SPF50+",ko:"에뛰드 순정 톤업 선크림",cat:"suncare",concern:["brightening","sensitive"],price:12000,budget:"low",ingredient:"징크 옥사이드, SPF50+ PA++++",verdict:"rec",why_zh:"物理防晒+提亮，敏感肌可用，价格实惠",rev:"不油腻，素颜提亮效果好",img:"https://image.oliveyoung.co.kr/cfimages/cf-goods/uploads/images/thumbnails/10/0000/0020/A00000020242601ko.jpg?l=ko"},
   {zh:"Clio 防水眼线笔",ko:"클리오 킬블랙 아이라이너",cat:"makeup",concern:["brightening"],price:10500,budget:"low",ingredient:"방수 포뮬러",verdict:"rec",why_zh:"防水持久力强，性价比远超欧美大牌",rev:"游泳后都不晕，韩国必买",img:"https://cdn-image.oliveyoung.com/prdtImg/1998/b02a3a21-f7b9-485f-9447-9c8ccf9be1cc.jpg?RS=800x800&AR=0&QT=80"},
   // ── 추가 추천 제품 ──
   {zh:"朝鲜美人光泽精华",ko:"조선미인 글로우 딥 세럼",cat:"skincare",concern:["brightening","sensitive"],price:15000,budget:"low",ingredient:"쌀 추출물 68%, 알부틴",verdict:"rec",why_zh:"米提取物68%+熊果苷美白组合，温和不刺激，小红书长期热销",rev:"用了2周皮肤透亮了，敏感肌也没问题",img:"https://cdn-image.oliveyoung.com/prdtImg/1835/27c3e0cd-b1e5-4db0-93a0-355b30c988a3.jpg?RS=800x800&AR=0&QT=80"},
@@ -618,7 +619,7 @@ function render(days){
       const showSpotImg=s.img&&!seenSpotImgs.has(s.img);
       if(s.img)seenSpotImgs.add(s.img);
       html+=`<div class="spot">
-        ${showSpotImg?`<img class="spot-img" src="${s.img}" alt="${s.ko}" loading="lazy" onerror="this.style.display='none'">`:''}
+        ${showSpotImg&&s.img?`<div class="spot-img-wrap"><img class="spot-img" src="${s.img}" alt="${s.ko}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`:''}
         <button class="fav" id="fav-${id}" onclick="toggleFav('${id}',this)">♥</button>
         <div class="cat">${CAT_LABEL[s.cat]||''} <span class="vbadge">✅ 实地验证 검증</span></div>
         <div class="zh">${s.zh}</div>
