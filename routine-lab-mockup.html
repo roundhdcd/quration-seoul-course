@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>筛선 Routine Lab — QK</title>
+<style>
+  :root{
+    --ink:#26222b;--sub:#8a8594;--line:#f0e8ec;--bg:#fff6f4;--card:#fff;
+    --accent:#ff5a7a;--red:#e34b46;--pink:#ffe3ea;--soft:#fff3f0;
+    --green:#2ecc71;--olive:#e8f5e9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif;
+    font-size:14px;line-height:1.5;min-height:100vh;padding-bottom:40px}
+
+  /* 헤더 */
+  .header{padding:16px 20px 12px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;text-align:center}
+  .header-logo{font-size:11px;color:var(--sub);letter-spacing:.5px;margin-bottom:3px}
+  .header-title{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:.3px}
+  .header-title span{color:var(--accent)}
+
+  /* 히어로 */
+  .hero{margin:16px 16px 0;background:linear-gradient(135deg,#fff,#fff5f4);
+    border:1px solid #f6d9d7;border-radius:18px;padding:18px 16px}
+  .hero-badge{display:inline-block;background:var(--pink);color:#e23a5e;
+    font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:20px;margin-bottom:10px;letter-spacing:.3px}
+  .hero-title{font-size:20px;font-weight:900;line-height:1.25;color:var(--ink)}
+  .hero-title em{color:var(--accent);font-style:normal}
+  .hero-desc{font-size:12.5px;color:#5b4636;margin-top:8px;line-height:1.6}
+
+  /* 입력 섹션 */
+  .section{margin:14px 16px 0}
+  .section-label{font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.5px;
+    text-transform:uppercase;margin-bottom:8px}
+  .skin-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+  .chip{padding:7px 13px;border:1.5px solid var(--line);border-radius:20px;
+    font-size:12.5px;font-weight:600;color:var(--sub);background:#fff;cursor:pointer;transition:.15s}
+  .chip.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
+  .product-input-wrap{background:#fff;border:1.5px solid var(--line);border-radius:14px;
+    overflow:hidden;box-shadow:0 2px 10px rgba(255,90,122,.07)}
+  .product-input{width:100%;padding:14px 16px;border:none;outline:none;font-size:14px;
+    color:var(--ink);background:transparent;resize:none;min-height:100px;
+    font-family:inherit;line-height:1.6}
+  .product-input::placeholder{color:#cbc6d0}
+  .input-footer{padding:10px 14px;background:#fdfafb;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center}
+  .input-hint{font-size:11px;color:var(--sub)}
+  .analyze-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;
+    border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.3px;
+    box-shadow:0 4px 14px rgba(255,90,122,.35)}
+
+  /* 구분선 */
+  .divider{margin:18px 16px;border:none;border-top:1px solid var(--line)}
+
+  /* 결과 카드 */
+  .result-header{padding:0 16px;margin-bottom:12px}
+  .result-title{font-size:17px;font-weight:900;color:var(--ink)}
+  .result-sub{font-size:12px;color:var(--sub);margin-top:3px}
+
+  .routine-block{margin:0 16px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(227,75,70,.06)}
+  .routine-head{padding:13px 16px;display:flex;align-items:center;gap:10px;
+    border-bottom:1px solid var(--line)}
+  .routine-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:17px;flex-shrink:0}
+  .am .routine-icon{background:#fff7e0}
+  .pm .routine-icon{background:#eef2ff}
+  .routine-head-text{}
+  .routine-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px}
+  .routine-head-title{font-size:14px;font-weight:800;color:var(--ink)}
+
+  .routine-steps{padding:10px 14px 4px}
+  .step-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #faf4f5;align-items:flex-start}
+  .step-item:last-child{border-bottom:none}
+  .step-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#e23a5e;
+    font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .step-content{}
+  .step-product{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .step-tip{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5}
+  .step-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;
+    border-radius:8px;margin-top:4px}
+  .badge-ok{background:#e8f5e9;color:#2e7d32}
+  .badge-warn{background:#fff3e0;color:#e65100}
+  .badge-skip{background:#fce4ec;color:#c62828}
+
+  /* 경고 카드 */
+  .warn-card{margin:0 16px 12px;background:#fff8f0;border:1.5px solid #ffe0b2;
+    border-radius:14px;padding:14px 16px}
+  .warn-title{font-size:13px;font-weight:800;color:#e65100;margin-bottom:8px;display:flex;gap:6px;align-items:center}
+  .warn-list{list-style:none}
+  .warn-list li{font-size:12.5px;color:#5d4037;padding:4px 0;padding-left:14px;position:relative;line-height:1.5}
+  .warn-list li::before{content:"⚠️";position:absolute;left:0;font-size:11px}
+
+  /* 추천 구매 */
+  .buy-section{margin:0 16px 12px}
+  .buy-tabs{display:flex;gap:8px;margin-bottom:10px}
+  .buy-tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;
+    border:1.5px solid var(--line);color:var(--sub);background:#fff;cursor:pointer}
+  .buy-tab.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
+  .buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .buy-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;
+    box-shadow:0 2px 8px rgba(227,75,70,.05)}
+  .buy-card-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#f9f3f4;
+    margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:28px}
+  .buy-card-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4}
+  .buy-card-price{font-size:12.5px;font-weight:800;color:var(--accent)}
+  .buy-card-where{font-size:10.5px;color:var(--sub);margin-bottom:7px}
+  .buy-btn{width:100%;padding:8px;border-radius:10px;border:none;font-size:11.5px;
+    font-weight:700;cursor:pointer;letter-spacing:.2px}
+  .btn-olive{background:#00c73c;color:#fff}
+  .btn-iherb{background:#5a7f3c;color:#fff}
+
+  /* 영상 섹션 */
+  .video-section{margin:0 16px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:16px;overflow:hidden}
+  .video-head{padding:13px 16px 10px;border-bottom:1px solid var(--line)}
+  .video-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:2px}
+  .video-head-title{font-size:14px;font-weight:800;color:var(--ink)}
+  .video-list{padding:10px 14px}
+  .video-item{display:flex;gap:11px;align-items:center;padding:8px 0;
+    border-bottom:1px solid #faf4f5;text-decoration:none}
+  .video-item:last-child{border-bottom:none}
+  .video-thumb{width:56px;height:40px;border-radius:8px;background:#f0e8ec;
+    display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .video-info{}
+  .video-platform{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.3px}
+  .video-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
+
+  /* 하단 CTA */
+  .bottom-cta{margin:6px 16px 0;background:linear-gradient(135deg,var(--accent),#ff8fa3);
+    border-radius:16px;padding:16px;text-align:center;color:#fff}
+  .bottom-cta-title{font-size:15px;font-weight:900;margin-bottom:4px}
+  .bottom-cta-sub{font-size:11.5px;opacity:.85;margin-bottom:12px}
+  .bottom-cta-btn{display:inline-block;background:#fff;color:var(--accent);
+    font-size:12.5px;font-weight:800;padding:9px 22px;border-radius:20px}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="header">
+  <div class="header-logo">QK · Quration Korea</div>
+  <div class="header-title">筛선 <span>Routine Lab</span></div>
+</div>
+
+<!-- 히어로 -->
+<div class="hero">
+  <div class="hero-badge">✦ AI 성분 검증</div>
+  <div class="hero-title">내 화장품<br><em>진짜 맞게</em> 쓰고 있어?</div>
+  <div class="hero-desc">가진 제품 입력하면 루틴 정리해드려요.<br>중복 성분·충돌 성분도 잡아줍니다.</div>
+</div>
+
+<!-- 피부 고민 선택 -->
+<div class="section">
+  <div class="section-label">피부 고민 선택</div>
+  <div class="skin-chips">
+    <div class="chip on">건성 · 수분부족</div>
+    <div class="chip">지성 · 모공</div>
+    <div class="chip">민감성</div>
+    <div class="chip">트러블</div>
+    <div class="chip">미백</div>
+    <div class="chip">안티에이징</div>
+  </div>
+  <div class="section-label">보유 제품 입력</div>
+  <div class="product-input-wrap">
+    <textarea class="product-input" placeholder="예시: 아누아 어성초 77 토너, 라운드랩 독도 선크림, CNP 프로폴리스 세럼, 에뛰드 순정 선크림"></textarea>
+    <div class="input-footer">
+      <span class="input-hint">제품명 쉼표로 구분</span>
+      <button class="analyze-btn">분석하기 →</button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 결과 헤더 -->
+<div class="result-header">
+  <div class="result-title">루틴 분석 결과</div>
+  <div class="result-sub">건성·수분부족 피부 기준 · 제품 4개</div>
+</div>
+
+<!-- 아침 루틴 -->
+<div class="routine-block am">
+  <div class="routine-head">
+    <div class="routine-icon">☀️</div>
+    <div class="routine-head-text">
+      <div class="routine-head-label">MORNING ROUTINE</div>
+      <div class="routine-head-title">아침 루틴 (4단계)</div>
+    </div>
+  </div>
+  <div class="routine-steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-product">아누아 어성초 77 토너</div>
+        <div class="step-tip">클렌징 후 첫 수분 레이어. 77% 어성초 진정 효과.</div>
+        <span class="step-badge badge-ok">✓ 아침 적합</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-product">CNP 프로폴리스 세럼</div>
+        <div class="step-tip">토너 흡수 후 30초 뒤 사용. 항산화·영양 공급.</div>
+        <span class="step-badge badge-ok">✓ 순서 맞음</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-product">라운드랩 독도 선크림</div>
+        <div class="step-tip">마지막에 꼭 선크림. SPF50+ 권장.</div>
+        <span class="step-badge badge-ok">✓ 필수 마무리</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 저녁 루틴 -->
+<div class="routine-block pm">
+  <div class="routine-head">
+    <div class="routine-icon">🌙</div>
+    <div class="routine-head-text">
+      <div class="routine-head-label">EVENING ROUTINE</div>
+      <div class="routine-head-title">저녁 루틴 (3단계)</div>
+    </div>
+  </div>
+  <div class="routine-steps">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-product">아누아 어성초 77 토너</div>
+        <div class="step-tip">클렌징 후 진정 첫 단계.</div>
+        <span class="step-badge badge-ok">✓ 저녁도 OK</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-product">CNP 프로폴리스 세럼</div>
+        <div class="step-tip">저녁엔 2~3펌프 넉넉히. 수면 중 회복 극대화.</div>
+        <span class="step-badge badge-ok">✓ 저녁에 효과 극대</span>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-product">에뛰드 순정 선크림 ⚠️</div>
+        <div class="step-tip">선크림은 저녁에 불필요. 수분크림으로 대체 권장.</div>
+        <span class="step-badge badge-skip">✗ 저녁엔 스킵</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 경고 카드 -->
+<div class="warn-card">
+  <div class="warn-title">⚠️ 주의할 점</div>
+  <ul class="warn-list">
+    <li>선크림 2개 중복 — 라운드랩 하나만 쓰세요 (어성초 성분 겹침)</li>
+    <li>저녁 수분크림 없음 — 건성피부에 필수, 추가 권장</li>
+    <li>비타민C 계열 없음 — 미백 원하면 아침 세럼 추가 고려</li>
+  </ul>
+</div>
+
+<!-- 추천 구매 -->
+<div class="buy-section">
+  <div class="section-label">추천 제품</div>
+  <div class="buy-tabs">
+    <div class="buy-tab on">올리브영</div>
+    <div class="buy-tab">iHerb</div>
+  </div>
+  <div class="buy-grid">
+    <div class="buy-card">
+      <div class="buy-card-img">🧴</div>
+      <div class="buy-card-name">메디필 콜라겐 임팩트 크림</div>
+      <div class="buy-card-where">올리브영 · 저녁 수분크림</div>
+      <div class="buy-card-price">₩28,000</div>
+      <button class="buy-btn btn-olive">올리브영 보기 →</button>
+    </div>
+    <div class="buy-card">
+      <div class="buy-card-img">✨</div>
+      <div class="buy-card-name">Some By Mi 비타C 세럼</div>
+      <div class="buy-card-where">올리브영 · 아침 미백</div>
+      <div class="buy-card-price">₩19,800</div>
+      <button class="buy-btn btn-olive">올리브영 보기 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- 관련 영상 -->
+<div class="video-section">
+  <div class="video-head">
+    <div class="video-head-label">RELATED CONTENT</div>
+    <div class="video-head-title">관련 QK 콘텐츠</div>
+  </div>
+  <div class="video-list">
+    <a class="video-item" href="#">
+      <div class="video-thumb">🎬</div>
+      <div class="video-info">
+        <div class="video-platform">XHS · 小红书</div>
+        <div class="video-title">선크림 2개 쓰면 생기는 일 (중복 성분 주의)</div>
+      </div>
+    </a>
+    <a class="video-item" href="#">
+      <div class="video-thumb">🎬</div>
+      <div class="video-info">
+        <div class="video-platform">DOUYIN · 抖音</div>
+        <div class="video-title">건성피부 올리브영 루틴 실화? 검증해봤습니다</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- 하단 CTA -->
+<div class="bottom-cta">
+  <div class="bottom-cta-title">더 궁금한 제품 있나요?</div>
+  <div class="bottom-cta-sub">QK 필터로 K뷰티 베스트 제품 확인하기</div>
+  <div class="bottom-cta-btn">K美妆 筛선 보러가기 →</div>
+</div>
+
+</body>
+</html>
