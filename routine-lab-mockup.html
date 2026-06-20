@@ -205,6 +205,47 @@
   .sc-tip-tag{font-size:9.5px;font-weight:700;padding:4px 9px;border-radius:20px;
     background:var(--pink);color:#e23a5e}
 
+  /* 루틴 블록 */
+  .sc-routine-block{background:#fff;border-radius:16px;padding:14px 13px;margin-bottom:10px;
+    border:1px solid #f6dce0;box-shadow:0 2px 12px rgba(227,75,70,.07)}
+  .sc-routine-night{background:linear-gradient(180deg,#faf7ff,#fff)}
+  .sc-routine-title{display:flex;align-items:center;gap:9px;margin-bottom:13px;
+    padding-bottom:10px;border-bottom:1.5px dashed #f0e0e4}
+  .sc-routine-icon{font-size:22px}
+  .sc-routine-label{font-size:9.5px;font-weight:800;color:var(--sub);letter-spacing:.8px}
+  .sc-routine-sub{font-size:12px;font-weight:800;color:var(--ink)}
+
+  /* 제품 스텝 */
+  .sc-pstep{display:flex;flex-direction:column;gap:5px}
+  .sc-pstep-num{font-size:8.5px;font-weight:900;color:var(--accent);letter-spacing:.8px;
+    background:var(--pink);display:inline-block;padding:2px 8px;border-radius:20px;
+    width:fit-content;margin-bottom:2px}
+  .sc-num-night{color:#6a4fa0;background:#f0eaff}
+  .sc-num-add{color:#c75000;background:#fff0e0}
+  .sc-pstep-inner{display:flex;gap:11px;align-items:center;background:#fdfafb;
+    border-radius:12px;padding:9px 10px;border:1px solid #f6dce0}
+  .sc-pstep-missing .sc-pstep-inner{border-style:dashed;border-color:#ffc090;background:#fff8f2}
+  .sc-pimg{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+    justify-content:center;font-size:22px;flex-shrink:0}
+  .sc-pinfo{}
+  .sc-pname{font-size:12.5px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px}
+  .sc-preason{font-size:10.5px;color:var(--sub);line-height:1.4}
+  .sc-arrow{text-align:center;color:#e8c0c8;font-size:16px;font-weight:700;
+    margin:4px 0;line-height:1}
+  .sc-arrow-night{color:#c0b0d8}
+
+  /* 하단 2단 */
+  .sc-bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
+  .sc-bottom-box{border-radius:14px;padding:12px 11px}
+  .sc-box-add{background:linear-gradient(135deg,#f0fff4,#e8f8f0);border:1px solid #a8d8b8}
+  .sc-box-warn{background:linear-gradient(135deg,#fff8f0,#fff0e8);border:1px solid #f0c090}
+  .sc-box-head{font-size:10.5px;font-weight:900;margin-bottom:8px;color:var(--ink)}
+  .sc-box-item{font-size:10px;color:#3a3a3a;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06);
+    line-height:1.4}
+  .sc-box-item:last-child{border-bottom:none}
+  .sc-box-add .sc-box-head{color:#2e7d32}
+  .sc-box-warn .sc-box-head{color:#c75000}
+
   /* 카드 푸터 */
   .sc-foot{background:linear-gradient(135deg,#3a2a2f,#5c3a42);padding:12px 16px;
     display:flex;align-items:center;justify-content:space-between}
@@ -420,85 +461,122 @@
 
   <div class="sc-body">
 
-    <!-- 아침 루틴 (풀폭) -->
-    <div class="sc-col sc-col-full">
-      <div class="sc-col-head">
-        <span class="sc-col-icon">☀️</span>
+    <!-- 아침 루틴 -->
+    <div class="sc-routine-block">
+      <div class="sc-routine-title">
+        <span class="sc-routine-icon">☀️</span>
         <div>
-          <div class="sc-col-label">MORNING · 아침 바르는 순서</div>
-          <div class="sc-col-title">가볍게 → 무겁게 → 차단</div>
+          <div class="sc-routine-label">MORNING ROUTINE</div>
+          <div class="sc-routine-sub">가볍게 → 무겁게 → 차단</div>
         </div>
       </div>
-      <div class="sc-step2">
-        <div class="sc-num2">1</div>
-        <div>
-          <div class="sc-name2">아누아 어성초 77 토너</div>
-          <div class="sc-tip2">수분 첫 레이어 · 77% 어성초로 즉각 진정</div>
+      <!-- 스텝 1 -->
+      <div class="sc-pstep">
+        <div class="sc-pstep-num">STEP 1</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#e8f5f0,#c8e6d8)">
+            <span>🌿</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname">아누아 어성초 77 토너</div>
+            <div class="sc-preason">수분 첫 레이어 · 77% 어성초 즉각 진정</div>
+          </div>
         </div>
       </div>
-      <div class="sc-step2">
-        <div class="sc-num2">2</div>
-        <div>
-          <div class="sc-name2">CNP 프로폴리스 세럼</div>
-          <div class="sc-tip2">흡수 후 30초 뒤 · 항산화 + 영양막 형성</div>
+      <div class="sc-arrow">↓</div>
+      <!-- 스텝 2 -->
+      <div class="sc-pstep">
+        <div class="sc-pstep-num">STEP 2</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff3dc,#ffe4a0)">
+            <span>🍯</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname">CNP 프로폴리스 세럼</div>
+            <div class="sc-preason">30초 후 · 항산화+영양막 형성</div>
+          </div>
         </div>
       </div>
-      <div class="sc-step2">
-        <div class="sc-num2">3</div>
-        <div>
-          <div class="sc-name2">라운드랩 독도 선크림</div>
-          <div class="sc-tip2">마지막 필수 · SPF50+ 자외선 차단으로 마무리</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 저녁 루틴 (풀폭) -->
-    <div class="sc-col sc-col-full">
-      <div class="sc-col-head">
-        <span class="sc-col-icon">🌙</span>
-        <div>
-          <div class="sc-col-label">EVENING · 저녁 바르는 순서</div>
-          <div class="sc-col-title">진정 → 영양 → 잠금</div>
-        </div>
-      </div>
-      <div class="sc-step2">
-        <div class="sc-num2">1</div>
-        <div>
-          <div class="sc-name2">아누아 어성초 77 토너</div>
-          <div class="sc-tip2">클렌징 후 자극받은 피부 즉시 진정</div>
-        </div>
-      </div>
-      <div class="sc-step2">
-        <div class="sc-num2">2</div>
-        <div>
-          <div class="sc-name2">CNP 프로폴리스 세럼</div>
-          <div class="sc-tip2">저녁엔 2~3펌프 넉넉히 · 수면 중 회복 극대화</div>
-        </div>
-      </div>
-      <div class="sc-step2 sc-step-add">
-        <div class="sc-num2" style="background:linear-gradient(135deg,#ffb347,#e08040)">+</div>
-        <div>
-          <div class="sc-name2" style="color:#c75000">수분크림 추가 필요 ⚠️</div>
-          <div class="sc-tip2">건성피부는 세럼만으론 부족 · 잠금 레이어 필수</div>
+      <div class="sc-arrow">↓</div>
+      <!-- 스텝 3 -->
+      <div class="sc-pstep">
+        <div class="sc-pstep-num">STEP 3</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#e3f0ff,#b8d4f8)">
+            <span>🛡</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname">라운드랩 독도 선크림</div>
+            <div class="sc-preason">마지막 필수 · SPF50+ 자외선 차단</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- 경고 -->
-    <div class="sc-warn2">
-      <div class="sc-warn2-head"><span>⚠️</span><span class="sc-warn2-title">지금 당장 바꿔야 할 것</span></div>
-      <div class="sc-warn2-item">선크림 2개 중복 사용 — 라운드랩 하나만 쓰세요</div>
-      <div class="sc-warn2-item">저녁 수분크림 없음 — 건성피부 필수 추가</div>
-      <div class="sc-warn2-item">비타민C 없음 — 미백 원하면 아침 세럼 추가</div>
+    <!-- 저녁 루틴 -->
+    <div class="sc-routine-block sc-routine-night">
+      <div class="sc-routine-title">
+        <span class="sc-routine-icon">🌙</span>
+        <div>
+          <div class="sc-routine-label">NIGHT ROUTINE</div>
+          <div class="sc-routine-sub">진정 → 영양 → 잠금</div>
+        </div>
+      </div>
+      <div class="sc-pstep">
+        <div class="sc-pstep-num sc-num-night">STEP 1</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#e8f5f0,#c8e6d8)">
+            <span>🌿</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname">아누아 어성초 77 토너</div>
+            <div class="sc-preason">클렌징 후 자극받은 피부 즉시 진정</div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-arrow sc-arrow-night">↓</div>
+      <div class="sc-pstep">
+        <div class="sc-pstep-num sc-num-night">STEP 2</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff3dc,#ffe4a0)">
+            <span>🍯</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname">CNP 프로폴리스 세럼</div>
+            <div class="sc-preason">2~3펌프 넉넉히 · 수면 중 회복 극대화</div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-arrow sc-arrow-night">↓</div>
+      <div class="sc-pstep sc-pstep-missing">
+        <div class="sc-pstep-num sc-num-add">ADD</div>
+        <div class="sc-pstep-inner">
+          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff0e0,#ffd5a0)">
+            <span>🧴</span>
+          </div>
+          <div class="sc-pinfo">
+            <div class="sc-pname" style="color:#c75000">수분크림 ← 필수 추가</div>
+            <div class="sc-preason">건성피부는 잠금 레이어 없으면 수분 증발</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 팁 태그 -->
-    <div class="sc-tip-box">
-      <div class="sc-tip-head">✦ 筛선 PICK · 추가하면 좋은 것</div>
-      <div class="sc-tip-row">
-        <span class="sc-tip-tag">메디필 콜라겐 크림</span>
-        <span class="sc-tip-tag">Some By Mi 비타C</span>
-        <span class="sc-tip-tag">이소트레티노인 경구제</span>
+    <!-- 하단 2단 섹션 -->
+    <div class="sc-bottom-row">
+      <!-- 추가해야 할 것 -->
+      <div class="sc-bottom-box sc-box-add">
+        <div class="sc-box-head">✦ 추가하면 좋아요</div>
+        <div class="sc-box-item">🧴 저녁 수분크림</div>
+        <div class="sc-box-item">✨ 아침 비타C 세럼</div>
+        <div class="sc-box-item">💊 프로바이오틱스</div>
+      </div>
+      <!-- 조심해야 할 것 -->
+      <div class="sc-bottom-box sc-box-warn">
+        <div class="sc-box-head">⚠️ 조심하세요</div>
+        <div class="sc-box-item">선크림 2개 중복</div>
+        <div class="sc-box-item">레티놀+AHA 동시 사용</div>
+        <div class="sc-box-item">저녁 선크림 사용</div>
       </div>
     </div>
 
