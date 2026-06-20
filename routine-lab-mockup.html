@@ -137,28 +137,77 @@
   .save-card-btn:active{opacity:.85;transform:scale(.98)}
 
   /* 공유 카드 (캡처용, 숨김) */
-  #share-card{position:fixed;left:-9999px;top:0;width:375px;background:linear-gradient(160deg,#ffecf0 0%,#fff5f4 50%,#fff0f5 100%);
-    padding:24px 20px 20px;font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif}
-  .sc-header{text-align:center;margin-bottom:16px}
-  .sc-brand{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:4px}
-  .sc-title{font-size:20px;font-weight:900;color:var(--ink);line-height:1.25}
-  .sc-title em{color:var(--accent);font-style:normal}
-  .sc-sub{font-size:11px;color:var(--sub);margin-top:5px}
-  .sc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-  .sc-block{background:#fff;border-radius:14px;padding:13px 12px;border:1px solid var(--line)}
-  .sc-block-head{font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.4px;margin-bottom:8px}
-  .sc-step{display:flex;gap:8px;padding:5px 0;align-items:flex-start;border-bottom:1px solid #faf4f5}
-  .sc-step:last-child{border-bottom:none}
-  .sc-num{width:18px;height:18px;border-radius:50%;background:var(--pink);color:#e23a5e;
-    font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-  .sc-name{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.35}
-  .sc-warn{background:#fff8f0;border:1.5px solid #ffe0b2;border-radius:12px;padding:11px 13px;margin-bottom:10px}
-  .sc-warn-title{font-size:11px;font-weight:800;color:#e65100;margin-bottom:5px}
-  .sc-warn-item{font-size:11px;color:#5d4037;padding:2px 0 2px 14px;position:relative;line-height:1.45}
-  .sc-warn-item::before{content:"⚠️";position:absolute;left:0;font-size:10px}
-  .sc-footer{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
-  .sc-footer-text{font-size:10px;color:var(--sub)}
-  .sc-footer-brand{font-size:12px;font-weight:900;color:var(--accent);margin-top:2px}
+  #share-card{position:fixed;left:-9999px;top:0;width:390px;
+    background:linear-gradient(168deg,#fff0f4 0%,#fff8f5 40%,#fef5f0 100%);
+    padding:0;font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif;overflow:hidden}
+
+  /* 카드 헤더 */
+  .sc-top{background:linear-gradient(135deg,#3a2a2f 0%,#5c3a42 100%);
+    padding:20px 20px 16px;position:relative;overflow:hidden}
+  .sc-top::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;
+    border-radius:50%;background:rgba(255,90,122,.15)}
+  .sc-top::before{content:'';position:absolute;left:-10px;bottom:-15px;width:70px;height:70px;
+    border-radius:50%;background:rgba(255,200,210,.1)}
+  .sc-brand-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .sc-brand-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .sc-brand-text{font-size:10px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:1.5px}
+  .sc-main-title{font-size:22px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:6px}
+  .sc-main-title em{color:#ffb3c4;font-style:normal}
+  .sc-main-sub{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.3px}
+  .sc-skin-tag{display:inline-block;background:rgba(255,90,122,.25);color:#ffb3c4;
+    font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:7px;letter-spacing:.3px}
+
+  /* 2단 루틴 */
+  .sc-body{padding:14px 14px 0}
+  .sc-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px}
+  .sc-col{background:#fff;border-radius:14px;padding:12px 11px;
+    box-shadow:0 2px 12px rgba(227,75,70,.08);border:1px solid #f6dce0}
+  .sc-col-head{display:flex;align-items:center;gap:6px;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:1px solid #faeaec}
+  .sc-col-icon{font-size:15px}
+  .sc-col-label{font-size:9px;font-weight:800;color:var(--sub);letter-spacing:.5px}
+  .sc-col-title{font-size:12.5px;font-weight:900;color:var(--ink)}
+  .sc-step2{display:flex;gap:7px;padding:5px 0;align-items:flex-start;border-bottom:1px solid #fdf4f5}
+  .sc-step2:last-child{border-bottom:none;padding-bottom:0}
+  .sc-num2{width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,#ff8fa3,var(--accent));
+    color:#fff;font-size:8.5px;font-weight:900;display:flex;align-items:center;
+    justify-content:center;flex-shrink:0;margin-top:1px}
+  .sc-name2{font-size:11px;font-weight:700;color:var(--ink);line-height:1.4}
+  .sc-tip2{font-size:9.5px;color:var(--sub);margin-top:1px;line-height:1.35}
+
+  /* 요일 스케줄 */
+  .sc-schedule{background:#fff;border-radius:14px;padding:12px 13px;margin-bottom:11px;
+    border:1px solid #f6dce0;box-shadow:0 2px 12px rgba(227,75,70,.06)}
+  .sc-sched-head{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:9px}
+  .sc-days{display:flex;gap:5px}
+  .sc-day{flex:1;text-align:center}
+  .sc-day-label{font-size:9px;font-weight:800;color:var(--sub);margin-bottom:4px}
+  .sc-day-pill{padding:5px 3px;border-radius:8px;font-size:8.5px;font-weight:700;line-height:1.3}
+  .sc-day-pill.normal{background:#fff3f5;color:#e23a5e;border:1px solid #f9d9de}
+  .sc-day-pill.special{background:#fff7e0;color:#c07800;border:1px solid #ffe5a0}
+  .sc-day-pill.rest{background:#f0f4ff;color:#3a5fa0;border:1px solid #c8d8ff}
+
+  /* 경고 */
+  .sc-warn2{background:linear-gradient(135deg,#fff8f0,#fff4f0);border-radius:14px;
+    padding:11px 13px;margin-bottom:11px;border:1px solid #ffd5b0}
+  .sc-warn2-head{display:flex;align-items:center;gap:5px;margin-bottom:7px}
+  .sc-warn2-title{font-size:10.5px;font-weight:900;color:#c75000}
+  .sc-warn2-item{font-size:10px;color:#5d4037;padding:3px 0 3px 15px;position:relative;line-height:1.45}
+  .sc-warn2-item::before{content:"↳";position:absolute;left:2px;color:#e08040;font-weight:700}
+
+  /* 팁 */
+  .sc-tip-box{background:linear-gradient(135deg,#fff,#fff5f4);border-radius:14px;
+    padding:11px 13px;margin-bottom:13px;border:1px solid #f6dce0}
+  .sc-tip-head{font-size:10px;font-weight:900;color:var(--accent);letter-spacing:.3px;margin-bottom:7px}
+  .sc-tip-row{display:flex;gap:7px;flex-wrap:wrap}
+  .sc-tip-tag{font-size:9.5px;font-weight:700;padding:4px 9px;border-radius:20px;
+    background:var(--pink);color:#e23a5e}
+
+  /* 카드 푸터 */
+  .sc-foot{background:linear-gradient(135deg,#3a2a2f,#5c3a42);padding:12px 16px;
+    display:flex;align-items:center;justify-content:space-between}
+  .sc-foot-left{font-size:9px;color:rgba(255,255,255,.5);line-height:1.5}
+  .sc-foot-brand{font-size:13px;font-weight:900;color:#ffb3c4;letter-spacing:.5px}
 
   /* 하단 CTA */
   .bottom-cta{margin:6px 16px 0;background:linear-gradient(135deg,var(--accent),#ff8fa3);
@@ -355,34 +404,106 @@
 
 <!-- 공유 카드 (캡처용) -->
 <div id="share-card">
-  <div class="sc-header">
-    <div class="sc-brand">✦ QK · Quration Korea</div>
-    <div class="sc-title">건성피부 <em>필승 루틴</em> 🌿</div>
-    <div class="sc-sub">筛선 Routine Lab · AI 성분 검증</div>
-  </div>
-  <div class="sc-row">
-    <div class="sc-block">
-      <div class="sc-block-head">☀️ 아침 MORNING</div>
-      <div class="sc-step"><div class="sc-num">1</div><div class="sc-name">아누아 어성초 토너</div></div>
-      <div class="sc-step"><div class="sc-num">2</div><div class="sc-name">CNP 프로폴리스 세럼</div></div>
-      <div class="sc-step"><div class="sc-num">3</div><div class="sc-name">라운드랩 독도 선크림</div></div>
+
+  <!-- 헤더 -->
+  <div class="sc-top">
+    <div class="sc-brand-row">
+      <div class="sc-brand-dot"></div>
+      <div class="sc-brand-text">QK · ROUTINE LAB</div>
     </div>
-    <div class="sc-block">
-      <div class="sc-block-head">🌙 저녁 EVENING</div>
-      <div class="sc-step"><div class="sc-num">1</div><div class="sc-name">아누아 어성초 토너</div></div>
-      <div class="sc-step"><div class="sc-num">2</div><div class="sc-name">CNP 프로폴리스 세럼</div></div>
-      <div class="sc-step"><div class="sc-num">3</div><div class="sc-name">수분크림 추가 필요</div></div>
+    <div class="sc-main-title">건성피부 <em>필승 루틴</em></div>
+    <div class="sc-main-sub">筛선 AI 성분 분석 · 검증된 순서로만</div>
+    <div class="sc-skin-tag">건성 · 수분부족 · 제품 4개 분석</div>
+  </div>
+
+  <div class="sc-body">
+
+    <!-- 아침/저녁 2단 -->
+    <div class="sc-cols">
+      <div class="sc-col">
+        <div class="sc-col-head">
+          <span class="sc-col-icon">☀️</span>
+          <div>
+            <div class="sc-col-label">MORNING</div>
+            <div class="sc-col-title">아침 루틴</div>
+          </div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">1</div>
+          <div><div class="sc-name2">아누아 어성초 토너</div><div class="sc-tip2">진정 첫 레이어</div></div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">2</div>
+          <div><div class="sc-name2">CNP 프로폴리스 세럼</div><div class="sc-tip2">항산화 영양 공급</div></div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">3</div>
+          <div><div class="sc-name2">라운드랩 독도 선크림</div><div class="sc-tip2">필수 마무리 SPF50+</div></div>
+        </div>
+      </div>
+      <div class="sc-col">
+        <div class="sc-col-head">
+          <span class="sc-col-icon">🌙</span>
+          <div>
+            <div class="sc-col-label">EVENING</div>
+            <div class="sc-col-title">저녁 루틴</div>
+          </div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">1</div>
+          <div><div class="sc-name2">아누아 어성초 토너</div><div class="sc-tip2">클렌징 후 진정</div></div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">2</div>
+          <div><div class="sc-name2">CNP 프로폴리스 세럼</div><div class="sc-tip2">저녁엔 넉넉히 2~3펌프</div></div>
+        </div>
+        <div class="sc-step2">
+          <div class="sc-num2">3</div>
+          <div><div class="sc-name2">수분크림 ← 추가 필요</div><div class="sc-tip2">건성피부 필수 마무리</div></div>
+        </div>
+      </div>
     </div>
+
+    <!-- 요일 스케줄 -->
+    <div class="sc-schedule">
+      <div class="sc-sched-head">📅 WEEKLY SCHEDULE</div>
+      <div class="sc-days">
+        <div class="sc-day"><div class="sc-day-label">월</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
+        <div class="sc-day"><div class="sc-day-label">화</div><div class="sc-day-pill special">BHA<br>데이</div></div>
+        <div class="sc-day"><div class="sc-day-label">수</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
+        <div class="sc-day"><div class="sc-day-label">목</div><div class="sc-day-pill special">BHA<br>데이</div></div>
+        <div class="sc-day"><div class="sc-day-label">금</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
+        <div class="sc-day"><div class="sc-day-label">토</div><div class="sc-day-pill special">집중<br>케어</div></div>
+        <div class="sc-day"><div class="sc-day-label">일</div><div class="sc-day-pill rest">휴식<br>데이</div></div>
+      </div>
+    </div>
+
+    <!-- 경고 -->
+    <div class="sc-warn2">
+      <div class="sc-warn2-head"><span>⚠️</span><span class="sc-warn2-title">지금 당장 바꿔야 할 것</span></div>
+      <div class="sc-warn2-item">선크림 2개 중복 사용 — 라운드랩 하나만 쓰세요</div>
+      <div class="sc-warn2-item">저녁 수분크림 없음 — 건성피부 필수 추가</div>
+      <div class="sc-warn2-item">비타민C 없음 — 미백 원하면 아침 세럼 추가</div>
+    </div>
+
+    <!-- 팁 태그 -->
+    <div class="sc-tip-box">
+      <div class="sc-tip-head">✦ 筛선 PICK · 추가하면 좋은 것</div>
+      <div class="sc-tip-row">
+        <span class="sc-tip-tag">메디필 콜라겐 크림</span>
+        <span class="sc-tip-tag">Some By Mi 비타C</span>
+        <span class="sc-tip-tag">이소트레티노인 경구제</span>
+      </div>
+    </div>
+
   </div>
-  <div class="sc-warn">
-    <div class="sc-warn-title">⚠️ 주의사항</div>
-    <div class="sc-warn-item">선크림 2개 중복 — 라운드랩 하나만</div>
-    <div class="sc-warn-item">저녁 수분크림 없음 — 추가 필요</div>
+
+  <!-- 푸터 -->
+  <div class="sc-foot">
+    <div class="sc-foot-left">筛선 — 걸러서 남긴 것만<br>quration.kr</div>
+    <div class="sc-foot-brand">QK Routine Lab ✦</div>
   </div>
-  <div class="sc-footer">
-    <div class="sc-footer-text">筛선 — 걸러서 남긴 것만 추천합니다</div>
-    <div class="sc-footer-brand">QK Routine Lab</div>
-  </div>
+
 </div>
 
 <!-- 하단 CTA -->
