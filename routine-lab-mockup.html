@@ -128,6 +128,38 @@
   .video-platform{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.3px}
   .video-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
 
+  /* 카드 저장 버튼 */
+  .save-card-wrap{margin:0 16px 14px;text-align:center}
+  .save-card-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#ff8fa3);
+    border:none;border-radius:16px;color:#fff;font-size:15px;font-weight:900;cursor:pointer;
+    letter-spacing:.3px;box-shadow:0 6px 20px rgba(255,90,122,.35);display:flex;
+    align-items:center;justify-content:center;gap:8px}
+  .save-card-btn:active{opacity:.85;transform:scale(.98)}
+
+  /* 공유 카드 (캡처용, 숨김) */
+  #share-card{position:fixed;left:-9999px;top:0;width:375px;background:linear-gradient(160deg,#ffecf0 0%,#fff5f4 50%,#fff0f5 100%);
+    padding:24px 20px 20px;font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif}
+  .sc-header{text-align:center;margin-bottom:16px}
+  .sc-brand{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:4px}
+  .sc-title{font-size:20px;font-weight:900;color:var(--ink);line-height:1.25}
+  .sc-title em{color:var(--accent);font-style:normal}
+  .sc-sub{font-size:11px;color:var(--sub);margin-top:5px}
+  .sc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .sc-block{background:#fff;border-radius:14px;padding:13px 12px;border:1px solid var(--line)}
+  .sc-block-head{font-size:11px;font-weight:800;color:var(--sub);letter-spacing:.4px;margin-bottom:8px}
+  .sc-step{display:flex;gap:8px;padding:5px 0;align-items:flex-start;border-bottom:1px solid #faf4f5}
+  .sc-step:last-child{border-bottom:none}
+  .sc-num{width:18px;height:18px;border-radius:50%;background:var(--pink);color:#e23a5e;
+    font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .sc-name{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.35}
+  .sc-warn{background:#fff8f0;border:1.5px solid #ffe0b2;border-radius:12px;padding:11px 13px;margin-bottom:10px}
+  .sc-warn-title{font-size:11px;font-weight:800;color:#e65100;margin-bottom:5px}
+  .sc-warn-item{font-size:11px;color:#5d4037;padding:2px 0 2px 14px;position:relative;line-height:1.45}
+  .sc-warn-item::before{content:"⚠️";position:absolute;left:0;font-size:10px}
+  .sc-footer{text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+  .sc-footer-text{font-size:10px;color:var(--sub)}
+  .sc-footer-brand{font-size:12px;font-weight:900;color:var(--accent);margin-top:2px}
+
   /* 하단 CTA */
   .bottom-cta{margin:6px 16px 0;background:linear-gradient(135deg,var(--accent),#ff8fa3);
     border-radius:16px;padding:16px;text-align:center;color:#fff}
@@ -290,6 +322,13 @@
   </div>
 </div>
 
+<!-- 카드 저장 버튼 -->
+<div class="save-card-wrap">
+  <button class="save-card-btn" onclick="saveCard()">
+    <span>🖼</span> 루틴 카드로 저장하기
+  </button>
+</div>
+
 <!-- 관련 영상 -->
 <div class="video-section">
   <div class="video-head">
@@ -314,6 +353,38 @@
   </div>
 </div>
 
+<!-- 공유 카드 (캡처용) -->
+<div id="share-card">
+  <div class="sc-header">
+    <div class="sc-brand">✦ QK · Quration Korea</div>
+    <div class="sc-title">건성피부 <em>필승 루틴</em> 🌿</div>
+    <div class="sc-sub">筛선 Routine Lab · AI 성분 검증</div>
+  </div>
+  <div class="sc-row">
+    <div class="sc-block">
+      <div class="sc-block-head">☀️ 아침 MORNING</div>
+      <div class="sc-step"><div class="sc-num">1</div><div class="sc-name">아누아 어성초 토너</div></div>
+      <div class="sc-step"><div class="sc-num">2</div><div class="sc-name">CNP 프로폴리스 세럼</div></div>
+      <div class="sc-step"><div class="sc-num">3</div><div class="sc-name">라운드랩 독도 선크림</div></div>
+    </div>
+    <div class="sc-block">
+      <div class="sc-block-head">🌙 저녁 EVENING</div>
+      <div class="sc-step"><div class="sc-num">1</div><div class="sc-name">아누아 어성초 토너</div></div>
+      <div class="sc-step"><div class="sc-num">2</div><div class="sc-name">CNP 프로폴리스 세럼</div></div>
+      <div class="sc-step"><div class="sc-num">3</div><div class="sc-name">수분크림 추가 필요</div></div>
+    </div>
+  </div>
+  <div class="sc-warn">
+    <div class="sc-warn-title">⚠️ 주의사항</div>
+    <div class="sc-warn-item">선크림 2개 중복 — 라운드랩 하나만</div>
+    <div class="sc-warn-item">저녁 수분크림 없음 — 추가 필요</div>
+  </div>
+  <div class="sc-footer">
+    <div class="sc-footer-text">筛선 — 걸러서 남긴 것만 추천합니다</div>
+    <div class="sc-footer-brand">QK Routine Lab</div>
+  </div>
+</div>
+
 <!-- 하단 CTA -->
 <div class="bottom-cta">
   <div class="bottom-cta-title">더 궁금한 제품 있나요?</div>
@@ -321,5 +392,37 @@
   <div class="bottom-cta-btn">K美妆 筛선 보러가기 →</div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+async function saveCard() {
+  const btn = document.querySelector('.save-card-btn');
+  btn.textContent = '생성 중...';
+  btn.disabled = true;
+
+  const card = document.getElementById('share-card');
+  card.style.left = '0';
+  card.style.position = 'absolute';
+  card.style.zIndex = '-1';
+
+  try {
+    const canvas = await html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null
+    });
+    const link = document.createElement('a');
+    link.download = 'QK_루틴카드.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch(e) {
+    alert('저장 실패. 다시 시도해주세요.');
+  }
+
+  card.style.left = '-9999px';
+  card.style.position = 'fixed';
+  btn.innerHTML = '<span>🖼</span> 루틴 카드로 저장하기';
+  btn.disabled = false;
+}
+</script>
 </body>
 </html>
