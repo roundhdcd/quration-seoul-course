@@ -128,6 +128,31 @@
   .video-platform{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.3px}
   .video-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
 
+  /* 입력 탭 */
+  .input-tabs{display:flex;gap:8px;margin-bottom:10px}
+  .input-tab{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:12px;
+    background:#fff;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;transition:.15s}
+  .input-tab.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
+
+  /* 사진 입력 */
+  .photo-input-wrap{}
+  .photo-drop{background:#fff;border:2px dashed var(--line);border-radius:16px;
+    padding:28px 20px;text-align:center;cursor:pointer;transition:.2s}
+  .photo-drop:active{background:var(--soft);border-color:var(--accent)}
+  .photo-drop-icon{font-size:36px;margin-bottom:10px}
+  .photo-drop-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:6px}
+  .photo-drop-sub{font-size:12px;color:var(--sub);line-height:1.6}
+  .photo-preview-img{width:100%;border-radius:14px;margin-top:10px;max-height:220px;
+    object-fit:cover;border:1px solid var(--line)}
+  .photo-recognized{background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:13px 14px;margin-top:10px}
+  .photo-rec-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:8px}
+  .photo-rec-products{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .rec-tag{background:var(--pink);color:#e23a5e;font-size:12px;font-weight:700;
+    padding:5px 11px;border-radius:20px;display:flex;align-items:center;gap:5px}
+  .rec-tag-del{cursor:pointer;opacity:.6;font-size:14px}
+  .photo-rec-edit{font-size:11px;color:var(--sub)}
+
   /* 카드 저장 버튼 */
   .save-card-wrap{margin:0 16px 14px;text-align:center}
   .save-card-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#ff8fa3);
@@ -288,11 +313,43 @@
     <div class="chip">안티에이징</div>
   </div>
   <div class="section-label">보유 제품 입력</div>
-  <div class="product-input-wrap">
+
+  <!-- 입력 방식 탭 -->
+  <div class="input-tabs">
+    <button class="input-tab on" onclick="switchTab('text',this)">✏️ 텍스트 입력</button>
+    <button class="input-tab" onclick="switchTab('photo',this)">📷 사진으로 인식</button>
+  </div>
+
+  <!-- 텍스트 입력 -->
+  <div id="tab-text" class="product-input-wrap">
     <textarea class="product-input" placeholder="예시: 아누아 어성초 77 토너, 라운드랩 독도 선크림, CNP 프로폴리스 세럼, 에뛰드 순정 선크림"></textarea>
     <div class="input-footer">
       <span class="input-hint">제품명 쉼표로 구분</span>
       <button class="analyze-btn">분석하기 →</button>
+    </div>
+  </div>
+
+  <!-- 사진 입력 -->
+  <div id="tab-photo" class="photo-input-wrap" style="display:none">
+    <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhoto(event)">
+    <div class="photo-drop" onclick="document.getElementById('photo-file').click()">
+      <div class="photo-drop-icon">📷</div>
+      <div class="photo-drop-title">사진 업로드</div>
+      <div class="photo-drop-sub">화장품 사진, 화장대 전체, 올리브영 장바구니 등<br>여러 장 올려도 돼요</div>
+    </div>
+    <div id="photo-preview-wrap" style="display:none">
+      <img id="photo-preview" class="photo-preview-img">
+      <div class="photo-recognized">
+        <div class="photo-rec-label">인식된 제품</div>
+        <div class="photo-rec-products" id="recognized-list">
+          <!-- 인식 결과 여기 -->
+        </div>
+        <div class="photo-rec-edit">직접 수정도 가능해요</div>
+      </div>
+    </div>
+    <div class="input-footer" style="margin-top:10px;background:transparent;border:none;padding:0 2px">
+      <span class="input-hint">사진 속 제품을 AI가 자동으로 읽어요</span>
+      <button class="analyze-btn" onclick="analyzeFromPhoto()">분석하기 →</button>
     </div>
   </div>
 </div>
@@ -599,6 +656,46 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
+// 탭 전환
+function switchTab(type, btn) {
+  document.querySelectorAll('.input-tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('tab-text').style.display = type === 'text' ? '' : 'none';
+  document.getElementById('tab-photo').style.display = type === 'photo' ? '' : 'none';
+}
+
+// 사진 미리보기 + 데모 인식
+function handlePhoto(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('photo-preview').src = ev.target.result;
+    document.getElementById('photo-preview-wrap').style.display = '';
+    document.querySelector('.photo-drop').style.display = 'none';
+    // 데모: 실제로는 Claude Vision API 호출
+    showDemoRecognized();
+  };
+  reader.readAsDataURL(file);
+}
+
+// 데모용 인식 결과 (실제는 API 응답)
+function showDemoRecognized() {
+  const products = ['아누아 어성초 77 토너', 'CNP 프로폴리스 세럼', '라운드랩 독도 선크림'];
+  const list = document.getElementById('recognized-list');
+  list.innerHTML = products.map(p => `
+    <div class="rec-tag">
+      ${p}
+      <span class="rec-tag-del" onclick="this.parentElement.remove()">×</span>
+    </div>
+  `).join('');
+}
+
+function analyzeFromPhoto() {
+  // 실제로는 인식된 제품 목록으로 분석 API 호출
+  alert('분석 중... (Vercel API 연결 후 실제 동작)');
+}
+
 async function saveCard() {
   const btn = document.querySelector('.save-card-btn');
   btn.textContent = '생성 중...';
