@@ -8,24 +8,23 @@
   :root{
     --ink:#26222b;--sub:#8a8594;--line:#f0e8ec;--bg:#fff6f4;--card:#fff;
     --accent:#ff5a7a;--red:#e34b46;--pink:#ffe3ea;--soft:#fff3f0;
-    --green:#2ecc71;--olive:#e8f5e9;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif;
     font-size:14px;line-height:1.5;min-height:100vh;padding-bottom:40px}
 
-  /* 헤더 */
+  /* 앱 헤더 */
   .header{padding:16px 20px 12px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;text-align:center}
   .header-logo{font-size:11px;color:var(--sub);letter-spacing:.5px;margin-bottom:3px}
-  .header-title{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:.3px}
+  .header-title{font-size:18px;font-weight:900;color:var(--ink)}
   .header-title span{color:var(--accent)}
 
   /* 히어로 */
   .hero{margin:16px 16px 0;background:linear-gradient(135deg,#fff,#fff5f4);
     border:1px solid #f6d9d7;border-radius:18px;padding:18px 16px}
   .hero-badge{display:inline-block;background:var(--pink);color:#e23a5e;
-    font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:20px;margin-bottom:10px;letter-spacing:.3px}
+    font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:20px;margin-bottom:10px}
   .hero-title{font-size:20px;font-weight:900;line-height:1.25;color:var(--ink)}
   .hero-title em{color:var(--accent);font-style:normal}
   .hero-desc{font-size:12.5px;color:#5b4636;margin-top:8px;line-height:1.6}
@@ -38,95 +37,6 @@
   .chip{padding:7px 13px;border:1.5px solid var(--line);border-radius:20px;
     font-size:12.5px;font-weight:600;color:var(--sub);background:#fff;cursor:pointer;transition:.15s}
   .chip.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
-  .product-input-wrap{background:#fff;border:1.5px solid var(--line);border-radius:14px;
-    overflow:hidden;box-shadow:0 2px 10px rgba(255,90,122,.07)}
-  .product-input{width:100%;padding:14px 16px;border:none;outline:none;font-size:14px;
-    color:var(--ink);background:transparent;resize:none;min-height:100px;
-    font-family:inherit;line-height:1.6}
-  .product-input::placeholder{color:#cbc6d0}
-  .input-footer{padding:10px 14px;background:#fdfafb;border-top:1px solid var(--line);
-    display:flex;justify-content:space-between;align-items:center}
-  .input-hint{font-size:11px;color:var(--sub)}
-  .analyze-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;
-    border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.3px;
-    box-shadow:0 4px 14px rgba(255,90,122,.35)}
-
-  /* 구분선 */
-  .divider{margin:18px 16px;border:none;border-top:1px solid var(--line)}
-
-  /* 결과 카드 */
-  .result-header{padding:0 16px;margin-bottom:12px}
-  .result-title{font-size:17px;font-weight:900;color:var(--ink)}
-  .result-sub{font-size:12px;color:var(--sub);margin-top:3px}
-
-  .routine-block{margin:0 16px 12px;background:#fff;border:1px solid var(--line);
-    border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(227,75,70,.06)}
-  .routine-head{padding:13px 16px;display:flex;align-items:center;gap:10px;
-    border-bottom:1px solid var(--line)}
-  .routine-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
-    justify-content:center;font-size:17px;flex-shrink:0}
-  .am .routine-icon{background:#fff7e0}
-  .pm .routine-icon{background:#eef2ff}
-  .routine-head-text{}
-  .routine-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px}
-  .routine-head-title{font-size:14px;font-weight:800;color:var(--ink)}
-
-  .routine-steps{padding:10px 14px 4px}
-  .step-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #faf4f5;align-items:flex-start}
-  .step-item:last-child{border-bottom:none}
-  .step-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#e23a5e;
-    font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-  .step-content{}
-  .step-product{font-size:13.5px;font-weight:700;color:var(--ink)}
-  .step-tip{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5}
-  .step-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;
-    border-radius:8px;margin-top:4px}
-  .badge-ok{background:#e8f5e9;color:#2e7d32}
-  .badge-warn{background:#fff3e0;color:#e65100}
-  .badge-skip{background:#fce4ec;color:#c62828}
-
-  /* 경고 카드 */
-  .warn-card{margin:0 16px 12px;background:#fff8f0;border:1.5px solid #ffe0b2;
-    border-radius:14px;padding:14px 16px}
-  .warn-title{font-size:13px;font-weight:800;color:#e65100;margin-bottom:8px;display:flex;gap:6px;align-items:center}
-  .warn-list{list-style:none}
-  .warn-list li{font-size:12.5px;color:#5d4037;padding:4px 0;padding-left:14px;position:relative;line-height:1.5}
-  .warn-list li::before{content:"⚠️";position:absolute;left:0;font-size:11px}
-
-  /* 추천 구매 */
-  .buy-section{margin:0 16px 12px}
-  .buy-tabs{display:flex;gap:8px;margin-bottom:10px}
-  .buy-tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;
-    border:1.5px solid var(--line);color:var(--sub);background:#fff;cursor:pointer}
-  .buy-tab.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
-  .buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .buy-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;
-    box-shadow:0 2px 8px rgba(227,75,70,.05)}
-  .buy-card-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#f9f3f4;
-    margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:28px}
-  .buy-card-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4}
-  .buy-card-price{font-size:12.5px;font-weight:800;color:var(--accent)}
-  .buy-card-where{font-size:10.5px;color:var(--sub);margin-bottom:7px}
-  .buy-btn{width:100%;padding:8px;border-radius:10px;border:none;font-size:11.5px;
-    font-weight:700;cursor:pointer;letter-spacing:.2px}
-  .btn-olive{background:#00c73c;color:#fff}
-  .btn-iherb{background:#5a7f3c;color:#fff}
-
-  /* 영상 섹션 */
-  .video-section{margin:0 16px 12px;background:#fff;border:1px solid var(--line);
-    border-radius:16px;overflow:hidden}
-  .video-head{padding:13px 16px 10px;border-bottom:1px solid var(--line)}
-  .video-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:2px}
-  .video-head-title{font-size:14px;font-weight:800;color:var(--ink)}
-  .video-list{padding:10px 14px}
-  .video-item{display:flex;gap:11px;align-items:center;padding:8px 0;
-    border-bottom:1px solid #faf4f5;text-decoration:none}
-  .video-item:last-child{border-bottom:none}
-  .video-thumb{width:56px;height:40px;border-radius:8px;background:#f0e8ec;
-    display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-  .video-info{}
-  .video-platform{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.3px}
-  .video-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
 
   /* 입력 탭 */
   .input-tabs{display:flex;gap:8px;margin-bottom:10px}
@@ -134,18 +44,25 @@
     background:#fff;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;transition:.15s}
   .input-tab.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
 
+  .product-input-wrap{background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden}
+  .product-input{width:100%;padding:14px 16px;border:none;outline:none;font-size:14px;
+    color:var(--ink);background:transparent;resize:none;min-height:100px;font-family:inherit;line-height:1.6}
+  .product-input::placeholder{color:#cbc6d0}
+  .input-footer{padding:10px 14px;background:#fdfafb;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center}
+  .input-hint{font-size:11px;color:var(--sub)}
+  .analyze-btn{background:var(--accent);color:#fff;border:none;padding:9px 20px;
+    border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;
+    box-shadow:0 4px 14px rgba(255,90,122,.35)}
+
   /* 사진 입력 */
-  .photo-input-wrap{}
   .photo-drop{background:#fff;border:2px dashed var(--line);border-radius:16px;
-    padding:28px 20px;text-align:center;cursor:pointer;transition:.2s}
-  .photo-drop:active{background:var(--soft);border-color:var(--accent)}
+    padding:28px 20px;text-align:center;cursor:pointer}
   .photo-drop-icon{font-size:36px;margin-bottom:10px}
   .photo-drop-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:6px}
   .photo-drop-sub{font-size:12px;color:var(--sub);line-height:1.6}
-  .photo-preview-img{width:100%;border-radius:14px;margin-top:10px;max-height:220px;
-    object-fit:cover;border:1px solid var(--line)}
-  .photo-recognized{background:#fff;border:1px solid var(--line);border-radius:14px;
-    padding:13px 14px;margin-top:10px}
+  .photo-preview-img{width:100%;border-radius:14px;margin-top:10px;max-height:220px;object-fit:cover}
+  .photo-recognized{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-top:10px}
   .photo-rec-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:8px}
   .photo-rec-products{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
   .rec-tag{background:var(--pink);color:#e23a5e;font-size:12px;font-weight:700;
@@ -153,129 +70,75 @@
   .rec-tag-del{cursor:pointer;opacity:.6;font-size:14px}
   .photo-rec-edit{font-size:11px;color:var(--sub)}
 
+  /* 구분선 */
+  .divider{margin:18px 16px;border:none;border-top:1px solid var(--line)}
+
+  /* 앱 결과 카드 */
+  .result-header{padding:0 16px;margin-bottom:12px}
+  .result-title{font-size:17px;font-weight:900;color:var(--ink)}
+  .result-sub{font-size:12px;color:var(--sub);margin-top:3px}
+  .routine-block{margin:0 16px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:18px;overflow:hidden;box-shadow:0 3px 14px rgba(227,75,70,.06)}
+  .routine-head{padding:13px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+  .routine-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .am .routine-icon{background:#fff7e0}
+  .pm .routine-icon{background:#eef2ff}
+  .routine-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px}
+  .routine-head-title{font-size:14px;font-weight:800;color:var(--ink)}
+  .routine-steps{padding:10px 14px 4px}
+  .step-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #faf4f5;align-items:flex-start}
+  .step-item:last-child{border-bottom:none}
+  .step-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#e23a5e;
+    font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .step-product{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .step-tip{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5}
+  .step-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;margin-top:4px}
+  .badge-ok{background:#e8f5e9;color:#2e7d32}
+  .badge-skip{background:#fce4ec;color:#c62828}
+  .warn-card{margin:0 16px 12px;background:#fff8f0;border:1.5px solid #ffe0b2;border-radius:14px;padding:14px 16px}
+  .warn-title{font-size:13px;font-weight:800;color:#e65100;margin-bottom:8px;display:flex;gap:6px;align-items:center}
+  .warn-list{list-style:none}
+  .warn-list li{font-size:12.5px;color:#5d4037;padding:4px 0;padding-left:14px;position:relative;line-height:1.5}
+  .warn-list li::before{content:"⚠️";position:absolute;left:0;font-size:11px}
+  .buy-section{margin:0 16px 12px}
+  .buy-tabs{display:flex;gap:8px;margin-bottom:10px}
+  .buy-tab{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;
+    border:1.5px solid var(--line);color:var(--sub);background:#fff;cursor:pointer}
+  .buy-tab.on{border-color:var(--accent);background:var(--pink);color:#e23a5e}
+  .buy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .buy-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+  .buy-card-img{width:100%;aspect-ratio:1;border-radius:10px;background:#f9f3f4;
+    margin-bottom:8px;display:flex;align-items:center;justify-content:center;font-size:28px}
+  .buy-card-name{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4}
+  .buy-card-price{font-size:12.5px;font-weight:800;color:var(--accent)}
+  .buy-card-where{font-size:10.5px;color:var(--sub);margin-bottom:7px}
+  .buy-btn{width:100%;padding:8px;border-radius:10px;border:none;font-size:11.5px;font-weight:700;cursor:pointer}
+  .btn-olive{background:#00c73c;color:#fff}
+  .btn-iherb{background:#5a7f3c;color:#fff}
+  .video-section{margin:0 16px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .video-head{padding:13px 16px 10px;border-bottom:1px solid var(--line)}
+  .video-head-label{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:2px}
+  .video-head-title{font-size:14px;font-weight:800;color:var(--ink)}
+  .video-list{padding:10px 14px}
+  .video-item{display:flex;gap:11px;align-items:center;padding:8px 0;border-bottom:1px solid #faf4f5;text-decoration:none}
+  .video-item:last-child{border-bottom:none}
+  .video-thumb{width:56px;height:40px;border-radius:8px;background:#f0e8ec;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .video-platform{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.3px}
+  .video-title{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4}
+
   /* 카드 저장 버튼 */
-  .save-card-wrap{margin:0 16px 14px;text-align:center}
-  .save-card-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#ff8fa3);
-    border:none;border-radius:16px;color:#fff;font-size:15px;font-weight:900;cursor:pointer;
-    letter-spacing:.3px;box-shadow:0 6px 20px rgba(255,90,122,.35);display:flex;
-    align-items:center;justify-content:center;gap:8px}
-  .save-card-btn:active{opacity:.85;transform:scale(.98)}
+  .save-card-wrap{margin:0 16px 14px}
+  .save-card-btn{width:100%;padding:14px;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px}
+  .btn-preview{background:#fff;color:var(--accent);border:2px solid var(--accent)}
+  .btn-save{background:linear-gradient(135deg,var(--accent),#ff8fa3);color:#fff;
+    box-shadow:0 6px 20px rgba(255,90,122,.35)}
 
-  /* 공유 카드 (캡처용, 숨김) */
-  #share-card{position:fixed;left:-9999px;top:0;width:390px;
-    background:linear-gradient(168deg,#fff0f4 0%,#fff8f5 40%,#fef5f0 100%);
-    padding:0;font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif;overflow:hidden}
-
-  /* 카드 헤더 */
-  .sc-top{background:linear-gradient(135deg,#3a2a2f 0%,#5c3a42 100%);
-    padding:20px 20px 16px;position:relative;overflow:hidden}
-  .sc-top::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;
-    border-radius:50%;background:rgba(255,90,122,.15)}
-  .sc-top::before{content:'';position:absolute;left:-10px;bottom:-15px;width:70px;height:70px;
-    border-radius:50%;background:rgba(255,200,210,.1)}
-  .sc-brand-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-  .sc-brand-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-  .sc-brand-text{font-size:10px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:1.5px}
-  .sc-main-title{font-size:22px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:6px}
-  .sc-main-title em{color:#ffb3c4;font-style:normal}
-  .sc-main-sub{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.3px}
-  .sc-skin-tag{display:inline-block;background:rgba(255,90,122,.25);color:#ffb3c4;
-    font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:7px;letter-spacing:.3px}
-
-  /* 2단 루틴 */
-  .sc-body{padding:14px 14px 0}
-  .sc-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px}
-  .sc-col{background:#fff;border-radius:14px;padding:12px 11px;margin-bottom:10px;
-    box-shadow:0 2px 12px rgba(227,75,70,.08);border:1px solid #f6dce0}
-  .sc-col-full{width:100%}
-  .sc-step-add{background:#fff9f5;border-radius:8px;padding:6px 8px;margin-top:4px}
-  .sc-col-head{display:flex;align-items:center;gap:6px;margin-bottom:10px;
-    padding-bottom:8px;border-bottom:1px solid #faeaec}
-  .sc-col-icon{font-size:15px}
-  .sc-col-label{font-size:9px;font-weight:800;color:var(--sub);letter-spacing:.5px}
-  .sc-col-title{font-size:12.5px;font-weight:900;color:var(--ink)}
-  .sc-step2{display:flex;gap:7px;padding:5px 0;align-items:flex-start;border-bottom:1px solid #fdf4f5}
-  .sc-step2:last-child{border-bottom:none;padding-bottom:0}
-  .sc-num2{width:17px;height:17px;border-radius:50%;background:linear-gradient(135deg,#ff8fa3,var(--accent));
-    color:#fff;font-size:8.5px;font-weight:900;display:flex;align-items:center;
-    justify-content:center;flex-shrink:0;margin-top:1px}
-  .sc-name2{font-size:11px;font-weight:700;color:var(--ink);line-height:1.4}
-  .sc-tip2{font-size:9.5px;color:var(--sub);margin-top:1px;line-height:1.35}
-
-  /* 요일 스케줄 */
-  .sc-schedule{background:#fff;border-radius:14px;padding:12px 13px;margin-bottom:11px;
-    border:1px solid #f6dce0;box-shadow:0 2px 12px rgba(227,75,70,.06)}
-  .sc-sched-head{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;margin-bottom:9px}
-  .sc-days{display:flex;gap:5px}
-  .sc-day{flex:1;text-align:center}
-  .sc-day-label{font-size:9px;font-weight:800;color:var(--sub);margin-bottom:4px}
-  .sc-day-pill{padding:5px 3px;border-radius:8px;font-size:8.5px;font-weight:700;line-height:1.3}
-  .sc-day-pill.normal{background:#fff3f5;color:#e23a5e;border:1px solid #f9d9de}
-  .sc-day-pill.special{background:#fff7e0;color:#c07800;border:1px solid #ffe5a0}
-  .sc-day-pill.rest{background:#f0f4ff;color:#3a5fa0;border:1px solid #c8d8ff}
-
-  /* 경고 */
-  .sc-warn2{background:linear-gradient(135deg,#fff8f0,#fff4f0);border-radius:14px;
-    padding:11px 13px;margin-bottom:11px;border:1px solid #ffd5b0}
-  .sc-warn2-head{display:flex;align-items:center;gap:5px;margin-bottom:7px}
-  .sc-warn2-title{font-size:10.5px;font-weight:900;color:#c75000}
-  .sc-warn2-item{font-size:10px;color:#5d4037;padding:3px 0 3px 15px;position:relative;line-height:1.45}
-  .sc-warn2-item::before{content:"↳";position:absolute;left:2px;color:#e08040;font-weight:700}
-
-  /* 팁 */
-  .sc-tip-box{background:linear-gradient(135deg,#fff,#fff5f4);border-radius:14px;
-    padding:11px 13px;margin-bottom:13px;border:1px solid #f6dce0}
-  .sc-tip-head{font-size:10px;font-weight:900;color:var(--accent);letter-spacing:.3px;margin-bottom:7px}
-  .sc-tip-row{display:flex;gap:7px;flex-wrap:wrap}
-  .sc-tip-tag{font-size:9.5px;font-weight:700;padding:4px 9px;border-radius:20px;
-    background:var(--pink);color:#e23a5e}
-
-  /* 루틴 블록 */
-  .sc-routine-block{background:#fff;border-radius:16px;padding:14px 13px;margin-bottom:10px;
-    border:1px solid #f6dce0;box-shadow:0 2px 12px rgba(227,75,70,.07)}
-  .sc-routine-night{background:linear-gradient(180deg,#faf7ff,#fff)}
-  .sc-routine-title{display:flex;align-items:center;gap:9px;margin-bottom:13px;
-    padding-bottom:10px;border-bottom:1.5px dashed #f0e0e4}
-  .sc-routine-icon{font-size:22px}
-  .sc-routine-label{font-size:9.5px;font-weight:800;color:var(--sub);letter-spacing:.8px}
-  .sc-routine-sub{font-size:12px;font-weight:800;color:var(--ink)}
-
-  /* 제품 스텝 */
-  .sc-pstep{display:flex;flex-direction:column;gap:5px}
-  .sc-pstep-num{font-size:8.5px;font-weight:900;color:var(--accent);letter-spacing:.8px;
-    background:var(--pink);display:inline-block;padding:2px 8px;border-radius:20px;
-    width:fit-content;margin-bottom:2px}
-  .sc-num-night{color:#6a4fa0;background:#f0eaff}
-  .sc-num-add{color:#c75000;background:#fff0e0}
-  .sc-pstep-inner{display:flex;gap:11px;align-items:center;background:#fdfafb;
-    border-radius:12px;padding:9px 10px;border:1px solid #f6dce0}
-  .sc-pstep-missing .sc-pstep-inner{border-style:dashed;border-color:#ffc090;background:#fff8f2}
-  .sc-pimg{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
-    justify-content:center;font-size:22px;flex-shrink:0}
-  .sc-pinfo{}
-  .sc-pname{font-size:12.5px;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:3px}
-  .sc-preason{font-size:10.5px;color:var(--sub);line-height:1.4}
-  .sc-arrow{text-align:center;color:#e8c0c8;font-size:16px;font-weight:700;
-    margin:4px 0;line-height:1}
-  .sc-arrow-night{color:#c0b0d8}
-
-  /* 하단 2단 */
-  .sc-bottom-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
-  .sc-bottom-box{border-radius:14px;padding:12px 11px}
-  .sc-box-add{background:linear-gradient(135deg,#f0fff4,#e8f8f0);border:1px solid #a8d8b8}
-  .sc-box-warn{background:linear-gradient(135deg,#fff8f0,#fff0e8);border:1px solid #f0c090}
-  .sc-box-head{font-size:10.5px;font-weight:900;margin-bottom:8px;color:var(--ink)}
-  .sc-box-item{font-size:10px;color:#3a3a3a;padding:3px 0;border-bottom:1px solid rgba(0,0,0,.06);
-    line-height:1.4}
-  .sc-box-item:last-child{border-bottom:none}
-  .sc-box-add .sc-box-head{color:#2e7d32}
-  .sc-box-warn .sc-box-head{color:#c75000}
-
-  /* 카드 푸터 */
-  .sc-foot{background:linear-gradient(135deg,#3a2a2f,#5c3a42);padding:12px 16px;
-    display:flex;align-items:center;justify-content:space-between}
-  .sc-foot-left{font-size:9px;color:rgba(255,255,255,.5);line-height:1.5}
-  .sc-foot-brand{font-size:13px;font-weight:900;color:#ffb3c4;letter-spacing:.5px}
+  /* 미리보기 모달 */
+  #preview-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;overflow-y:auto;padding:16px}
+  .modal-inner{max-width:420px;margin:0 auto}
+  .modal-close{display:block;margin-left:auto;margin-bottom:8px;background:#fff;border:none;
+    border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;position:sticky;top:0}
 
   /* 하단 CTA */
   .bottom-cta{margin:6px 16px 0;background:linear-gradient(135deg,var(--accent),#ff8fa3);
@@ -284,6 +147,82 @@
   .bottom-cta-sub{font-size:11.5px;opacity:.85;margin-bottom:12px}
   .bottom-cta-btn{display:inline-block;background:#fff;color:var(--accent);
     font-size:12.5px;font-weight:800;padding:9px 22px;border-radius:20px}
+
+  /* ===== 공유 카드 (스타일3 감성) ===== */
+  #share-card{
+    position:fixed;left:-9999px;top:0;width:390px;
+    background:#fdf6ee;
+    font-family:-apple-system,'PingFang SC','Noto Sans KR',sans-serif;
+    overflow:hidden
+  }
+
+  /* 카드 헤더 */
+  .sc-top{
+    background:linear-gradient(160deg,#3b2314 0%,#5c3820 100%);
+    padding:24px 20px 20px;position:relative;overflow:hidden;text-align:center
+  }
+  .sc-top-deco{position:absolute;opacity:.1;font-size:90px;top:-15px;right:-15px;line-height:1;pointer-events:none}
+  .sc-top-deco2{position:absolute;opacity:.07;font-size:70px;bottom:-10px;left:-10px;line-height:1;pointer-events:none}
+  .sc-brand{font-size:9.5px;font-weight:700;color:rgba(255,220,180,.55);letter-spacing:2.5px;margin-bottom:11px}
+  .sc-title{font-size:25px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:6px;font-style:italic}
+  .sc-title em{color:#ffd090;font-style:normal}
+  .sc-sub{font-size:11px;color:rgba(255,220,180,.55);letter-spacing:.3px;margin-bottom:11px}
+  .sc-tag{display:inline-block;background:rgba(255,180,80,.18);color:#ffd090;
+    font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;border:1px solid rgba(255,180,80,.3)}
+
+  /* 카드 섹션 */
+  .sc-sec{padding:16px 18px}
+  .sc-sec-am{background:linear-gradient(180deg,#fffcf3,#fff8ec)}
+  .sc-sec-pm{background:linear-gradient(180deg,#f6f0ff,#ede4ff)}
+  .sc-sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    padding-bottom:11px;border-bottom:2px solid rgba(0,0,0,.07)}
+  .sc-sec-icon{font-size:28px}
+  .sc-sec-label{font-size:9px;font-weight:800;letter-spacing:1px;margin-bottom:2px}
+  .sc-sec-am .sc-sec-label{color:#9a6820}
+  .sc-sec-pm .sc-sec-label{color:#6840a0}
+  .sc-sec-title{font-size:14.5px;font-weight:900;color:#2a1a0a;line-height:1.2}
+  .sc-sec-hint{font-size:10px;color:#9a8a7a;margin-top:2px}
+
+  /* 스텝 행 */
+  .sc-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+  .sc-row:last-child{margin-bottom:0}
+  .sc-col-l{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0}
+  .sc-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:11.5px;font-weight:900;color:#fff;flex-shrink:0}
+  .sc-sec-am .sc-num{background:linear-gradient(135deg,#f0a030,#d07010)}
+  .sc-sec-pm .sc-num{background:linear-gradient(135deg,#9070c0,#5030a0)}
+  .sc-num-add{background:linear-gradient(135deg,#e08040,#b05010) !important}
+  .sc-vline{width:2px;flex:1;min-height:18px;border-radius:2px;opacity:.4}
+  .sc-sec-am .sc-vline{background:#e09030}
+  .sc-sec-pm .sc-vline{background:#8060b0}
+  .sc-card{background:rgba(255,255,255,.72);border-radius:13px;padding:10px 12px;
+    border:1px solid rgba(0,0,0,.07);display:flex;gap:10px;align-items:center;flex:1}
+  .sc-card-add{border:1.5px dashed #c08040;background:rgba(255,240,210,.45)}
+  .sc-pimg{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;
+    justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+  .sc-pinfo{flex:1}
+  .sc-pname{font-size:12.5px;font-weight:800;color:#2a1a0a;line-height:1.3;margin-bottom:3px}
+  .sc-pname-add{color:#a05010}
+  .sc-preason{font-size:10.5px;color:#7a6a58;line-height:1.45}
+
+  /* 하단 2단 박스 */
+  .sc-bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    padding:14px 16px;background:#fdf6ee;border-top:1px solid #ede0d0}
+  .sc-box{border-radius:14px;padding:13px 12px}
+  .sc-box-add{background:linear-gradient(160deg,#edfaf3,#e0f5e8);border:1.5px solid #88d0a0}
+  .sc-box-warn{background:linear-gradient(160deg,#fff5ec,#ffeadc);border:1.5px solid #dca870}
+  .sc-box-head{font-size:11px;font-weight:900;margin-bottom:9px}
+  .sc-box-add .sc-box-head{color:#1e7035}
+  .sc-box-warn .sc-box-head{color:#9a4a08}
+  .sc-bitem{font-size:10px;color:#3a3a3a;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06);
+    line-height:1.4;display:flex;gap:5px}
+  .sc-bitem:last-child{border-bottom:none;padding-bottom:0}
+
+  /* 카드 푸터 */
+  .sc-foot{background:linear-gradient(135deg,#3b2314,#5c3820);padding:13px 18px;
+    display:flex;align-items:center;justify-content:space-between}
+  .sc-foot-l{font-size:9px;color:rgba(255,220,180,.45);line-height:1.6}
+  .sc-foot-r{font-size:13px;font-weight:900;color:#ffd090;font-style:italic}
 </style>
 </head>
 <body>
@@ -301,7 +240,7 @@
   <div class="hero-desc">가진 제품 입력하면 루틴 정리해드려요.<br>중복 성분·충돌 성분도 잡아줍니다.</div>
 </div>
 
-<!-- 피부 고민 선택 -->
+<!-- 피부 고민 + 제품 입력 -->
 <div class="section">
   <div class="section-label">피부 고민 선택</div>
   <div class="skin-chips">
@@ -313,14 +252,10 @@
     <div class="chip">안티에이징</div>
   </div>
   <div class="section-label">보유 제품 입력</div>
-
-  <!-- 입력 방식 탭 -->
   <div class="input-tabs">
     <button class="input-tab on" onclick="switchTab('text',this)">✏️ 텍스트 입력</button>
     <button class="input-tab" onclick="switchTab('photo',this)">📷 사진으로 인식</button>
   </div>
-
-  <!-- 텍스트 입력 -->
   <div id="tab-text" class="product-input-wrap">
     <textarea class="product-input" placeholder="예시: 아누아 어성초 77 토너, 라운드랩 독도 선크림, CNP 프로폴리스 세럼, 에뛰드 순정 선크림"></textarea>
     <div class="input-footer">
@@ -328,27 +263,23 @@
       <button class="analyze-btn">분석하기 →</button>
     </div>
   </div>
-
-  <!-- 사진 입력 -->
-  <div id="tab-photo" class="photo-input-wrap" style="display:none">
+  <div id="tab-photo" style="display:none">
     <input type="file" id="photo-file" accept="image/*" style="display:none" onchange="handlePhoto(event)">
     <div class="photo-drop" onclick="document.getElementById('photo-file').click()">
       <div class="photo-drop-icon">📷</div>
       <div class="photo-drop-title">사진 업로드</div>
-      <div class="photo-drop-sub">화장품 사진, 화장대 전체, 올리브영 장바구니 등<br>여러 장 올려도 돼요</div>
+      <div class="photo-drop-sub">화장품 사진, 화장대, 올리브영 장바구니 등<br>여러 장 올려도 돼요</div>
     </div>
     <div id="photo-preview-wrap" style="display:none">
       <img id="photo-preview" class="photo-preview-img">
       <div class="photo-recognized">
         <div class="photo-rec-label">인식된 제품</div>
-        <div class="photo-rec-products" id="recognized-list">
-          <!-- 인식 결과 여기 -->
-        </div>
+        <div class="photo-rec-products" id="recognized-list"></div>
         <div class="photo-rec-edit">직접 수정도 가능해요</div>
       </div>
     </div>
     <div class="input-footer" style="margin-top:10px;background:transparent;border:none;padding:0 2px">
-      <span class="input-hint">사진 속 제품을 AI가 자동으로 읽어요</span>
+      <span class="input-hint">AI가 사진 속 제품을 자동으로 읽어요</span>
       <button class="analyze-btn" onclick="analyzeFromPhoto()">분석하기 →</button>
     </div>
   </div>
@@ -356,97 +287,93 @@
 
 <hr class="divider">
 
-<!-- 결과 헤더 -->
+<!-- 앱 결과 -->
 <div class="result-header">
   <div class="result-title">루틴 분석 결과</div>
   <div class="result-sub">건성·수분부족 피부 기준 · 제품 4개</div>
 </div>
 
-<!-- 아침 루틴 -->
 <div class="routine-block am">
   <div class="routine-head">
     <div class="routine-icon">☀️</div>
-    <div class="routine-head-text">
+    <div>
       <div class="routine-head-label">MORNING ROUTINE</div>
-      <div class="routine-head-title">아침 루틴 (4단계)</div>
+      <div class="routine-head-title">아침 루틴 (3단계)</div>
     </div>
   </div>
   <div class="routine-steps">
     <div class="step-item">
       <div class="step-num">1</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">아누아 어성초 77 토너</div>
-        <div class="step-tip">클렌징 후 첫 수분 레이어. 77% 어성초 진정 효과.</div>
+        <div class="step-tip">수분 첫 레이어. 77% 어성초 진정.</div>
         <span class="step-badge badge-ok">✓ 아침 적합</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">2</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">CNP 프로폴리스 세럼</div>
-        <div class="step-tip">토너 흡수 후 30초 뒤 사용. 항산화·영양 공급.</div>
+        <div class="step-tip">흡수 30초 후. 항산화 + 영양막 형성.</div>
         <span class="step-badge badge-ok">✓ 순서 맞음</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">3</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">라운드랩 독도 선크림</div>
-        <div class="step-tip">마지막에 꼭 선크림. SPF50+ 권장.</div>
+        <div class="step-tip">마지막 필수. SPF50+.</div>
         <span class="step-badge badge-ok">✓ 필수 마무리</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 저녁 루틴 -->
 <div class="routine-block pm">
   <div class="routine-head">
     <div class="routine-icon">🌙</div>
-    <div class="routine-head-text">
-      <div class="routine-head-label">EVENING ROUTINE</div>
+    <div>
+      <div class="routine-head-label">NIGHT ROUTINE</div>
       <div class="routine-head-title">저녁 루틴 (3단계)</div>
     </div>
   </div>
   <div class="routine-steps">
     <div class="step-item">
       <div class="step-num">1</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">아누아 어성초 77 토너</div>
-        <div class="step-tip">클렌징 후 진정 첫 단계.</div>
-        <span class="step-badge badge-ok">✓ 저녁도 OK</span>
+        <div class="step-tip">클렌징 후 즉시 진정.</div>
+        <span class="step-badge badge-ok">✓ 저녁 OK</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">2</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">CNP 프로폴리스 세럼</div>
-        <div class="step-tip">저녁엔 2~3펌프 넉넉히. 수면 중 회복 극대화.</div>
+        <div class="step-tip">2~3펌프 넉넉히. 수면 중 회복.</div>
         <span class="step-badge badge-ok">✓ 저녁에 효과 극대</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">3</div>
-      <div class="step-content">
+      <div>
         <div class="step-product">에뛰드 순정 선크림 ⚠️</div>
-        <div class="step-tip">선크림은 저녁에 불필요. 수분크림으로 대체 권장.</div>
+        <div class="step-tip">선크림은 저녁 불필요. 수분크림 대체 권장.</div>
         <span class="step-badge badge-skip">✗ 저녁엔 스킵</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 경고 카드 -->
 <div class="warn-card">
   <div class="warn-title">⚠️ 주의할 점</div>
   <ul class="warn-list">
-    <li>선크림 2개 중복 — 라운드랩 하나만 쓰세요 (어성초 성분 겹침)</li>
-    <li>저녁 수분크림 없음 — 건성피부에 필수, 추가 권장</li>
-    <li>비타민C 계열 없음 — 미백 원하면 아침 세럼 추가 고려</li>
+    <li>선크림 2개 중복 — 라운드랩 하나만 (성분 겹침)</li>
+    <li>저녁 수분크림 없음 — 건성피부 필수 추가</li>
+    <li>비타민C 없음 — 미백 원하면 아침 세럼 추가</li>
   </ul>
 </div>
 
-<!-- 추천 구매 -->
 <div class="buy-section">
   <div class="section-label">추천 제품</div>
   <div class="buy-tabs">
@@ -473,20 +400,14 @@
 
 <!-- 카드 버튼 -->
 <div class="save-card-wrap">
-  <button class="save-card-btn" style="background:#fff;color:var(--accent);border:2px solid var(--accent);box-shadow:none;margin-bottom:8px" onclick="previewCard()">
-    <span>👁</span> 카드 미리보기
-  </button>
-  <button class="save-card-btn" onclick="saveCard()">
-    <span>🖼</span> 카드로 저장하기 (PNG)
-  </button>
+  <button class="save-card-btn btn-preview" onclick="previewCard()">👁 카드 미리보기</button>
+  <button class="save-card-btn btn-save" onclick="saveCard()">🖼 카드로 저장하기 (PNG)</button>
 </div>
 
 <!-- 미리보기 모달 -->
-<div id="preview-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;overflow-y:auto;padding:20px">
-  <div style="max-width:420px;margin:0 auto;position:relative">
-    <button onclick="document.getElementById('preview-modal').style.display='none'"
-      style="position:sticky;top:0;left:100%;display:block;margin-left:auto;margin-bottom:8px;
-      background:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;z-index:1000">×</button>
+<div id="preview-modal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="document.getElementById('preview-modal').style.display='none'">×</button>
     <div id="modal-card-container"></div>
   </div>
 </div>
@@ -515,151 +436,6 @@
   </div>
 </div>
 
-<!-- 공유 카드 (캡처용) -->
-<div id="share-card">
-
-  <!-- 헤더 -->
-  <div class="sc-top">
-    <div class="sc-brand-row">
-      <div class="sc-brand-dot"></div>
-      <div class="sc-brand-text">QK · ROUTINE LAB</div>
-    </div>
-    <div class="sc-main-title">건성피부 <em>필승 루틴</em></div>
-    <div class="sc-main-sub">筛선 AI 성분 분석 · 검증된 순서로만</div>
-    <div class="sc-skin-tag">건성 · 수분부족 · 제품 4개 분석</div>
-  </div>
-
-  <div class="sc-body">
-
-    <!-- 아침 루틴 -->
-    <div class="sc-routine-block">
-      <div class="sc-routine-title">
-        <span class="sc-routine-icon">☀️</span>
-        <div>
-          <div class="sc-routine-label">MORNING ROUTINE</div>
-          <div class="sc-routine-sub">가볍게 → 무겁게 → 차단</div>
-        </div>
-      </div>
-      <!-- 스텝 1 -->
-      <div class="sc-pstep">
-        <div class="sc-pstep-num">STEP 1</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#e8f5f0,#c8e6d8)">
-            <span>🌿</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname">아누아 어성초 77 토너</div>
-            <div class="sc-preason">수분 첫 레이어 · 77% 어성초 즉각 진정</div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-arrow">↓</div>
-      <!-- 스텝 2 -->
-      <div class="sc-pstep">
-        <div class="sc-pstep-num">STEP 2</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff3dc,#ffe4a0)">
-            <span>🍯</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname">CNP 프로폴리스 세럼</div>
-            <div class="sc-preason">30초 후 · 항산화+영양막 형성</div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-arrow">↓</div>
-      <!-- 스텝 3 -->
-      <div class="sc-pstep">
-        <div class="sc-pstep-num">STEP 3</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#e3f0ff,#b8d4f8)">
-            <span>🛡</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname">라운드랩 독도 선크림</div>
-            <div class="sc-preason">마지막 필수 · SPF50+ 자외선 차단</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 저녁 루틴 -->
-    <div class="sc-routine-block sc-routine-night">
-      <div class="sc-routine-title">
-        <span class="sc-routine-icon">🌙</span>
-        <div>
-          <div class="sc-routine-label">NIGHT ROUTINE</div>
-          <div class="sc-routine-sub">진정 → 영양 → 잠금</div>
-        </div>
-      </div>
-      <div class="sc-pstep">
-        <div class="sc-pstep-num sc-num-night">STEP 1</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#e8f5f0,#c8e6d8)">
-            <span>🌿</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname">아누아 어성초 77 토너</div>
-            <div class="sc-preason">클렌징 후 자극받은 피부 즉시 진정</div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-arrow sc-arrow-night">↓</div>
-      <div class="sc-pstep">
-        <div class="sc-pstep-num sc-num-night">STEP 2</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff3dc,#ffe4a0)">
-            <span>🍯</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname">CNP 프로폴리스 세럼</div>
-            <div class="sc-preason">2~3펌프 넉넉히 · 수면 중 회복 극대화</div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-arrow sc-arrow-night">↓</div>
-      <div class="sc-pstep sc-pstep-missing">
-        <div class="sc-pstep-num sc-num-add">ADD</div>
-        <div class="sc-pstep-inner">
-          <div class="sc-pimg" style="background:linear-gradient(135deg,#fff0e0,#ffd5a0)">
-            <span>🧴</span>
-          </div>
-          <div class="sc-pinfo">
-            <div class="sc-pname" style="color:#c75000">수분크림 ← 필수 추가</div>
-            <div class="sc-preason">건성피부는 잠금 레이어 없으면 수분 증발</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 하단 2단 섹션 -->
-    <div class="sc-bottom-row">
-      <!-- 추가해야 할 것 -->
-      <div class="sc-bottom-box sc-box-add">
-        <div class="sc-box-head">✦ 추가하면 좋아요</div>
-        <div class="sc-box-item">🧴 저녁 수분크림</div>
-        <div class="sc-box-item">✨ 아침 비타C 세럼</div>
-        <div class="sc-box-item">💊 프로바이오틱스</div>
-      </div>
-      <!-- 조심해야 할 것 -->
-      <div class="sc-bottom-box sc-box-warn">
-        <div class="sc-box-head">⚠️ 조심하세요</div>
-        <div class="sc-box-item">선크림 2개 중복</div>
-        <div class="sc-box-item">레티놀+AHA 동시 사용</div>
-        <div class="sc-box-item">저녁 선크림 사용</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- 푸터 -->
-  <div class="sc-foot">
-    <div class="sc-foot-left">筛선 — 걸러서 남긴 것만<br>quration.kr</div>
-    <div class="sc-foot-brand">QK Routine Lab ✦</div>
-  </div>
-
-</div>
-
 <!-- 하단 CTA -->
 <div class="bottom-cta">
   <div class="bottom-cta-title">더 궁금한 제품 있나요?</div>
@@ -667,9 +443,149 @@
   <div class="bottom-cta-btn">K美妆 筛선 보러가기 →</div>
 </div>
 
+<!-- ===== 공유 카드 (캡처용, 스타일3) ===== -->
+<div id="share-card">
+
+  <div class="sc-top">
+    <div class="sc-top-deco">🌿</div>
+    <div class="sc-top-deco2">✿</div>
+    <div class="sc-brand">✦ QK · ROUTINE LAB ✦</div>
+    <div class="sc-title">건성피부 <em>필승 루틴</em></div>
+    <div class="sc-sub">筛선 AI 성분 분석 · 검증된 순서로만</div>
+    <div class="sc-tag">건성 · 수분부족 · 제품 4개 분석</div>
+  </div>
+
+  <!-- 아침 -->
+  <div class="sc-sec sc-sec-am">
+    <div class="sc-sec-head">
+      <span class="sc-sec-icon">☀️</span>
+      <div>
+        <div class="sc-sec-label">MORNING ROUTINE · 아침</div>
+        <div class="sc-sec-title">가볍게 → 무겁게 → 차단</div>
+        <div class="sc-sec-hint">이 순서 지켜야 효과 2배</div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num">1</div>
+        <div class="sc-vline"></div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#d0f0e0,#90d8b0)">🌿</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname">아누아 어성초 77 토너</div>
+          <div class="sc-preason">수분 첫 레이어 · 77% 어성초 즉각 진정<br>세안 직후 아직 촉촉할 때 펴줘요</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num">2</div>
+        <div class="sc-vline"></div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#fff0b0,#ffd060)">🍯</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname">CNP 프로폴리스 세럼</div>
+          <div class="sc-preason">30초 뒤 · 항산화 + 영양막 형성<br>1~2펌프, 토너 반쯤 흡수됐을 때</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num">3</div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#c8e4ff,#80b8f0)">🛡</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname">라운드랩 독도 선크림</div>
+          <div class="sc-preason">마지막 필수 · SPF50+ 자외선 차단<br>세럼 완전 흡수 후 마무리</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 저녁 -->
+  <div class="sc-sec sc-sec-pm">
+    <div class="sc-sec-head">
+      <span class="sc-sec-icon">🌙</span>
+      <div>
+        <div class="sc-sec-label">NIGHT ROUTINE · 저녁</div>
+        <div class="sc-sec-title">진정 → 영양 → 잠금</div>
+        <div class="sc-sec-hint">수면 중 피부 회복 골든타임</div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num">1</div>
+        <div class="sc-vline"></div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#d0f0e0,#90d8b0)">🌿</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname">아누아 어성초 77 토너</div>
+          <div class="sc-preason">클렌징 후 자극받은 피부 즉시 진정<br>미온수 세안 → 1분 안에 발라요</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num">2</div>
+        <div class="sc-vline"></div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#fff0b0,#ffd060)">🍯</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname">CNP 프로폴리스 세럼</div>
+          <div class="sc-preason">저녁엔 2~3펌프 넉넉히<br>수면 중 회복 극대화</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-row">
+      <div class="sc-col-l">
+        <div class="sc-num sc-num-add">+</div>
+      </div>
+      <div class="sc-card sc-card-add">
+        <div class="sc-pimg" style="background:linear-gradient(135deg,#ffe8b0,#ffcc70)">🧴</div>
+        <div class="sc-pinfo">
+          <div class="sc-pname sc-pname-add">수분크림 ← 지금 없어요!</div>
+          <div class="sc-preason">건성피부 필수 · 세럼만으론 수분 증발<br>메디필 콜라겐 크림 추천</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 추가/주의 -->
+  <div class="sc-bottom">
+    <div class="sc-box sc-box-add">
+      <div class="sc-box-head">✦ 추가하면 좋아요</div>
+      <div class="sc-bitem"><span>🧴</span>저녁 수분크림 (필수)</div>
+      <div class="sc-bitem"><span>✨</span>아침 비타C 세럼</div>
+      <div class="sc-bitem"><span>💊</span>콜라겐 영양제</div>
+    </div>
+    <div class="sc-box sc-box-warn">
+      <div class="sc-box-head">⚠️ 조심하세요</div>
+      <div class="sc-bitem"><span>🚫</span>선크림 2개 중복</div>
+      <div class="sc-bitem"><span>🚫</span>저녁에 선크림</div>
+      <div class="sc-bitem"><span>🚫</span>레티놀+AHA 동시</div>
+    </div>
+  </div>
+
+  <div class="sc-foot">
+    <div class="sc-foot-l">筛선 — 걸러서 남긴 것만<br>quration.kr</div>
+    <div class="sc-foot-r">QK Routine Lab ✦</div>
+  </div>
+
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-// 카드 미리보기
 function previewCard() {
   const card = document.getElementById('share-card');
   const container = document.getElementById('modal-card-container');
@@ -680,7 +596,6 @@ function previewCard() {
   document.getElementById('preview-modal').style.display = 'block';
 }
 
-// 탭 전환
 function switchTab(type, btn) {
   document.querySelectorAll('.input-tab').forEach(t => t.classList.remove('on'));
   btn.classList.add('on');
@@ -688,7 +603,6 @@ function switchTab(type, btn) {
   document.getElementById('tab-photo').style.display = type === 'photo' ? '' : 'none';
 }
 
-// 사진 미리보기 + 데모 인식
 function handlePhoto(e) {
   const file = e.target.files[0];
   if (!file) return;
@@ -697,33 +611,26 @@ function handlePhoto(e) {
     document.getElementById('photo-preview').src = ev.target.result;
     document.getElementById('photo-preview-wrap').style.display = '';
     document.querySelector('.photo-drop').style.display = 'none';
-    // 데모: 실제로는 Claude Vision API 호출
     showDemoRecognized();
   };
   reader.readAsDataURL(file);
 }
 
-// 데모용 인식 결과 (실제는 API 응답)
 function showDemoRecognized() {
   const products = ['아누아 어성초 77 토너', 'CNP 프로폴리스 세럼', '라운드랩 독도 선크림'];
   const list = document.getElementById('recognized-list');
   list.innerHTML = products.map(p => `
-    <div class="rec-tag">
-      ${p}
-      <span class="rec-tag-del" onclick="this.parentElement.remove()">×</span>
-    </div>
+    <div class="rec-tag">${p}<span class="rec-tag-del" onclick="this.parentElement.remove()">×</span></div>
   `).join('');
 }
 
 function analyzeFromPhoto() {
-  // 실제로는 인식된 제품 목록으로 분석 API 호출
   alert('분석 중... (Vercel API 연결 후 실제 동작)');
 }
 
 async function saveCard() {
-  const btn = document.querySelector('.save-card-btn');
-  btn.textContent = '생성 중...';
-  btn.disabled = true;
+  const btns = document.querySelectorAll('.btn-save');
+  btns.forEach(b => { b.textContent = '생성 중...'; b.disabled = true; });
 
   const card = document.getElementById('share-card');
   card.style.left = '0';
@@ -731,11 +638,7 @@ async function saveCard() {
   card.style.zIndex = '-1';
 
   try {
-    const canvas = await html2canvas(card, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null
-    });
+    const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
     const link = document.createElement('a');
     link.download = 'QK_루틴카드.png';
     link.href = canvas.toDataURL('image/png');
@@ -746,8 +649,7 @@ async function saveCard() {
 
   card.style.left = '-9999px';
   card.style.position = 'fixed';
-  btn.innerHTML = '<span>🖼</span> 루틴 카드로 저장하기';
-  btn.disabled = false;
+  btns.forEach(b => { b.textContent = '🖼 카드로 저장하기 (PNG)'; b.disabled = false; });
 }
 </script>
 </body>
