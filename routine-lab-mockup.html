@@ -172,7 +172,7 @@
   .sc-sub{font-size:11px;color:rgba(255,255,255,.75);margin-bottom:10px}
   .sc-tag{display:inline-block;background:rgba(255,255,255,.3);color:#fff;
     font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;
-    backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.4)}
+    border:1px solid rgba(255,255,255,.5)}
 
   /* 섹션 구분 데코 */
   .sc-divider{text-align:center;font-size:13px;letter-spacing:4px;padding:5px 0;
@@ -647,22 +647,34 @@ async function saveCard() {
   btns.forEach(b => { b.textContent = '생성 중...'; b.disabled = true; });
 
   const card = document.getElementById('share-card');
-  card.style.left = '0';
   card.style.position = 'absolute';
+  card.style.left = '0';
+  card.style.top = '0';
   card.style.zIndex = '-1';
 
+  await new Promise(r => setTimeout(r, 100));
+
   try {
-    const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
+    const canvas = await html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#fff9f4',
+      logging: false
+    });
     const link = document.createElement('a');
     link.download = 'QK_루틴카드.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
   } catch(e) {
-    alert('저장 실패. 다시 시도해주세요.');
+    console.error('html2canvas error:', e);
+    alert('저장 실패: ' + e.message);
   }
 
-  card.style.left = '-9999px';
   card.style.position = 'fixed';
+  card.style.left = '-9999px';
+  card.style.top = '0';
+  card.style.zIndex = '';
   btns.forEach(b => { b.textContent = '🖼 카드로 저장하기 (PNG)'; b.disabled = false; });
 }
 </script>
