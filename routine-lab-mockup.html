@@ -160,8 +160,10 @@
   /* 2단 루틴 */
   .sc-body{padding:14px 14px 0}
   .sc-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:11px}
-  .sc-col{background:#fff;border-radius:14px;padding:12px 11px;
+  .sc-col{background:#fff;border-radius:14px;padding:12px 11px;margin-bottom:10px;
     box-shadow:0 2px 12px rgba(227,75,70,.08);border:1px solid #f6dce0}
+  .sc-col-full{width:100%}
+  .sc-step-add{background:#fff9f5;border-radius:8px;padding:6px 8px;margin-top:4px}
   .sc-col-head{display:flex;align-items:center;gap:6px;margin-bottom:10px;
     padding-bottom:8px;border-bottom:1px solid #faeaec}
   .sc-col-icon{font-size:15px}
@@ -418,63 +420,67 @@
 
   <div class="sc-body">
 
-    <!-- 아침/저녁 2단 -->
-    <div class="sc-cols">
-      <div class="sc-col">
-        <div class="sc-col-head">
-          <span class="sc-col-icon">☀️</span>
-          <div>
-            <div class="sc-col-label">MORNING</div>
-            <div class="sc-col-title">아침 루틴</div>
-          </div>
-        </div>
-        <div class="sc-step2">
-          <div class="sc-num2">1</div>
-          <div><div class="sc-name2">아누아 어성초 토너</div><div class="sc-tip2">진정 첫 레이어</div></div>
-        </div>
-        <div class="sc-step2">
-          <div class="sc-num2">2</div>
-          <div><div class="sc-name2">CNP 프로폴리스 세럼</div><div class="sc-tip2">항산화 영양 공급</div></div>
-        </div>
-        <div class="sc-step2">
-          <div class="sc-num2">3</div>
-          <div><div class="sc-name2">라운드랩 독도 선크림</div><div class="sc-tip2">필수 마무리 SPF50+</div></div>
+    <!-- 아침 루틴 (풀폭) -->
+    <div class="sc-col sc-col-full">
+      <div class="sc-col-head">
+        <span class="sc-col-icon">☀️</span>
+        <div>
+          <div class="sc-col-label">MORNING · 아침 바르는 순서</div>
+          <div class="sc-col-title">가볍게 → 무겁게 → 차단</div>
         </div>
       </div>
-      <div class="sc-col">
-        <div class="sc-col-head">
-          <span class="sc-col-icon">🌙</span>
-          <div>
-            <div class="sc-col-label">EVENING</div>
-            <div class="sc-col-title">저녁 루틴</div>
-          </div>
+      <div class="sc-step2">
+        <div class="sc-num2">1</div>
+        <div>
+          <div class="sc-name2">아누아 어성초 77 토너</div>
+          <div class="sc-tip2">수분 첫 레이어 · 77% 어성초로 즉각 진정</div>
         </div>
-        <div class="sc-step2">
-          <div class="sc-num2">1</div>
-          <div><div class="sc-name2">아누아 어성초 토너</div><div class="sc-tip2">클렌징 후 진정</div></div>
+      </div>
+      <div class="sc-step2">
+        <div class="sc-num2">2</div>
+        <div>
+          <div class="sc-name2">CNP 프로폴리스 세럼</div>
+          <div class="sc-tip2">흡수 후 30초 뒤 · 항산화 + 영양막 형성</div>
         </div>
-        <div class="sc-step2">
-          <div class="sc-num2">2</div>
-          <div><div class="sc-name2">CNP 프로폴리스 세럼</div><div class="sc-tip2">저녁엔 넉넉히 2~3펌프</div></div>
-        </div>
-        <div class="sc-step2">
-          <div class="sc-num2">3</div>
-          <div><div class="sc-name2">수분크림 ← 추가 필요</div><div class="sc-tip2">건성피부 필수 마무리</div></div>
+      </div>
+      <div class="sc-step2">
+        <div class="sc-num2">3</div>
+        <div>
+          <div class="sc-name2">라운드랩 독도 선크림</div>
+          <div class="sc-tip2">마지막 필수 · SPF50+ 자외선 차단으로 마무리</div>
         </div>
       </div>
     </div>
 
-    <!-- 요일 스케줄 -->
-    <div class="sc-schedule">
-      <div class="sc-sched-head">📅 WEEKLY SCHEDULE</div>
-      <div class="sc-days">
-        <div class="sc-day"><div class="sc-day-label">월</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
-        <div class="sc-day"><div class="sc-day-label">화</div><div class="sc-day-pill special">BHA<br>데이</div></div>
-        <div class="sc-day"><div class="sc-day-label">수</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
-        <div class="sc-day"><div class="sc-day-label">목</div><div class="sc-day-pill special">BHA<br>데이</div></div>
-        <div class="sc-day"><div class="sc-day-label">금</div><div class="sc-day-pill normal">기본<br>루틴</div></div>
-        <div class="sc-day"><div class="sc-day-label">토</div><div class="sc-day-pill special">집중<br>케어</div></div>
-        <div class="sc-day"><div class="sc-day-label">일</div><div class="sc-day-pill rest">휴식<br>데이</div></div>
+    <!-- 저녁 루틴 (풀폭) -->
+    <div class="sc-col sc-col-full">
+      <div class="sc-col-head">
+        <span class="sc-col-icon">🌙</span>
+        <div>
+          <div class="sc-col-label">EVENING · 저녁 바르는 순서</div>
+          <div class="sc-col-title">진정 → 영양 → 잠금</div>
+        </div>
+      </div>
+      <div class="sc-step2">
+        <div class="sc-num2">1</div>
+        <div>
+          <div class="sc-name2">아누아 어성초 77 토너</div>
+          <div class="sc-tip2">클렌징 후 자극받은 피부 즉시 진정</div>
+        </div>
+      </div>
+      <div class="sc-step2">
+        <div class="sc-num2">2</div>
+        <div>
+          <div class="sc-name2">CNP 프로폴리스 세럼</div>
+          <div class="sc-tip2">저녁엔 2~3펌프 넉넉히 · 수면 중 회복 극대화</div>
+        </div>
+      </div>
+      <div class="sc-step2 sc-step-add">
+        <div class="sc-num2" style="background:linear-gradient(135deg,#ffb347,#e08040)">+</div>
+        <div>
+          <div class="sc-name2" style="color:#c75000">수분크림 추가 필요 ⚠️</div>
+          <div class="sc-tip2">건성피부는 세럼만으론 부족 · 잠금 레이어 필수</div>
+        </div>
       </div>
     </div>
 
