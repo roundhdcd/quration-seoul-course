@@ -89,8 +89,11 @@
   .step-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid #faf4f5;align-items:flex-start}
   .step-item:last-child{border-bottom:none}
   .step-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#e23a5e;
-    font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px}
+  .step-pimg{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;
+    justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.09)}
   .step-product{font-size:13.5px;font-weight:700;color:var(--ink)}
+  .step-product-zh{font-size:11px;color:var(--sub);font-weight:500;margin-top:1px}
   .step-tip{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5}
   .step-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;margin-top:4px}
   .badge-ok{background:#e8f5e9;color:#2e7d32}
@@ -233,6 +236,8 @@
     display:flex;align-items:center;justify-content:space-between}
   .sc-foot-l{font-size:9px;color:rgba(255,255,255,.65);line-height:1.6}
   .sc-foot-r{font-size:13px;font-weight:900;color:#fff;letter-spacing:.3px}
+  .sc-zh{font-size:10px;color:rgba(255,255,255,.55);margin-top:3px}
+  .sc-preason-zh{font-size:9.5px;color:#a89888;margin-top:2px;line-height:1.4}
 </style>
 </head>
 <body>
@@ -245,32 +250,32 @@
 
 <!-- 히어로 -->
 <div class="hero">
-  <div class="hero-badge">✦ AI 성분 검증</div>
-  <div class="hero-title">내 화장품<br><em>진짜 맞게</em> 쓰고 있어?</div>
-  <div class="hero-desc">가진 제품 입력하면 루틴 정리해드려요.<br>중복 성분·충돌 성분도 잡아줍니다.</div>
+  <div class="hero-badge">✦ AI 성분 검증 · AI成分分析</div>
+  <div class="hero-title">갖고 있는 제품으로<br><em>루틴 만들기</em></div>
+  <div class="hero-desc">보유 제품 입력하면 올바른 순서로 루틴 만들어드려요. 중복·충돌 성분도 잡아줍니다.<br><span style="color:#b0a0a8;font-size:11.5px">输入现有产品，自动定制专属护肤步骤</span></div>
 </div>
 
 <!-- 피부 고민 + 제품 입력 -->
 <div class="section">
-  <div class="section-label">피부 고민 선택</div>
+  <div class="section-label">피부 고민 선택 · 选择肌肤问题</div>
   <div class="skin-chips">
-    <div class="chip on">건성 · 수분부족</div>
-    <div class="chip">지성 · 모공</div>
-    <div class="chip">민감성</div>
-    <div class="chip">트러블</div>
-    <div class="chip">미백</div>
-    <div class="chip">안티에이징</div>
+    <div class="chip on">건성·수분부족 干性</div>
+    <div class="chip">지성·모공 油性</div>
+    <div class="chip">민감성 敏感</div>
+    <div class="chip">트러블 痘痘</div>
+    <div class="chip">미백 美白</div>
+    <div class="chip">안티에이징 抗衰</div>
   </div>
-  <div class="section-label">보유 제품 입력</div>
+  <div class="section-label">갖고 있는 제품 입력 · 输入现有产品</div>
   <div class="input-tabs">
-    <button class="input-tab on" onclick="switchTab('text',this)">✏️ 텍스트 입력</button>
-    <button class="input-tab" onclick="switchTab('photo',this)">📷 사진으로 인식</button>
+    <button class="input-tab on" onclick="switchTab('text',this)">✏️ 텍스트 · 文字</button>
+    <button class="input-tab" onclick="switchTab('photo',this)">📷 사진 · 拍照</button>
   </div>
   <div id="tab-text" class="product-input-wrap">
-    <textarea class="product-input" placeholder="예시: 아누아 어성초 77 토너, 라운드랩 독도 선크림, CNP 프로폴리스 세럼, 에뛰드 순정 선크림"></textarea>
+    <textarea class="product-input" placeholder="예시: 아누아 어성초 77 토너, 라운드랩 독도 선크림, CNP 프로폴리스 세럼&#10;例：Anua鱼腥草77%水，CNP安瓶精华，独岛防晒"></textarea>
     <div class="input-footer">
-      <span class="input-hint">제품명 쉼표로 구분</span>
-      <button class="analyze-btn">분석하기 →</button>
+      <span class="input-hint">제품명 쉼표로 구분 · 产品名用逗号分隔</span>
+      <button class="analyze-btn">분석하기 · 分析 →</button>
     </div>
   </div>
   <div id="tab-photo" style="display:none">
@@ -299,41 +304,47 @@
 
 <!-- 앱 결과 -->
 <div class="result-header">
-  <div class="result-title">루틴 분석 결과</div>
-  <div class="result-sub">건성·수분부족 피부 기준 · 제품 4개</div>
+  <div class="result-title">루틴 분석 결과 · 护肤步骤分析</div>
+  <div class="result-sub">건성·수분부족 피부 기준 · 干性肌 · 제품 4개</div>
 </div>
 
 <div class="routine-block am">
   <div class="routine-head">
     <div class="routine-icon">☀️</div>
     <div>
-      <div class="routine-head-label">MORNING ROUTINE</div>
+      <div class="routine-head-label">MORNING ROUTINE · 早间护肤</div>
       <div class="routine-head-title">아침 루틴 (3단계)</div>
     </div>
   </div>
   <div class="routine-steps">
     <div class="step-item">
       <div class="step-num">1</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#d8f5e8,#9de0b6)">🌿</div>
       <div>
         <div class="step-product">아누아 어성초 77 토너</div>
-        <div class="step-tip">수분 첫 레이어. 77% 어성초 진정.</div>
-        <span class="step-badge badge-ok">✓ 아침 적합</span>
+        <div class="step-product-zh">Anua鱼腥草77%舒缓水</div>
+        <div class="step-tip">수분 첫 레이어 · 补水第一层，77%鱼腥草镇静</div>
+        <span class="step-badge badge-ok">✓ 아침 적합 早间OK</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">2</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#fff3c0,#ffd060)">🍯</div>
       <div>
         <div class="step-product">CNP 프로폴리스 세럼</div>
-        <div class="step-tip">흡수 30초 후. 항산화 + 영양막 형성.</div>
-        <span class="step-badge badge-ok">✓ 순서 맞음</span>
+        <div class="step-product-zh">CNP蜂胶精华安瓶</div>
+        <div class="step-tip">흡수 30초 후 · 吸收30秒后，抗氧化+营养膜</div>
+        <span class="step-badge badge-ok">✓ 순서 맞음 顺序正确</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">3</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#c8e8ff,#80bcf0)">🛡</div>
       <div>
         <div class="step-product">라운드랩 독도 선크림</div>
-        <div class="step-tip">마지막 필수. SPF50+.</div>
-        <span class="step-badge badge-ok">✓ 필수 마무리</span>
+        <div class="step-product-zh">Round Lab独岛防晒SPF50+</div>
+        <div class="step-tip">마지막 필수 · 最后一步必用，SPF50+防晒</div>
+        <span class="step-badge badge-ok">✓ 필수 마무리 必要收尾</span>
       </div>
     </div>
   </div>
@@ -343,67 +354,73 @@
   <div class="routine-head">
     <div class="routine-icon">🌙</div>
     <div>
-      <div class="routine-head-label">NIGHT ROUTINE</div>
+      <div class="routine-head-label">NIGHT ROUTINE · 晚间护肤</div>
       <div class="routine-head-title">저녁 루틴 (3단계)</div>
     </div>
   </div>
   <div class="routine-steps">
     <div class="step-item">
       <div class="step-num">1</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#d8f5e8,#9de0b6)">🌿</div>
       <div>
         <div class="step-product">아누아 어성초 77 토너</div>
-        <div class="step-tip">클렌징 후 즉시 진정.</div>
-        <span class="step-badge badge-ok">✓ 저녁 OK</span>
+        <div class="step-product-zh">Anua鱼腥草77%舒缓水</div>
+        <div class="step-tip">클렌징 후 즉시 진정 · 洁面后立即镇静肌肤</div>
+        <span class="step-badge badge-ok">✓ 저녁 OK 晚间适用</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">2</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#fff3c0,#ffd060)">🍯</div>
       <div>
         <div class="step-product">CNP 프로폴리스 세럼</div>
-        <div class="step-tip">2~3펌프 넉넉히. 수면 중 회복.</div>
-        <span class="step-badge badge-ok">✓ 저녁에 효과 극대</span>
+        <div class="step-product-zh">CNP蜂胶精华安瓶</div>
+        <div class="step-tip">2~3펌프 넉넉히 · 多用2~3泵，睡眠中修复</div>
+        <span class="step-badge badge-ok">✓ 저녁 효과 극대 夜间效果最佳</span>
       </div>
     </div>
     <div class="step-item">
       <div class="step-num">3</div>
+      <div class="step-pimg" style="background:linear-gradient(135deg,#ffe8d0,#ffb870)">⚠️</div>
       <div>
         <div class="step-product">에뛰드 순정 선크림 ⚠️</div>
-        <div class="step-tip">선크림은 저녁 불필요. 수분크림 대체 권장.</div>
-        <span class="step-badge badge-skip">✗ 저녁엔 스킵</span>
+        <div class="step-product-zh">ETUDE纯净防晒</div>
+        <div class="step-tip">선크림은 저녁 불필요 · 晚间不需要防晒，建议换成乳霜</div>
+        <span class="step-badge badge-skip">✗ 저녁엔 스킵 晚间跳过</span>
       </div>
     </div>
   </div>
 </div>
 
 <div class="warn-card">
-  <div class="warn-title">⚠️ 주의할 점</div>
+  <div class="warn-title">⚠️ 주의할 점 · 注意事项</div>
   <ul class="warn-list">
-    <li>선크림 2개 중복 — 라운드랩 하나만 (성분 겹침)</li>
-    <li>저녁 수분크림 없음 — 건성피부 필수 추가</li>
-    <li>비타민C 없음 — 미백 원하면 아침 세럼 추가</li>
+    <li>선크림 2개 중복 — 라운드랩 하나만 · 防晒重复，只用Round Lab一款</li>
+    <li>저녁 수분크림 없음 — 건성피부 필수 추가 · 缺少晚霜，干性肌必须补充</li>
+    <li>비타민C 없음 — 미백 원하면 아침 세럼 추가 · 无维C精华，早间加入可美白</li>
   </ul>
 </div>
 
 <div class="buy-section">
-  <div class="section-label">추천 제품</div>
+  <div class="section-label">추천 제품 · 推荐补充产品</div>
   <div class="buy-tabs">
-    <div class="buy-tab on">올리브영</div>
+    <div class="buy-tab on">올리브영 橄榄Young</div>
     <div class="buy-tab">iHerb</div>
   </div>
   <div class="buy-grid">
     <div class="buy-card">
       <div class="buy-card-img">🧴</div>
-      <div class="buy-card-name">메디필 콜라겐 임팩트 크림</div>
+      <div class="buy-card-name">메디필 콜라겐 임팩트 크림<br><span style="font-weight:400;color:#aaa;font-size:10.5px">Medipeel胶原蛋白晚霜</span></div>
       <div class="buy-card-where">올리브영 · 저녁 수분크림</div>
       <div class="buy-card-price">₩28,000</div>
-      <button class="buy-btn btn-olive">올리브영 보기 →</button>
+      <button class="buy-btn btn-olive">올리브영 보기 · 查看 →</button>
     </div>
     <div class="buy-card">
       <div class="buy-card-img">✨</div>
-      <div class="buy-card-name">Some By Mi 비타C 세럼</div>
+      <div class="buy-card-name">Some By Mi 비타C 세럼<br><span style="font-weight:400;color:#aaa;font-size:10.5px">SomeByMi维C精华</span></div>
       <div class="buy-card-where">올리브영 · 아침 미백</div>
       <div class="buy-card-price">₩19,800</div>
-      <button class="buy-btn btn-olive">올리브영 보기 →</button>
+      <button class="buy-btn btn-olive">올리브영 보기 · 查看 →</button>
     </div>
   </div>
 </div>
@@ -462,9 +479,10 @@
     <div class="sc-top-deco3">💕</div>
     <div class="sc-top-deco4">🌿</div>
     <div class="sc-brand">✦ QK · ROUTINE LAB ✦</div>
-    <div class="sc-title">건성피부 <em>필승 루틴</em></div>
-    <div class="sc-sub">筛선 AI 성분 분석 · 검증된 순서로만</div>
-    <div class="sc-tag">건성 · 수분부족 · 제품 4개 분석</div>
+    <div class="sc-title">갖고 있는 제품 <em>루틴</em></div>
+    <div class="sc-zh">干性肌 · 现有产品护肤步骤分析</div>
+    <div class="sc-sub" style="margin-top:6px">筛선 AI 성분 분석 · 검증된 순서로만</div>
+    <div class="sc-tag">건성 干性 · 수분부족 缺水 · 제품 4개</div>
   </div>
 
   <!-- 아침 -->
@@ -472,9 +490,9 @@
     <div class="sc-sec-head">
       <span class="sc-sec-icon">☀️</span>
       <div>
-        <div class="sc-sec-label">MORNING ROUTINE · 아침</div>
+        <div class="sc-sec-label">MORNING 아침 · 早间护肤</div>
         <div class="sc-sec-title">가볍게 → 무겁게 → 차단</div>
-        <div class="sc-sec-hint">이 순서 지켜야 효과 2배</div>
+        <div class="sc-sec-hint">이 순서 지켜야 효과 2배 · 由清到厚，最后防晒</div>
       </div>
     </div>
 
@@ -488,6 +506,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname">아누아 어성초 77 토너</div>
           <div class="sc-preason">수분 첫 레이어 · 77% 어성초 즉각 진정<br>세안 직후 아직 촉촉할 때 펴줘요</div>
+          <div class="sc-preason-zh">补水第一步·鱼腥草77%即刻镇静</div>
         </div>
       </div>
     </div>
@@ -502,6 +521,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname">CNP 프로폴리스 세럼</div>
           <div class="sc-preason">30초 뒤 · 항산화 + 영양막 형성<br>1~2펌프, 토너 반쯤 흡수됐을 때</div>
+          <div class="sc-preason-zh">30秒后·抗氧化+营养膜，1~2泵</div>
         </div>
       </div>
     </div>
@@ -515,6 +535,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname">라운드랩 독도 선크림</div>
           <div class="sc-preason">마지막 필수 · SPF50+ 자외선 차단<br>세럼 완전 흡수 후 마무리</div>
+          <div class="sc-preason-zh">最后必用·SPF50+防晒，精华吸收后</div>
         </div>
       </div>
     </div>
@@ -527,9 +548,9 @@
     <div class="sc-sec-head">
       <span class="sc-sec-icon">🌙</span>
       <div>
-        <div class="sc-sec-label">NIGHT ROUTINE · 저녁</div>
+        <div class="sc-sec-label">NIGHT 저녁 · 晚间护肤</div>
         <div class="sc-sec-title">진정 → 영양 → 잠금</div>
-        <div class="sc-sec-hint">수면 중 피부 회복 골든타임</div>
+        <div class="sc-sec-hint">수면 중 피부 회복 골든타임 · 睡眠修复黄金时间</div>
       </div>
     </div>
 
@@ -543,6 +564,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname">아누아 어성초 77 토너</div>
           <div class="sc-preason">클렌징 후 자극받은 피부 즉시 진정<br>미온수 세안 → 1분 안에 발라요</div>
+          <div class="sc-preason-zh">洁面后即刻镇静·温水洗脸后1分钟内</div>
         </div>
       </div>
     </div>
@@ -557,6 +579,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname">CNP 프로폴리스 세럼</div>
           <div class="sc-preason">저녁엔 2~3펌프 넉넉히<br>수면 중 회복 극대화</div>
+          <div class="sc-preason-zh">晚间多用2~3泵·睡眠中最大化修复</div>
         </div>
       </div>
     </div>
@@ -570,6 +593,7 @@
         <div class="sc-pinfo">
           <div class="sc-pname sc-pname-add">수분크림 ← 지금 없어요!</div>
           <div class="sc-preason">건성피부 필수 · 세럼만으론 수분 증발<br>메디필 콜라겐 크림 추천</div>
+          <div class="sc-preason-zh">干性肌必备·推荐Medipeel胶原蛋白晚霜</div>
         </div>
       </div>
     </div>
@@ -578,21 +602,21 @@
   <!-- 하단 추가/주의 -->
   <div class="sc-bottom">
     <div class="sc-box sc-box-add">
-      <div class="sc-box-head">✦ 추가하면 좋아요</div>
-      <div class="sc-bitem"><span>🧴</span>저녁 수분크림 (필수)</div>
-      <div class="sc-bitem"><span>✨</span>아침 비타C 세럼</div>
-      <div class="sc-bitem"><span>💊</span>콜라겐 영양제</div>
+      <div class="sc-box-head">✦ 추가하면 좋아요 · 建议添加</div>
+      <div class="sc-bitem"><span>🧴</span>저녁 수분크림 晚霜(필수)</div>
+      <div class="sc-bitem"><span>✨</span>아침 비타C 세럼 维C精华</div>
+      <div class="sc-bitem"><span>💊</span>콜라겐 영양제 胶原蛋白</div>
     </div>
     <div class="sc-box sc-box-warn">
-      <div class="sc-box-head">⚠️ 조심하세요</div>
-      <div class="sc-bitem"><span>🚫</span>선크림 2개 중복</div>
-      <div class="sc-bitem"><span>🚫</span>저녁에 선크림</div>
-      <div class="sc-bitem"><span>🚫</span>레티놀+AHA 동시</div>
+      <div class="sc-box-head">⚠️ 조심하세요 · 注意事项</div>
+      <div class="sc-bitem"><span>🚫</span>선크림 2개 중복 防晒重复</div>
+      <div class="sc-bitem"><span>🚫</span>저녁에 선크림 晚间防晒</div>
+      <div class="sc-bitem"><span>🚫</span>레티놀+AHA 동시 同时使用</div>
     </div>
   </div>
 
   <div class="sc-foot">
-    <div class="sc-foot-l">筛선 — 걸러서 남긴 것만<br>quration.kr</div>
+    <div class="sc-foot-l">筛선 — 걸러서 남긴 것만<br>筛选后才值得信赖 · quration.kr</div>
     <div class="sc-foot-r">🌸 QK Routine Lab</div>
   </div>
 
